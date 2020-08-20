@@ -13,6 +13,10 @@ pt-BR:
       user:
         one: Usuário
         other: Usuários
+      audience_member:
+        one: Membro de audiência
+        other: Membros de audiência
+        one_lower_case: membro de audiência
     attributes:
       attribute_commons: &commons
         name: Nome
@@ -43,4 +47,15 @@ pt-BR:
         register_number: Número do registro
         cpf: CPF
         active: Status
+      audience_member:
+        cpf: CPF
+        id: Código
         <<: *commons
+    errors:
+      models:
+        audience_member:
+          attributes:
+            email:
+              bad_email: formato inválido
+            cpf:
+              bad_cpf: formato inválido

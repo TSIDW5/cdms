@@ -28,6 +28,14 @@ ActiveRecord::Schema.define(version: 2020_08_28_001525) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "audience_members", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "cpf", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "department_modules", force: :cascade do |t|
     t.bigint "department_id", null: false
     t.string "name"

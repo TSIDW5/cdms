@@ -3,6 +3,8 @@ pt-BR:
     app:
       title: SGCD
       name: Sistema Gerenciador de Certificados e Declarações da UTFPR-GP
+      sidebar:
+        audience_members: Membros de audiência
     boolean:
       'true': Sim
       'false': Não

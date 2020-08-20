@@ -20,6 +20,7 @@ AllCops:
     - 'config/initializers/backtrace_silencers.rb'
     - 'config/initializers/content_security_policy.rb'
     - 'config/environments/production.rb'
+    - 'test/system/admins/audience_members/*'
 
 Style/Documentation:
   Enabled: false

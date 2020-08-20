@@ -1,0 +1,20 @@
+<tr role="row" class="odd">
+    <td><%= audience_member.name %></td>
+    <td><%= audience_member.cpf %></td>
+    <td><%= audience_member.email %></td>
+    <td>
+        
+    <%= link_to admins_audience_member_path(audience_member.id), class: 'icon', active: :exclusive do %>
+        <i class="far fa-user"></i>
+    <% end %>
+
+    <%= link_to edit_admins_audience_member_path(audience_member.id), class: 'icon', active: :exclusive do %>
+        <i class="fe fe-edit"></i>
+    <% end %>
+
+    <%= link_to admins_audience_member_path(audience_member.id), class: 'icon', method: :delete, data: {confirm: I18n.t('simple_form.confirm')}, active: :exclusive do %>
+        <i class="fe fe-trash-2"></i>
+    <% end %>
+
+    </td>
+</tr>

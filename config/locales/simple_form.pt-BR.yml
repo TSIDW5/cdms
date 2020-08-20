@@ -7,11 +7,13 @@ pt-BR:
       mark: '*'
     buttons:
       cancel: Cancelar
-      edit: Editar
+      edit: Editar %{entity}
       update: Atualizar
       back: Voltar
-      save: Salvar
       submit: Enviar
+      new: Novo %{entity}
+      save: Salvar
+      remove: Deletar %{entity}
     error_notification:
       default_message: 'Alguns erros foram encontrados, por favor verifique:'
     hints:
@@ -27,3 +29,4 @@ pt-BR:
     prompts:
       user:
         role: Selecione um opção
+    confirm: Deseja deletar este registro?
