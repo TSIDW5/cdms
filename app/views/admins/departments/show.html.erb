@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @department.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @department.description %>
+</p>
+
+<p>
+  <strong>Sigla:</strong>
+  <%= @department.sigla %>
+</p>
+
+<p>
+  <strong>Local:</strong>
+  <%= @department.local %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @department.phone %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @department.email %>
+</p>
+
+<%= link_to 'Edit', edit_department_path(@department) %> |
+<%= link_to 'Back', departments_path %>
