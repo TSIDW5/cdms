@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_24_004207) do
+ActiveRecord::Schema.define(version: 2020_08_24_020843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,4 +39,14 @@ ActiveRecord::Schema.define(version: 2020_08_24_004207) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "departments_modules", force: :cascade do |t|
+    t.bigint "departments_id", null: false
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["departments_id"], name: "index_departments_modules_on_departments_id"
+  end
+
+  add_foreign_key "departments_modules", "departments", column: "departments_id"
 end

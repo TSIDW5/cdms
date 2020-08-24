@@ -30,5 +30,10 @@
   <%= @department.email %>
 </p>
 
-<%= link_to 'Edit', edit_department_path(@department) %> |
-<%= link_to 'Back', departments_path %>
+
+  <ul>
+    <%= render 'admins/departments_modules/form'%>
+  </ul>
+
+<%= link_to 'Edit', edit_admins_department_path(@department) %> |
+<%= link_to 'Back', admins_departments_path %>

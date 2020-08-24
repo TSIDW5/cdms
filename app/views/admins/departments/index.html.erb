@@ -2,9 +2,10 @@
 
 <h1>Departments</h1>
 
-<table>
+<table class="table card-table table-vcenter text-nowrap datatable dataTable no-footer" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
   <thead>
     <tr>
+      <th>Cod</th>
       <th>Name</th>
       <th>Description</th>
       <th>Sigla</th>
@@ -15,17 +16,23 @@
     </tr>
   </thead>
 
+
+
+
+
   <tbody>
     <% @departments.each do |department| %>
       <tr>
+        <td><%= department.id %></td>
         <td><%= department.name %></td>
         <td><%= department.description %></td>
         <td><%= department.sigla %></td>
         <td><%= department.local %></td>
         <td><%= department.phone %></td>
         <td><%= department.email %></td>
-        <td><%= link_to 'Edit', admins_edit_department_path(department) %></td>
-        <td><%= link_to 'Destroy', admins_destroy_department_path(department) , method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', admins_department_path(department) %></td>
+        <td><%= link_to 'Edit', edit_admins_department_path(department) %></td>
+        <td><%= link_to 'Destroy', admins_department_path(department) , method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -33,4 +40,4 @@
 
 <br>
 
-<%= link_to 'New Department', admins_new_department_path %>
+<%= link_to 'New Department', new_admins_department_path, class: 'btn btn-outline-primary btn-sm' %>

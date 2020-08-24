@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Departments Modules</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Departments</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @departments_modules.each do |departments_module| %>
+      <tr>
+        <td><%= departments_module.departments_id %></td>
+        <td><%= departments_module.name %></td>
+        <td><%= departments_module.description %></td>
+        <td><%= link_to 'Show', departments_module %></td>
+        <td><%= link_to 'Edit', edit_departments_module_path(departments_module) %></td>
+        <td><%= link_to 'Destroy', departments_module, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Departments Module', new_admins_department_departments_module_path %>

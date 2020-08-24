@@ -8,6 +8,7 @@ class Admins::DepartmentsController < Admins::BaseController
 
   # GET /departments/1
   def show
+    @departments_module = DepartmentsModule.new(departments_id: @department.id)
   end
 
   # GET /departments/new
@@ -25,7 +26,7 @@ class Admins::DepartmentsController < Admins::BaseController
     @department = Department.new(department_params)
 
     if @department.save
-      redirect_to admins_list_departments_path, notice: 'Department was successfully created.'
+      redirect_to admins_departments_url, notice: 'Department was successfully created.'
     else
       render :new
     end
@@ -34,7 +35,7 @@ class Admins::DepartmentsController < Admins::BaseController
   # PATCH/PUT /departments/1
   def update
     if @department.update(department_params)
-      redirect_to admins_list_departments_path, notice: 'Department was successfully updated.'
+      redirect_to admins_department_path, notice: 'Department was successfully updated.'
     else
       render :edit
     end
@@ -43,7 +44,7 @@ class Admins::DepartmentsController < Admins::BaseController
   # DELETE /departments/1
   def destroy
     @department.destroy
-    redirect_to admins_list_departments_path, notice: 'Department was successfully destroyed.'
+    redirect_to admins_departments_url, notice: 'Department was successfully destroyed.'
   end
 
   private

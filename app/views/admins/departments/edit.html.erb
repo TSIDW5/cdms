@@ -1,4 +1,7 @@
 <h1>Editing Department</h1>
 
 
-<%= render 'admins/departments/form', department: @department, url_form: admins_update_department_path %>
+<%= render 'admins/departments/form', department: @department, url_form: admins_department_path %>
+
+
+<%= link_to 'Back', admins_departments_path %>
