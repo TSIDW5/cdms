@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   authenticate :admin do
     namespace :admins do
       root to: 'dashboard#index'
-      
+      resources :users
+
       resources :departments do
         resources :department_modules
       end
