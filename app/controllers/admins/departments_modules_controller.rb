@@ -21,8 +21,8 @@ class Admins::DepartmentsModulesController < Admins::BaseController
 
   # POST /departments_modules
   def create
-    @department = Department.find(params[:departments_id])
-    @departments_module = @department.departmentsModule.new(departments_module_params)
+    @department = Department.find(params[:department_id])
+    @departments_module = @department.departments_modules.new(departments_module_params)
 
     if @departments_module.save
       redirect_to @departments_module, notice: 'Departments module was successfully created.'
@@ -54,6 +54,6 @@ class Admins::DepartmentsModulesController < Admins::BaseController
 
     # Only allow a trusted parameter "white list" through.
     def departments_module_params
-      params.require(:departments_module).permit(:departments_id, :name, :description)
+      params.require(:departments_module).permit(:name, :description)
     end
 end

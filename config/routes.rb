@@ -5,17 +5,10 @@ Rails.application.routes.draw do
   authenticate :admin do
     namespace :admins do
       root to: 'dashboard#index'
-
-      resources :departments do
-        resources :departments_modules, shallow: true
-      end
       
-      #get '/departments', to: 'departments#index', as: 'list_departments'
-      #get '/departments/new', to: 'departments#new', as: 'new_department'
-      #get '/departments/:id', to: 'departments#edit', as: 'edit_department'
-      #post '/departments', to: 'departments#create', as: 'create_department'
-      #patch '/departments/:id', to: 'departments#update', as: 'update_department'
-      #delete '/departments/:id', to: 'departments#destroy', as: 'destroy_department'
+      resources :departments do
+        resources :departments_modules
+      end
     end
   end
 
