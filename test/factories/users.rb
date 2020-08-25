@@ -4,7 +4,7 @@ FactoryBot.define do
     email { "usarname@email.com" }
     username { "usarname" }
     register_number { "123123" }
-    cpf { "123.123.123-12" }
+    cpf { "381.236.990-77" }
     status { false }
   end
 end
