@@ -10,7 +10,8 @@ class Admins::DepartmentModulesController < Admins::BaseController
     @module = @department.modules.new(module_params)
 
     if @module.save
-      redirect_to [:admins, @department], notice: 'Departments module was successfully created.'
+      flash[:success] = I18n.t('flash.actions.create.m', { resource_name: I18n.t('activerecord.models.department_module.one') })
+      redirect_to [:admins, @department]
     else
       render 'admins/departments/show'
     end
@@ -18,7 +19,8 @@ class Admins::DepartmentModulesController < Admins::BaseController
 
   def update
     if @department_module.update(departments_module_params)
-      redirect_to @departments_module, notice: 'Departments module was successfully updated.'
+      flash[:success] = I18n.t('flash.actions.update.m', { resource_name: I18n.t('activerecord.models.department_module.one') })
+      redirect_to @departments_module
     else
       render 'admins/departments/show'
     end
@@ -27,7 +29,8 @@ class Admins::DepartmentModulesController < Admins::BaseController
   def destroy
     @department = Department.find(params[:department_id])
     @module.destroy
-    redirect_to [:admins, @department], notice: 'Departments module was successfully destroyed.'
+    flash[:success] = I18n.t('flash.actions.destroy.m', { resource_name: I18n.t('activerecord.models.department_module.one') })
+    redirect_to [:admins, @department]
   end
 
   private

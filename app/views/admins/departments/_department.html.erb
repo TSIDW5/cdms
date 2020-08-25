@@ -9,7 +9,7 @@
     <%end%>
     </td>
     <td><%= link_to admins_department_path(department) ,
-     method: :delete, data: { confirm: 'Are you sure?' } do%>
+     method: :delete, data: { confirm: t('activerecord.attributes.attribute_commons.are_you_sure') } do%>
         <span class="icon mr-3" ><i class="fas fa-trash"></i></span>
     <%end%>
     </td>

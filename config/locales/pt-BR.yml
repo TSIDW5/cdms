@@ -7,7 +7,7 @@ pt-BR:
       department:
         one: Departamento
         other: Departamentos
-      department_modules:
+      department_module:
         one: Módulo Departamento
         other: Módulos Departamento
     attributes:
@@ -17,6 +17,7 @@ pt-BR:
         created_at: Criado em
         updated_at: Atualizado em
         turn_back: Retornar
+        are_you_sure: você tem certeza ?
       admin:
         password: Senha
         current_password: Senha atual
@@ -35,7 +36,7 @@ pt-BR:
         edit_department: Editar Departamento
         show_department: Mostrar Departamento
         <<: *commons
-      department_modules:
+      department_module:
         name: Nome
         description: Descrição 
         <<: *commons
