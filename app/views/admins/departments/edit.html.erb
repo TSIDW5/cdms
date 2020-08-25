@@ -1,5 +1,4 @@
-<%= provide(:page_title, "Editar Departamento")%>
+<% provide(:head_title, t('activerecord.models.department.other')) %>
+<% provide(:page_title, t('activerecord.attributes.department.edit_department')) %>
 
 <%= render 'form'%>
-
-<%= link_to 'Back', admins_departments_path %>

@@ -1,12 +1,16 @@
 <tr>
-    <td><%= department.id %></td>
+    <td><%= link_to "#{department.initials}", admins_department_path(department) %></td>
     <td><%= department.name %></td>
-    <td><%= department.description %></td>
-    <td><%= department.initials %></td>
     <td><%= department.local %></td>
     <td><%= department.phone %></td>
     <td><%= department.email %></td>
-    <td><%= link_to 'Show', admins_department_path(department) %></td>
-    <td><%= link_to 'Edit', edit_admins_department_path(department) %></td>
-    <td><%= link_to 'Destroy', admins_department_path(department) , method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to edit_admins_department_path(department) do%>
+        <span class="icon mr-3" ><i class="fas fa-edit"></i></span>
+    <%end%>
+    </td>
+    <td><%= link_to admins_department_path(department) ,
+     method: :delete, data: { confirm: 'Are you sure?' } do%>
+        <span class="icon mr-3" ><i class="fas fa-trash"></i></span>
+    <%end%>
+    </td>
 </tr>

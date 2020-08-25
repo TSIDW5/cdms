@@ -4,16 +4,38 @@ pt-BR:
       admin:
         one: Administrador
         other: Administradores
+      department:
+        one: Departamento
+        other: Departamentos
+      department_modules:
+        one: Módulo Departamento
+        other: Módulos Departamento
     attributes:
       attribute_commons: &commons
         name: Nome
         email: Email
         created_at: Criado em
         updated_at: Atualizado em
+        turn_back: Retornar
       admin:
         password: Senha
         current_password: Senha atual
         password_confirmation: Confirmação de senha
         remember_me: Lembre-me
         reset_password_token: Token para recuperação de senha
+        <<: *commons
+      department:
+        name: Nome
+        description: Descrição 
+        initials: Sigla
+        local: Local
+        phone: Telefone 
+        email: Email 
+        new_department: Novo Departamento
+        edit_department: Editar Departamento
+        show_department: Mostrar Departamento
+        <<: *commons
+      department_modules:
+        name: Nome
+        description: Descrição 
         <<: *commons

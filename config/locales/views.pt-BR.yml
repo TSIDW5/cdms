@@ -52,4 +52,11 @@ pt-BR:
       name:
         singular: Usuário
         plural:  Usuários
-
+    department:
+      name:
+        singular: Departamento
+        plural:  Departamentos
+    department_module:
+      name:
+        singular: Módulo Departamento
+        plural: Módulos Departamento

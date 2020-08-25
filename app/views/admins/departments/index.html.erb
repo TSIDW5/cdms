@@ -1,24 +1,28 @@
-<% provide(:title, 'Departamentos') %>
+<% provide(:head_title, t('activerecord.models.department.other')) %>
+<% provide(:page_title, t('activerecord.models.department.other')) %>
 
-<table class="table card-table table-vcenter text-nowrap datatable dataTable no-footer" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
-  <thead>
-    <tr>
-      <th>Cod</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Initials</th>
-      <th>Local</th>
-      <th>Phone</th>
-      <th>Email</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="row">
+   <div class="col text-right">
+     <%= link_to t('activerecord.attributes.department.new_department'), new_admins_department_path, class: 'btn btn-primary ml-auto' %>
+   </div>
+</div>
+<div class="row">
+  <table class="table card-table table-vcenter text-nowrap datatable dataTable no-footer" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+    <thead>
+      <tr>
+        <th><%= t('activerecord.attributes.department.initials') %></th>
+        <th><%= t('activerecord.attributes.department.name') %></th>
+        <th><%= t('activerecord.attributes.department.local') %></th>
+        <th><%= t('activerecord.attributes.department.phone') %></th>
+        <th><%= t('activerecord.attributes.department.email') %></th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <%= render @departments %>
-  </tbody>
-</table>
+    <tbody>
+      <%= render @departments %>
+    </tbody>
+  </table>
+</div>
 
-<br>
 
-<%= link_to 'New Department', new_admins_department_path, class: 'btn btn-outline-primary btn-sm' %>

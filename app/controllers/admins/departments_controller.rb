@@ -46,6 +46,6 @@ class Admins::DepartmentsController < Admins::BaseController
     end
 
     def department_params
-      params.require(:department).permit(:name, :description, :sigla, :local, :phone, :email)
+      params.require(:department).permit(:name, :description, :initials, :local, :phone, :email)
     end
 end
