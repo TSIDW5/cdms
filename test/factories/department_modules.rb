@@ -1,6 +1,6 @@
 FactoryBot.define do
-  factory :departments_module do
-    departments { nil }
+  factory :department_module do
+    department {  }
     name { "MyString" }
     description { "MyText" }
   end

@@ -1,7 +1,5 @@
-<h1>Editing Department</h1>
+<%= provide(:page_title, "Editar Departamento")%>
 
-
-<%= render 'admins/departments/form', department: @department, url_form: admins_department_path %>
-
+<%= render 'form'%>
 
 <%= link_to 'Back', admins_departments_path %>

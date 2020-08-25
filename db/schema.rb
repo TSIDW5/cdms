@@ -28,10 +28,19 @@ ActiveRecord::Schema.define(version: 2020_08_24_020843) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "department_modules", force: :cascade do |t|
+    t.bigint "department_id", null: false
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["department_id"], name: "index_department_modules_on_department_id"
+  end
+
   create_table "departments", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.string "sigla"
+    t.string "initials"
     t.string "local"
     t.string "phone"
     t.string "email"
@@ -39,14 +48,5 @@ ActiveRecord::Schema.define(version: 2020_08_24_020843) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "departments_modules", force: :cascade do |t|
-    t.bigint "departments_id", null: false
-    t.string "name"
-    t.text "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["departments_id"], name: "index_departments_modules_on_departments_id"
-  end
-
-  add_foreign_key "departments_modules", "departments", column: "departments_id"
+  add_foreign_key "department_modules", "departments"
 end

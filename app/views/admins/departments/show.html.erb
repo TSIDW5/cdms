@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 
 <p>
   <strong>Name:</strong>
@@ -12,7 +11,7 @@
 
 <p>
   <strong>Sigla:</strong>
-  <%= @department.sigla %>
+  <%= @department.initials %>
 </p>
 
 <p>
@@ -32,8 +31,24 @@
 
 
   <ul>
-    <%= render 'admins/departments_modules/form' %>
+    <%= render 'admins/department_modules/form' %>
   </ul>
+    <h2>Módulos</h2>
+  
+  <table>
+  <thead>
+    <tr>
+      <th>Departments</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+    <tbody>
+      <%= render partial: 'admins/department_modules/department_modules', @department.modules %>
+    </tbody>
+  </table>
 
 <%= link_to 'Edit', edit_admins_department_path(@department) %> |
 <%= link_to 'Back', admins_departments_path %>

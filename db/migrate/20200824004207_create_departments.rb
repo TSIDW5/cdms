@@ -3,7 +3,7 @@ class CreateDepartments < ActiveRecord::Migration[6.0]
     create_table :departments do |t|
       t.string :name
       t.text :description
-      t.string :sigla
+      t.string :initials
       t.string :local
       t.string :phone
       t.string :email
