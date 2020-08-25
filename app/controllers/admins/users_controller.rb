@@ -21,11 +21,10 @@ class Admins::UsersController < Admins::BaseController
 
   # POST /admin/users
   def create
-    user_params
     @user = User.new(user_params)
-
+    console
     if @user.save
-      redirect_to :admins_users_url, notice: 'User was successfully created.'
+      redirect_to admins_users_path, notice: 'User was successfully created.'
     else
       render :new
     end
@@ -43,7 +42,7 @@ class Admins::UsersController < Admins::BaseController
   # DELETE /admin/users/1
   def destroy
     @user.destroy
-    redirect_to :admins_users_url, notice: 'User was successfully destroyed.'
+    redirect_to admins_users_path, notice: 'User was successfully destroyed.'
   end
 
   private

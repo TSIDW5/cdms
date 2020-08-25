@@ -1,5 +1,8 @@
-<h1>New User</h1>
+<% provide(:head_title, t('views.user.new.title')) %>
+<% provide(:page_title, t('views.user.new.title')) %>
+
+<div class="breadcrumb"><%= link_to 'Home', :admins_root, class: "pr-1" %> / <%= link_to 'Usuários', :admins_users, class: "pr-1 pl-1" %> / <%= t('views.user.new.title') %></div>
 
 <%= render 'form', user: @user,  url: :admins_users %>
 
-<%= link_to 'Back', :admins_users %>
+<%= link_to t('views.links.back'), :admins_users %>

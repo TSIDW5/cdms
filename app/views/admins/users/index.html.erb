@@ -1,23 +1,27 @@
+<% provide(:head_title, t('views.user.name.plural')) %>
+<% provide(:page_title, t('views.user.name.plural')) %>
+
 <p id="notice"><%= notice %></p>
 
-<h1>Users</h1>
+<div class="breadcrumb"><%= link_to 'Home', :admins_root, class: "pr-1" %> / <%= t('views.user.name.plural') %></div>
 
-<%= link_to 'New User', :new_admins_user, class: "btn btn-primary ml-auto" %>
+<%= link_to t('views.user.new.title'), :new_admins_user, class: "btn btn-primary ml-auto" %>
+<div class="table-responsive">
 
-<table class="table card-table table-striped table-vcenter">
-  <thead>
+  <table class="table card-table table-striped table-vcenter">
+    <thead>
     <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Username</th>
-      <th>Register number</th>
+      <th><%= t('views.user.table.name') %></th>
+      <th><%= t('views.user.table.email') %></th>
+      <th><%= t('views.user.table.username') %></th>
+      <th><%= t('views.user.table.register_number') %></th>
       <th>Cpf</th>
       <th>Status</th>
       <th colspan="3"></th>
     </tr>
-  </thead>
+    </thead>
 
-  <tbody>
+    <tbody>
     <% @users.each do |user| %>
       <tr>
         <td><%= user.name %></td>
@@ -26,10 +30,11 @@
         <td><%= user.register_number %></td>
         <td><%= user.cpf %></td>
         <td><%= user.status %></td>
-        <td><%= link_to 'Show', admins_user_path(user) %></td>
-        <td><%= link_to 'Edit', edit_admins_user_path(user) %></td>
-        <td><%= link_to 'Destroy', admins_user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to t('views.links.show'), admins_user_path(user), class: "btn btn-primary"%></td>
+        <td><%= link_to t('views.links.edit'), edit_admins_user_path(user), class: "btn btn-secondary" %></td>
+        <td><%= link_to t('views.links.destroy'), admins_user_path(user), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>

@@ -1,22 +1,25 @@
+<% provide(:head_title, t('views.user.show.title')) %>
+<% provide(:page_title, t('views.user.show.title')) %>
+
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong><%= t('views.user.table.name') %>:</strong>
   <%= @user.name %>
 </p>
 
 <p>
-  <strong>Email:</strong>
+  <strong><%= t('views.user.table.email') %>:</strong>
   <%= @user.email %>
 </p>
 
 <p>
-  <strong>Username:</strong>
+  <strong><%= t('views.user.table.username') %>:</strong>
   <%= @user.username %>
 </p>
 
 <p>
-  <strong>Register number:</strong>
+  <strong><%= t('views.user.table.register_number') %>:</strong>
   <%= @user.register_number %>
 </p>
 
@@ -30,5 +33,5 @@
   <%= @user.status %>
 </p>
 
-<%= link_to 'Edit', edit_admins_user_path(@user) %> |
-<%= link_to 'Back', :admins_users %>
+<%= link_to t('views.links.edit'), edit_admins_user_path(@user) %> |
+<%= link_to t('views.links.back'), :admins_users %>

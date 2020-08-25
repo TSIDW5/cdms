@@ -17,6 +17,8 @@ pt-BR:
     labels:
       user:
         username: 'Usuário'
+        name: 'Nome'
+        register_number: 'Número do registro'
         password: 'Senha'
     hints:
       user:
@@ -25,6 +27,9 @@ pt-BR:
     placeholders:
       user:
         username: 'Seu usuário'
+        name: 'Seu nome'
+        register_number: 'Seu número do registro'
+        cpf: 'Seu cpf'
         password: '****'
     prompts:
       user:
