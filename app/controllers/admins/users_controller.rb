@@ -3,7 +3,7 @@ class Admins::UsersController < Admins::BaseController
 
   # GET /admin/users
   def index
-    @users = User.paginate :page => params[:page], :per_page => 30
+    @users = User.paginate :page => params[:page], :per_page => 2
     @custom_paginate_renderer = custom_paginate_renderer
   end
 
