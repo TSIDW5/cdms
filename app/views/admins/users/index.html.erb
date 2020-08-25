@@ -1,8 +1,6 @@
 <% provide(:head_title, t('views.user.name.plural')) %>
 <% provide(:page_title, t('views.user.name.plural')) %>
 
-<p id="notice"><%= notice %></p>
-
 <div class="breadcrumb"><%= link_to 'Home', :admins_root, class: "pr-1" %> / <%= t('views.user.name.plural') %></div>
 
 <%= link_to t('views.user.new.title'), :new_admins_user, class: "btn btn-primary ml-auto" %>
