@@ -22,9 +22,11 @@ class Admins::UsersController < Admins::BaseController
   # POST /admin/users
   def create
     @user = User.new(user_params)
-    console
     if @user.save
-      redirect_to admins_users_path, notice: 'User was successfully created.'
+      if user_params[:image]
+        @user.image.attach(user_params[:image])
+      end
+      redirect_to admins_users_path, notice: t('flash.users.create')
     else
       render :new
     end
@@ -33,7 +35,10 @@ class Admins::UsersController < Admins::BaseController
   # PATCH/PUT /admin/users/1
   def update
     if @user.update(user_params)
-      redirect_to @user, notice: 'User was successfully updated.'
+      if user_params[:image]
+        @user.image.attach(user_params[:image])
+      end
+      redirect_to admins_users_path, notice: t('flash.users.update')
     else
       render :edit
     end
@@ -42,7 +47,7 @@ class Admins::UsersController < Admins::BaseController
   # DELETE /admin/users/1
   def destroy
     @user.destroy
-    redirect_to admins_users_path, notice: 'User was successfully destroyed.'
+    redirect_to admins_users_path, notice: t('flash.users.destroy')
   end
 
   private
@@ -53,6 +58,6 @@ class Admins::UsersController < Admins::BaseController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:name, :email, :username, :register_number, :cpf, :status)
+      params.require(:user).permit(:name, :email, :username, :register_number, :cpf, :status, :image)
     end
 end

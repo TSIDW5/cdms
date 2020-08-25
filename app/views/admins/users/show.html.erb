@@ -33,5 +33,11 @@
   <%= @user.status %>
 </p>
 
+<p class="">
+  <% if @user.image.attached? %>
+    <img src="<%= url_for(@user.image) %>">
+  <% end %>
+</p>
+
 <%= link_to t('views.links.edit'), edit_admins_user_path(@user) %> |
 <%= link_to t('views.links.back'), :admins_users %>

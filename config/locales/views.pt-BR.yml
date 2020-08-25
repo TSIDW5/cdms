@@ -66,6 +66,9 @@ pt-BR:
         email: Email
         username: Usuário
         register_number: Número do registro
+        status:
+          true: Ativo
+          false: Inativo
     department:
       name:
         singular: Departamento

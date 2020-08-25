@@ -29,7 +29,7 @@
         <td><%= user.username %></td>
         <td><%= user.register_number %></td>
         <td><%= user.cpf %></td>
-        <td><%= user.status %></td>
+        <td><%= t('views.user.table.status.' + user.status.to_s)%></td>
         <td><%= link_to t('views.links.show'), admins_user_path(user), class: "btn btn-primary"%></td>
         <td><%= link_to t('views.links.edit'), edit_admins_user_path(user), class: "btn btn-secondary" %></td>
         <td><%= link_to t('views.links.destroy'), admins_user_path(user), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>

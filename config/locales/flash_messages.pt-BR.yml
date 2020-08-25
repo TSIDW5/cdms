@@ -1,5 +1,9 @@
 pt-BR:
   flash:
+    users:
+      create: 'Usuário criado com sucesso!'
+      update: 'Usuário atualizado com sucesso!'
+      destroy: 'Usuário removido com sucesso!'
     actions:
       update:
         m: '%{resource_name} Atualizado com sucesso!'

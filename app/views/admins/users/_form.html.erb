@@ -26,8 +26,24 @@
     </div>
   </div>
 
-  <div class="form-inputs col-sm-6">
-    <%= f.input :status, as: :boolean %>
+  <div class="form-inputs">
+    <div class="custom-control custom-switch">
+      <%= f.check_box :status, class: "custom-control-input", id: "customSwitch1"   %>
+      <label class="custom-control-label" for="customSwitch1">Ativo</label>
+    </div>
+  </div>
+
+  <div class="form-inputs">
+    <%= f.label "Imagem" %> <br>
+    <%= f.file_field :image %>
+  </div>
+
+  <div class="row">
+    <p class="col-sm-3 pt-3">
+      <% if @user.image.attached? %>
+        <img src="<%= url_for(@user.image) %>">
+      <% end %>
+    </p>
   </div>
 
   <div class="form-actions">
