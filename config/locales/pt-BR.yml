@@ -10,6 +10,9 @@ pt-BR:
       department_module:
         one: Módulo Departamento
         other: Módulos Departamento
+      user:
+        one: Usuário
+        other: Usuários
     attributes:
       attribute_commons: &commons
         name: Nome
@@ -27,13 +30,16 @@ pt-BR:
         <<: *commons
       department:
         name: Nome
-        description: Descrição 
+        description: Descrição
         initials: Sigla
         local: Local
-        phone: Telefone 
-        email: Email 
+        phone: Telefone
+        email: Email
         <<: *commons
       department_module:
         name: Nome
         description: Descrição
         <<: *commons
+      user:
+        username: Usuário
+        register_number: Número do registro
