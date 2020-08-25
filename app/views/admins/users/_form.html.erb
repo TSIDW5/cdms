@@ -6,9 +6,11 @@
     <div class="form-inputs col-sm-6">
       <%= f.input :name %>
     </div>
-    <div class="form-inputs col-sm-6">
-
+    <div class="form-inputs col-sm-4">
       <%= f.input :username %>
+    </div>
+    <div class="pb-2 col-sm-2 d-flex align-items-center">
+      @utfpr.edu.br
     </div>
   </div>
 
@@ -25,7 +27,7 @@
   </div>
 
   <div class="form-inputs col-sm-6">
-    <%= f.input :status %>
+    <%= f.input :status, as: :boolean %>
   </div>
 
   <div class="form-actions">

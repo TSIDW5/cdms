@@ -17,6 +17,7 @@ pt-BR:
     labels:
       user:
         username: 'Usuário'
+        status: 'Ativo'
         name: 'Nome'
         register_number: 'Número do registro'
         password: 'Senha'
