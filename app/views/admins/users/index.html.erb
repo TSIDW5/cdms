@@ -37,4 +37,8 @@
     <% end %>
     </tbody>
   </table>
+  <nav aria-label="Pagination" class="d-flex justify-content-center mt-2 mb-2">
+    <%= will_paginate @users, renderer: @custom_paginate_renderer %>
+  </nav>
+
 </div>

@@ -10,6 +10,7 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 gem 'sass-rails', '>= 6'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 4.0'
+gem 'will_paginate', '~> 3.3.0'
 
 gem 'devise'
 gem 'font-awesome-sass', '~> 5.13.0'
