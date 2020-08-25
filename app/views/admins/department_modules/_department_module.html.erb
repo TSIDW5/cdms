@@ -1,7 +1,11 @@
 <tr>
   <td><%= department_module.name %></td>
   <td><%= department_module.description %></td>
-  <td><%= link_to 'Destroy', [:admins, @department, department_module], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  <td class="text-justify"><%= link_to [:admins, @department, department_module], method: :delete, 
+  data: { confirm: 'Are you sure?' } do%>
+     <span class="icon mr-3 " ><i class="fas fa-trash"></i></span>
+  <%end%>
+  </td>
 </tr>
  
 
