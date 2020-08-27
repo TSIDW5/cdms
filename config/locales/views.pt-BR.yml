@@ -56,7 +56,14 @@ pt-BR:
       name:
         singular: Departamento
         plural:  Departamentos
+      links:  
+        new_department: Novo Departamento
+        edit_department: Editar Departamento
+        show_department: Mostrar Departamento
     department_module:
       name:
         singular: Módulo Departamento
         plural: Módulos Departamento
+      links:  
+        new_department_module: Novo Módulo 
+        edit_department_module: Editar Módulo

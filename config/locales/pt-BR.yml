@@ -32,13 +32,8 @@ pt-BR:
         local: Local
         phone: Telefone 
         email: Email 
-        new_department: Novo Departamento
-        edit_department: Editar Departamento
-        show_department: Mostrar Departamento
         <<: *commons
       department_module:
         name: Nome
         description: Descrição
-        new_department_module: Novo Módulo 
-        edit_department_module: Editar Módulo
         <<: *commons
