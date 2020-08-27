@@ -1,0 +1,64 @@
+<% provide(:head_title, t('activerecord.models.department.other')) %>
+<% provide(:page_title, t('views.department.links.show_department')) %>
+
+<div class="card-body">
+  <div class="row">
+    <div class="col-md-6">
+      <p>
+        <strong><%= t('activerecord.attributes.department.name') %>: </strong>
+        <%= @department.name %>
+      </p>
+      <p>
+        <strong><%= t('activerecord.attributes.department.description') %>:</strong>
+        <%= @department.description %>
+      </p>
+      <p>
+        <strong><%= t('activerecord.attributes.department.initials') %>:</strong>
+        <%= @department.initials %>
+      </p>
+      <p>
+        <strong><%= t('activerecord.attributes.department.local') %>:</strong>
+        <%= @department.local %>
+      </p>
+      <p>
+        <strong><%= t('activerecord.attributes.department.phone') %>:</strong>
+        <%= @department.phone %>
+      </p>
+      <p>
+        <strong><%= t('activerecord.attributes.department.email') %>:</strong>
+        <%= @department.email %>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="row ">
+  <div class="col-12">
+    <div class="card-header">
+      <h3 class="card-title"><%= t('activerecord.models.department_module.other')%></h3>
+    </div>
+    <div class="card-body">
+      <div class="row">
+      <div class="col text-right">
+          <%= link_to t('views.department_module.links.new_department_module'), new_admins_department_department_module_path(@department), class: 'btn btn-primary ml-auto' %>
+      </div>
+        <table class="table table-responsive card-table table-vcenter text-nowrap datatable dataTable no-footer" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+          <thead>
+            <tr>
+              <th><%= t('activerecord.attributes.department_module.name') %></th>
+              <th><%= t('activerecord.attributes.department_module.description') %></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render @department.modules %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card-footer text-right">
+      <%= link_to  t('views.department.links.edit_department'), edit_admins_department_path(@department), class: 'btn btn-primary ml-auto' %> |
+      <%= link_to t('activerecord.attributes.attribute_commons.turn_back'), admins_departments_path, class: 'btn btn-primary ml-auto' %>
+    </div>
+  </div>  
+</div>

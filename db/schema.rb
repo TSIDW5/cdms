@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_19_164051) do
+ActiveRecord::Schema.define(version: 2020_08_24_020843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,4 +28,25 @@ ActiveRecord::Schema.define(version: 2020_07_19_164051) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "department_modules", force: :cascade do |t|
+    t.bigint "department_id", null: false
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["department_id"], name: "index_department_modules_on_department_id"
+  end
+
+  create_table "departments", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "initials"
+    t.string "local"
+    t.string "phone"
+    t.string "email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "department_modules", "departments"
 end

@@ -1,0 +1,28 @@
+<% provide(:head_title, t('activerecord.models.department.other')) %>
+<% provide(:page_title, t('activerecord.models.department.other')) %>
+
+<div class="row">
+   <div class="col text-right">
+     <%= link_to t('views.department.links.new_department'), new_admins_department_path, class: 'btn btn-primary ml-auto' %>
+   </div>
+</div>
+<div class="row table-responsive">
+  <table class="table table-striped card-table table-vcenter text-nowrap datatable dataTable no-footer" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+    <thead>
+      <tr>
+        <th><%= t('activerecord.attributes.department.initials') %></th>
+        <th><%= t('activerecord.attributes.department.name') %></th>
+        <th><%= t('activerecord.attributes.department.local') %></th>
+        <th><%= t('activerecord.attributes.department.phone') %></th>
+        <th><%= t('activerecord.attributes.department.email') %></th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= render @departments %>
+    </tbody>
+  </table>
+</div>
+
+
