@@ -38,5 +38,7 @@ pt-BR:
         <<: *commons
       department_module:
         name: Nome
-        description: Descrição 
+        description: Descrição
+        new_department_module: Novo Módulo 
+        edit_department_module: Editar Módulo
         <<: *commons

@@ -1,6 +1,11 @@
 <tr>
   <td><%= department_module.name %></td>
   <td><%= department_module.description %></td>
+  <td class="text-justify">
+    <%= link_to edit_admins_department_department_module_path(@department, department_module) do%>
+     <span class="icon mr-3 " ><i class="fas fa-edit"></i></span>
+    <%end%>
+  </td>
   <td class="text-justify"><%= link_to [:admins, @department, department_module], method: :delete, 
   data: { confirm: t('activerecord.attributes.attribute_commons.are_you_sure') } do%>
      <span class="icon mr-3 " ><i class="fas fa-trash"></i></span>

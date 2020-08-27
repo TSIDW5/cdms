@@ -2,6 +2,16 @@ class Admins::DepartmentModulesController < Admins::BaseController
   before_action :set_module, only: [:show, :edit, :update, :destroy]
 
 
+  def new
+    @department = Department.find(params[:department_id])
+    @module = DepartmentModule.new(department_id: @department.id)
+  end
+  
+  def edit
+    @department = Department.find(params[:department_id])
+    @module = DepartmentModule.find(params[:id])
+  end
+
   def show
   end
 
@@ -13,7 +23,7 @@ class Admins::DepartmentModulesController < Admins::BaseController
       flash[:success] = t('flash.actions.create.m', { resource_name: t('activerecord.models.department_module.one') })
       redirect_to [:admins, @department]
     else
-      render 'admins/departments/show'
+      render :new
     end
   end
 
@@ -23,7 +33,7 @@ class Admins::DepartmentModulesController < Admins::BaseController
       flash[:success] = t('flash.actions.update.m', { resource_name: t('activerecord.models.department_module.one') })
       redirect_to [:admins, @department]
     else
-      render 'admins/departments/show'
+      render :edit
     end
   end
 
