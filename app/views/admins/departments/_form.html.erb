@@ -1,41 +1,28 @@
 <%= simple_form_for([:admins, @department]) do |f| %>
 
-
 <div class="card-body">
   <div class="row">
     <div class="col-md-6">
-      <div class="form-group">
         <%= f.input :name %>
-      </div>
     </div>
     <div class="col-sm-2">
-      <div class="form-group">
         <%= f.input :initials %>
-      </div>
     </div>
     <div class="col-sm-4">
-      <div class="form-group">
          <%= f.input :phone %>
-      </div>
     </div>
     <div class="col-sm-6">
-      <div class="form-group">
         <%= f.input :local %>
-      </div>
     </div>
     <div class="col-sm-6">
-      <div class="form-group">
        <%= f.input :email %>
-      </div>
     </div>
     <div class="col-sm-12">
-      <div class="form-group">
        <%= f.input :description %>
-      </div>
     </div>
     <div class="col-sm-12">
       <div class="form-actions">
-        <%= f.button :submit,  class: 'btn btn-success ml-auto' %>
+        <%= f.button :submit, t('simple_form.buttons.save'), class: 'btn btn-success ml-auto' %>
         <%= link_to t('activerecord.attributes.attribute_commons.turn_back'), admins_departments_path, class: 'btn btn-danger ml-auto' %>
       </div>
     </div>
