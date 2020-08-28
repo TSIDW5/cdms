@@ -12,6 +12,7 @@ gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 4.0'
 gem 'cpf_cnpj'
 gem 'carrierwave', '~> 2.0'
+gem 'jquery_mask_rails'
 
 gem 'devise'
 gem 'font-awesome-sass', '~> 5.13.0'
