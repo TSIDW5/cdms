@@ -18,7 +18,7 @@ class Admins::UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create user" do
     assert_difference('User.count') do
-      post admins_users_path, params: { user: { cpf: '537.826.460-02', name: @user.name, register_number: @user.register_number, status: @user.status, username: 'userTest' } }
+      post admins_users_path, params: { user: { cpf: CPF.generate(true), name: @user.name, register_number: @user.register_number, status: @user.status, username: 'userTest' } }
     end
 
     assert_redirected_to admins_users_url
