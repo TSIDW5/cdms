@@ -30,7 +30,7 @@ class Admins::DepartmentsControllerTest < ActionDispatch::IntegrationTest
     should "create department" do
       sign_in create(:admin)
       assert_difference('Department.count') do
-        post admins_departments_url, params: { department: { description: @department.description, email: "email@email", local: @department.local, name: @department.name, phone: @department.phone, initials: "12312321" } }
+        post admins_departments_url, params: { department: { description: @department.description, email: "email1@email.com", local: @department.local, name: @department.name, phone: @department.phone, initials: "dep1" } }
       end
       assert_redirected_to admins_departments_url
     end

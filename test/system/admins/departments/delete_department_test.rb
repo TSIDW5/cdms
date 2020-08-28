@@ -17,4 +17,13 @@ class DeleteDepartmentTest < ApplicationSystemTestCase
       assert_selector('div.alert.alert-success', text: I18n.t('flash.actions.destroy.m', { resource_name: I18n.t('activerecord.models.department.one') }))
     end
   end
+
+  context 'not logged in' do
+    should 'redirect to sing_in' do
+      
+      visit admins_departments_path
+
+      assert_current_path(new_admin_session_path)
+    end
+  end
 end

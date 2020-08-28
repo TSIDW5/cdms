@@ -1,7 +1,12 @@
 require 'test_helper'
 
 class DepartmentModuleTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  subject { FactoryBot.create(:department_module) }
+  
+  context 'validations' do
+    should validate_presence_of(:name)
+    should validate_presence_of(:description)
+    
+    should validate_uniqueness_of(:name)
+  end
 end

@@ -26,7 +26,11 @@ class CreateDepartmentTest < ApplicationSystemTestCase
         click_on I18n.t('simple_form.buttons.save')
   
         assert_current_path admins_departments_path
-        assert_selector('div.alert.alert-success', text: I18n.t('flash.actions.create.m', { resource_name: I18n.t('activerecord.models.department.one') }))
+        
+        assert_selector(
+          'div.alert.alert-success',
+          text: I18n.t('flash.actions.create.m', { resource_name: I18n.t('activerecord.models.department.one') })
+        )
     end  
 
     should 'error creating department' do
