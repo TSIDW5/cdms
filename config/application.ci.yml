@@ -1,0 +1,17 @@
+database: &database
+  db.username: postgres
+  db.password: postgres
+  db.host: db
+
+mailer: &mailer
+  mailer.host: localhost
+  mailer.port: '3000'
+  mailer.from: 'sgcd@utfpr.edu.br'
+
+development:
+  <<: *database
+  <<: *mailer
+
+test:
+  <<: *database
+  <<: *mailer
