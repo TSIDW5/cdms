@@ -17,10 +17,7 @@ class CreateUserTest < ApplicationSystemTestCase
       fill_in 'user_active', with: true
       click_on t('simple_form.buttons.save')
       assert_current_path admins_users_path
-      assert_selector(
-          'div.alert.alert-success',
-          text: t('flash.actions.create.m', { resource_name: t('activerecord.models.user.one') })
-      )
+      assert_selector('div.alert.alert-success', text: t('flash.actions.create.m', { resource_name: t('activerecord.models.user.one') }))
       assert_text new_cpf
       assert_text new_name
       assert_text new_username

@@ -6,17 +6,17 @@ class Admins::UsersControllerTest < ActionDispatch::IntegrationTest
     sign_in create(:admin)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get admins_users_url
     assert_response :success
   end
 
-  test "should get new" do
+  test 'should get new' do
     get new_admins_user_url
     assert_response :success
   end
 
-  test "should create user" do
+  test 'should create user' do
     assert_difference('User.count') do
       post admins_users_path, params: { user: { cpf: CPF.generate(true), name: @user.name, register_number: @user.register_number, status: @user.status, username: 'userTest' } }
     end
@@ -24,22 +24,30 @@ class Admins::UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to admins_users_url
   end
 
-  test "should show user" do
+  test 'should show user' do
     get admins_user_url(@user)
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get edit_admins_user_url(@user)
     assert_response :success
   end
 
-  test "should update user" do
-    patch admins_user_url(@user), params: { user: { cpf: @user.cpf,  name: @user.name, register_number: @user.register_number, status: @user.status, username: @user.username } }
+  test 'should update user' do
+    patch admins_user_url(@user), params: {
+      user: {
+        cpf: @user.cpf,
+        name: @user.name,
+        register_number: @user.register_number,
+        status: @user.status,
+        username: @user.username
+      }
+    }
     assert_redirected_to admins_users_url
   end
 
-  test "should destroy user" do
+  test 'should destroy user' do
     assert_difference('User.count', -1) do
       delete admins_user_path(@user)
     end

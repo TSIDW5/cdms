@@ -9,7 +9,7 @@ class User < ApplicationRecord
   validate :validate_cpf
 
   before_save do
-    self.email = self.username + '@utfpr.edu.br'
+    self.email = username + '@utfpr.edu.br'
   end
 
   def validate_cpf
