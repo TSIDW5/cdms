@@ -34,8 +34,8 @@
 </p>
 
 <p class="">
-  <% if @user.image.attached? %>
-    <img src="<%= url_for(@user.image) %>">
+  <% if @user.avatar? %>
+    <img src="<%= url_for(@user.avatar.url) %>">
   <% end %>
 </p>
 

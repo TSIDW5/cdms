@@ -35,13 +35,13 @@
 
   <div class="form-inputs">
     <%= f.label "Imagem" %> <br>
-    <%= f.file_field :image %>
+    <%= f.file_field :avatar %>
   </div>
 
   <div class="row">
     <p class="col-sm-3 pt-3">
-      <% if @user.image.attached? %>
-        <img src="<%= url_for(@user.image) %>">
+      <% if @user.avatar? %>
+        <img src="<%= url_for(@user.avatar.thumb.url) %>">
       <% end %>
     </p>
   </div>

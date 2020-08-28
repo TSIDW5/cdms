@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_one_attached :image
+  mount_uploader :avatar, AvatarUploader
 
   validates :name, presence: true
   validates :username, presence: true, uniqueness: true, format: { with: /\A[a-z0-9]+\Z/ }

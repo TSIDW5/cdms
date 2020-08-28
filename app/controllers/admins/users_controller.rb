@@ -23,8 +23,9 @@ class Admins::UsersController < Admins::BaseController
   def create
     @user = User.new(user_params)
     if @user.save
-      if user_params[:image]
-        @user.image.attach(user_params[:image])
+      if user_params[:avatar]
+        @user.avatar = user_params[:avatar]
+        @user.save!
       end
       redirect_to admins_users_path, notice: t('flash.users.create')
     else
@@ -35,8 +36,9 @@ class Admins::UsersController < Admins::BaseController
   # PATCH/PUT /admin/users/1
   def update
     if @user.update(user_params)
-      if user_params[:image]
-        @user.image.attach(user_params[:image])
+      if user_params[:avatar]
+        @user.avatar = user_params[:avatar]
+        @user.save!
       end
       redirect_to admins_users_path, notice: t('flash.users.update')
     else
@@ -58,6 +60,6 @@ class Admins::UsersController < Admins::BaseController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:name, :email, :username, :register_number, :cpf, :status, :image)
+      params.require(:user).permit(:name, :email, :username, :register_number, :cpf, :status, :avatar)
     end
 end

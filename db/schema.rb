@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 2020_08_24_020843) do
     t.boolean "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "avatar"
   end
 
   add_foreign_key "department_modules", "departments"

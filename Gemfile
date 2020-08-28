@@ -11,6 +11,7 @@ gem 'sass-rails', '>= 6'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 4.0'
 gem "cpf_cnpj"
+gem 'carrierwave', '~> 2.0'
 
 gem 'devise'
 gem 'font-awesome-sass', '~> 5.13.0'
