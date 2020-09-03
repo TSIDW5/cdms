@@ -11,7 +11,9 @@ module FileHelper
     private
 
     def path_to(folder)
-      Rails.root.join('test', 'samples', folder, '*')
+      base = ENV['FILES_PATH_TO_TEST'] || Rails.root.join('test/samples')
+
+      "#{base}/#{folder}/*"
     end
   end
 end
