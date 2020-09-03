@@ -13,10 +13,9 @@ jobs:
       FILES_PATH_TO_TEST: /var/www/cdms/test/samples
     container:
       image: ruby:2.7.1
-      volumes:
-        - ${{ jobs.tests.env.FILES_PATH_TO_TEST }}:${{ jobs.tests.env.FILES_PATH_TO_TEST }}
       options: >-
         --network-alias testHost
+        --volume "$FILES_PATH_TO_TEST":"$FILES_PATH_TO_TEST"
     services:
       db:
         image: postgres
