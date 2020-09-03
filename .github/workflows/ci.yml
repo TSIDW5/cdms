@@ -15,7 +15,7 @@ jobs:
       image: ruby:2.7.1
       options: >-
         --network-alias testHost
-        --volume "${{ secrets.RAILS_MASTER_KEY }}":"${{ secrets.RAILS_MASTER_KEY }}"
+        --volume "${{ FILES_PATH_TO_TEST }}":"${{ FILES_PATH_TO_TEST }}"
     services:
       db:
         image: postgres
@@ -33,7 +33,7 @@ jobs:
         image: selenium/standalone-chrome-debug:latest
         ports: ['4444:4444']
         options: >-
-          --volume "${{ secrets.RAILS_MASTER_KEY }}":"${{ secrets.RAILS_MASTER_KEY }}"
+          --volume "${{ FILES_PATH_TO_TEST }}":"${{ FILES_PATH_TO_TEST }}"
     steps:
       - uses: actions/checkout@v2
 
