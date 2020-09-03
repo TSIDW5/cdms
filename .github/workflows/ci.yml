@@ -42,6 +42,7 @@ jobs:
           ls -la /var/www/cdms/test/samples
           cp config/application.ci.yml config/application.yml
           echo ${{ github.workspace }}
+          docker exec selenium ls /var/www/cdms/test/samples
 
       - name: Install libpq-dev for postgres
         run: apt-get -yqq install libpq-dev
