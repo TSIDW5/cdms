@@ -37,11 +37,16 @@ jobs:
           # - ${{ github.workspace }}:/var/www/cdms
     steps:
       - uses: actions/checkout@v1
+        with:
+          path: /var/www/cdms
 
       - name: Copy application env file
         run: |
           pwd
+          ls
+          ls $pwd
           cp config/application.ci.yml config/application.yml
+          echo ${{ github.workspace }}
 
       - name: Install libpq-dev for postgres
         run: apt-get -yqq install libpq-dev
