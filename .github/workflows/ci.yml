@@ -16,7 +16,7 @@ jobs:
       image: ruby:2.7.1
       options: >-
         --network-alias testHost
-        --workdir /var/www/cdms
+        # --workdir /var/www/cdms
     services:
       db:
         image: postgres
@@ -37,14 +37,15 @@ jobs:
           # - ${{ github.workspace }}:/var/www/cdms
     steps:
       - uses: actions/checkout@v2
-        with:
-          path: /var/www/cdms
+        # with:
+          # path: /var/www/cdms
 
       - name: Copy application env file
         run: |
           ls $pwd
           mkdir /var/www/cdms/test/samples
           cp -r test/samples/* /var/www/cdms/test/samples
+          ls -la /var/www/cdms/test/sample
           cp config/application.ci.yml config/application.yml
           echo ${{ github.workspace }}
 
