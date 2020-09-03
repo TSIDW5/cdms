@@ -13,8 +13,8 @@ jobs:
       FILES_PATH_TO_TEST: /var/www/cdms/test/samples
     container:
       image: ruby:2.7.1
-      volumes:
-        - ${{ $FILES_PATH_TO_TEST }}:${{ $FILES_PATH_TO_TEST }}
+      # volumes:
+        # - ${{ $FILES_PATH_TO_TEST }}:${{ $FILES_PATH_TO_TEST }}
       options: >-
         --network-alias testHost
     services:
@@ -33,14 +33,15 @@ jobs:
       selenium:
         image: selenium/standalone-chrome-debug:latest
         ports: ['4444:4444']
-        volumes:
-          - ${{ $FILES_PATH_TO_TEST }}:${{ $FILES_PATH_TO_TEST }}
+        # volumes:
+        #   - ${{ $FILES_PATH_TO_TEST }}:${{ $FILES_PATH_TO_TEST }}
     steps:
       - uses: actions/checkout@v2
 
       - name: Copy application env file
         run: |
-          pwd
+          echo $FILES_PATH_TO_TEST
+          echo "oi"
           mkdir -p $FILES_PATH_TO_TEST
           cp -r test/samples/* $FILES_PATH_TO_TEST
           ls -la /var/www/cdms/test/samples
