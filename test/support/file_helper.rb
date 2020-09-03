@@ -11,8 +11,7 @@ module FileHelper
     private
 
     def path_to(folder)
-      "/var/www/cdms/test/samples/#{folder}/*"
-      # Rails.root.join('test', 'samples', folder, '*')
+      Rails.root.join('test', 'samples', folder, '*')
     end
   end
 end

@@ -43,6 +43,7 @@ class CreateTest < ApplicationSystemTestCase
         fill_in 'user_cpf', with: user.cpf
         fill_in 'user_username', with: user.username
         fill_in 'user_register_number', with: user.register_number
+
         puts FileHelper.image.path
         attach_file 'user_avatar', FileHelper.image.path, make_visible: true
 
