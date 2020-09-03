@@ -11,7 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ruby:2.7.1
-      options: --network-alias testHost
+      options: >-
+        --network-alias testHost
+        --workdir /var/www/cdms
     services:
       db:
         image: postgres
@@ -28,13 +30,15 @@ jobs:
       selenium:
         image: selenium/standalone-chrome-debug:latest
         ports: ['4444:4444']
-        volumes:
-          - ${{ github.workspace }}:/var/www/cdms
+        # volumes:
+          # - ${{ github.workspace }}:/var/www/cdms
     steps:
       - uses: actions/checkout@v1
 
       - name: Copy application env file
-        run: cp config/application.ci.yml config/application.yml
+        run: |
+          pwd
+          cp config/application.ci.yml config/application.yml
 
       - name: Install libpq-dev for postgres
         run: apt-get -yqq install libpq-dev
