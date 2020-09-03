@@ -15,7 +15,7 @@ jobs:
       image: ruby:2.7.1
       options: >-
         --network-alias testHost
-        --volume ${{ $FILES_PATH_TO_TEST:$FILES_PATH_TO_TEST }}
+        --volume "${{ $FILES_PATH_TO_TEST:$FILES_PATH_TO_TEST }"
     services:
       db:
         image: postgres
