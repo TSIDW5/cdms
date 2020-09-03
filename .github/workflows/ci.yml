@@ -9,14 +9,10 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
-    # defaults:
-    #   run:
-    #     working-directory: /var/www/cdms
     container:
       image: ruby:2.7.1
       options: >-
         --network-alias testHost
-        # --workdir /var/www/cdms
     services:
       db:
         image: postgres
@@ -33,12 +29,8 @@ jobs:
       selenium:
         image: selenium/standalone-chrome-debug:latest
         ports: ['4444:4444']
-        # volumes:
-          # - ${{ github.workspace }}:/var/www/cdms
     steps:
       - uses: actions/checkout@v2
-        # with:
-          # path: /var/www/cdms
 
       - name: Copy application env file
         run: |
