@@ -1,5 +1,6 @@
 $(document).on('turbolinks:load', () => {
-  $('.custom-file-input').change(function () {
-    $(this).siblings('.custom-file-label').text(this.files[0].name);
+  $('.custom-file-input').change((e) => {
+    const el = e.currentTarget;
+    $(el).siblings('.custom-file-label').text(el.files[0].name);
   });
 });
