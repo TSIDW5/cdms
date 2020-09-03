@@ -9,11 +9,13 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: /var/www/cdms
     container:
       image: ruby:2.7.1
       options: >-
         --network-alias testHost
-        --workdir /var/www/cdms
     services:
       db:
         image: postgres
