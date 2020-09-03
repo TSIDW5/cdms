@@ -40,11 +40,6 @@ jobs:
 
       - name: Copy application env file
         run: |
-          echo $FILES_PATH_TO_TEST
-          # echo "oi"
-          # mkdir -p $FILES_PATH_TO_TEST
-          cp -r test/samples/* $FILES_PATH_TO_TEST
-          ls -la $FILES_PATH_TO_TEST
           cp config/application.ci.yml config/application.yml
 
       - name: Install libpq-dev for postgres
@@ -77,6 +72,10 @@ jobs:
           npm install -g yarn
           yarn install
           yarn install --check-files
+
+      - name: Copy files to upload test
+        run: |
+          cp -r test/samples/* $FILES_PATH_TO_TEST
 
       - name: Run tests
         env:
