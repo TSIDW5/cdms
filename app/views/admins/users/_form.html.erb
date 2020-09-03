@@ -1,52 +1,32 @@
 <%= simple_form_for [:admins, @user] do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="row">
-    <div class="form-inputs col-sm-6">
-      <%= f.input :name %>
-    </div>
-    <div class="form-inputs col-sm-4">
-      <%= f.input :username %>
-    </div>
-    <div class="pb-2 col-sm-2 d-flex align-items-center">
-      @utfpr.edu.br
-    </div>
+    <%= f.input :name, wrapper_html: { class: 'col-sm-6'}  %>
+    <%= f.input :username, wrapper_html: { class: 'col-sm-6'} do %>
+      <div class="input-group">
+        <%= f.input_field :username, class: 'form-control string required' %>
+        <span class="input-group-append">
+          <span class="input-group-text">@utfpr.edu.br</span>
+        </span>
+      </div>
+    <% end %>
   </div>
 
   <div class="row">
-    <div class="form-inputs col-sm-6">
-
-      <%= f.input :register_number %>
-    </div>
-
-    <div class="form-inputs col-sm-6">
-
-      <%= f.input :cpf, input_html: { class: "mask-cpf"} %>
-    </div>
-  </div>
-
-  <div class="form-inputs">
-    <div class="custom-control custom-switch">
-      <%= f.check_box :status, class: "custom-control-input", id: "customSwitch1"   %>
-      <label class="custom-control-label" for="customSwitch1">Ativo</label>
-    </div>
-  </div>
-
-  <div class="form-inputs">
-    <%= f.label "Imagem" %> <br>
-    <%= f.file_field :avatar %>
+    <%= f.input :register_number, wrapper_html: { class: 'col-sm-6' } %>
+    <%= f.input :cpf, input_html: { 'data-mask': '000.000.000-00' }, wrapper_html: { class: 'col-sm-6' } %>
   </div>
 
   <div class="row">
-    <p class="col-sm-3 pt-3">
-      <% if @user.avatar? %>
-        <img src="<%= url_for(@user.avatar.thumb.url) %>">
-      <% end %>
-    </p>
+    <%= f.input :avatar, as: :choose_file, wrapper_html:  { class: 'col-sm-9' }, input_html: { accept: 'image/*' } %>
+    <%= f.input :active, as: :switch_single, wrapper_html: { class: 'col-sm-3' } %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, class: 'btn btn-primary float-right' %>
+  <div class="form-footer">
+    <div class="d-flex">
+      <%= link_to t('views.links.back'), admins_users_path, class: 'btn btn-secondary' %>
+      <%= f.button :submit, class: 'btn btn-primary ml-auto' %>
+    </div>
   </div>
+
 <% end %>

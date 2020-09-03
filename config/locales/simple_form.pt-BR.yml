@@ -14,24 +14,16 @@ pt-BR:
       submit: Enviar
     error_notification:
       default_message: 'Alguns erros foram encontrados, por favor verifique:'
-    labels:
-      user:
-        username: 'Usuário'
-        status: 'Ativo'
-        name: 'Nome'
-        register_number: 'Número do registro'
-        password: 'Senha'
     hints:
       user:
-        username: 'Usuário para logar'
-        password: 'Sem caracteres especiais, por favor!'
+        password: Sem caracteres especiais, por favor!
     placeholders:
       user:
-        username: 'Seu usuário'
-        name: 'Seu nome'
-        register_number: 'Seu número do registro'
-        cpf: 'Seu cpf'
+        username: usuário institucional
+        name: Nome
+        register_number: Número do registro
+        cpf: CPF
         password: '****'
     prompts:
       user:
-        role: 'Selecione um opção'
+        role: Selecione um opção

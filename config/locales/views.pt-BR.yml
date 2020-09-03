@@ -6,6 +6,11 @@ pt-BR:
     boolean:
       'true': Sim
       'false': Não
+    status:
+      true: Ativo
+      false: Inativo
+    file:
+      choose: Procurar...
     tooltips:
       home:
         admin:
@@ -22,6 +27,8 @@ pt-BR:
           sign_in: Acessar a área do administrativa
         user:
           sign_in: Acessar a área do usuário
+    search:
+      placeholder: Procurar...
     session:
       new:
         head_title: Entrar
@@ -61,14 +68,8 @@ pt-BR:
         title: Visualizar usuário
       edit:
         title: Editar usuário
-      table:
-        name: Nome
-        email: Email
-        username: Usuário
-        register_number: Número do registro
-        status:
-          true: Ativo
-          false: Inativo
+      links:
+        new: Novo usuário
     department:
       name:
         singular: Departamento

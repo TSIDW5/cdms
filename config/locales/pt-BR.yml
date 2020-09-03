@@ -43,3 +43,6 @@ pt-BR:
       user:
         username: Usuário
         register_number: Número do registro
+        cpf: CPF
+        active: Status
+        <<: *commons

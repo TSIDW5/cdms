@@ -1,0 +1,16 @@
+<tr>
+  <td><%= link_to user.name, admins_user_path(user) %></td>
+  <td><%= user.email %></td>
+  <td><%= user.username %></td>
+  <td><%= user.register_number %></td>
+  <td><%= user.cpf %></td>
+  <td><%= t("views.status.#{user.active?}") %></td>
+  <td>
+    <%= link_to edit_admins_user_path(user) do %>
+      <%= icon('fas', 'edit', class: 'icon', data: { toggle: 'tooltip' }, title: t('views.links.edit')) %>
+    <% end %>
+    <%= link_to admins_user_path(user), method: :delete, data: { confirm: 'Are you sure?' } do %>
+      <%= icon('fas', 'trash', class: 'icon', data: { toggle: 'tooltip' }, title: t('views.links.destroy')) %>
+    <% end %>
+  </td>
+</tr>

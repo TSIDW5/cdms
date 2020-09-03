@@ -1,10 +1,9 @@
 FactoryBot.define do
   factory :user do
-    name { 'User' }
-    email { 'usarname@email.com' }
-    username { 'usarname' }
+    name { 'Name' }
     register_number { '123123' }
+    sequence(:username) { |n| "usarname#{n}" }
     cpf { CPF.generate(true) }
-    status { false }
+    active { false }
   end
 end

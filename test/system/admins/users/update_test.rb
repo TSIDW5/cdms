@@ -1,16 +1,26 @@
 require 'application_system_test_case'
 
-class CreateTest < ApplicationSystemTestCase
-  context 'create' do
+class UpdateTest < ApplicationSystemTestCase
+  context 'update' do
     setup do
       admin = create(:admin)
       login_as(admin, as: :admin)
-      visit new_admins_user_path
+
+      @user = create(:user)
+      visit edit_admins_user_path(@user)
+    end
+
+    should 'fill the field' do
+      assert_field 'user_name', with: @user.name
+      assert_field 'user_username', with: @user.username
+      assert_field 'user_cpf', with: @user.cpf
+      assert_field 'user_register_number', with: @user.register_number
+      assert_unchecked_field 'user_active', visible: false
     end
 
     context 'successfully' do
       should 'no image' do
-        user = build(:user)
+        user = build(:user, active: true)
 
         fill_in 'user_name', with: user.name
         fill_in 'user_cpf', with: user.cpf
@@ -19,41 +29,38 @@ class CreateTest < ApplicationSystemTestCase
         find('div.user_active label.custom-switch').click
         find("input[type='submit']").click
 
-        flash_message = I18n.t('flash.actions.create.m', resource_name: User.model_name.human)
+        flash_message = I18n.t('flash.actions.update.m', resource_name: User.model_name.human)
         assert_selector('div.alert.alert-success', text: flash_message)
 
-        user = User.last
         within('table.table tbody') do
-          assert_selector "a[href='#{admins_user_path(user)}']", text: user.name
+          assert_selector "a[href='#{admins_user_path(@user)}']", text: user.name
           assert_text user.email
           assert_text user.username
           assert_text user.register_number
           assert_text user.cpf
-          assert_text I18n.t("views.status.#{user.active?}")
-
-          assert_selector "a[href='#{edit_admins_user_path(user)}']"
-          assert_selector "a[href='#{admins_user_path(user)}'][data-method='delete']"
+          assert_text I18n.t("views.status.#{user.active}")
         end
+
+        visit admins_user_path(@user)
+        assert_selector "img[src='#{@user.avatar.url}']"
       end
 
-      should 'with image' do
-        user = build(:user)
-
-        fill_in 'user_name', with: user.name
-        fill_in 'user_cpf', with: user.cpf
-        fill_in 'user_username', with: user.username
-        fill_in 'user_register_number', with: user.register_number
+      should 'image' do
         attach_file 'user_avatar', FileHelper.image.path, make_visible: true
-
         find("input[type='submit']").click
 
-        user = User.last
-        visit admins_user_path(user)
-        assert_selector "img[src='#{user.avatar.url}']"
+        @user.reload
+        visit admins_user_path(@user)
+        assert_selector "img[src='#{@user.avatar.url}']"
       end
     end
 
     should 'unsuccessfully' do
+      fill_in 'user_name', with: ''
+      fill_in 'user_cpf', with: ''
+      fill_in 'user_username', with: ''
+      fill_in 'user_register_number', with: ''
+
       find("input[type='submit']").click
 
       assert_selector('div.alert.alert-danger', text: I18n.t('flash.actions.errors'))

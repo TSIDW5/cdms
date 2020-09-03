@@ -1,43 +1,45 @@
 <% provide(:head_title, t('views.user.show.title')) %>
 <% provide(:page_title, t('views.user.show.title')) %>
 
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-sm-6">
+    <p>
+      <strong><%= User.human_attribute_name(:name) %>:</strong>
+      <%= @user.name %>
+    </p>
 
-<p>
-  <strong><%= t('views.user.table.name') %>:</strong>
-  <%= @user.name %>
-</p>
+    <p>
+      <strong><%= User.human_attribute_name(:email) %>:</strong>
+      <%= @user.email %>
+    </p>
 
-<p>
-  <strong><%= t('views.user.table.email') %>:</strong>
-  <%= @user.email %>
-</p>
+    <p>
+      <strong><%= User.human_attribute_name(:username) %>:</strong>
+      <%= @user.username %>
+    </p>
 
-<p>
-  <strong><%= t('views.user.table.username') %>:</strong>
-  <%= @user.username %>
-</p>
+    <p>
+      <strong><%= User.human_attribute_name(:register_number) %>:</strong>
+      <%= @user.register_number %>
+    </p>
 
-<p>
-  <strong><%= t('views.user.table.register_number') %>:</strong>
-  <%= @user.register_number %>
-</p>
+    <p>
+      <strong><%= User.human_attribute_name(:cpf) %>:</strong>
+      <%= @user.cpf %>
+    </p>
 
-<p>
-  <strong>Cpf:</strong>
-  <%= @user.cpf %>
-</p>
+    <p>
+      <strong><%= User.human_attribute_name(:active) %>:</strong>
+      <%= t("views.status.#{@user.active?}") %>
+    </p>
+  </div>
 
-<p>
-  <strong>Status:</strong>
-  <%= t('views.user.table.status.' + @user.status.to_s)%>
-</p>
+  <div class="col-sm-6">
+    <%= image_tag @user.avatar.url %>
+  </div>
+</div>
 
-<p class="">
-  <% if @user.avatar? %>
-    <img src="<%= url_for(@user.avatar.url) %>">
-  <% end %>
-</p>
-
-<%= link_to t('views.links.edit'), edit_admins_user_path(@user) %> |
-<%= link_to t('views.links.back'), :admins_users %>
+<div class="d-flex mt-3">
+  <%= link_to t('views.links.back'), admins_users_path, class: 'btn btn-secondary' %>
+  <%= link_to t('views.links.edit'), edit_admins_user_path(@user), class: 'btn btn-primary ml-auto' %>
+</div>

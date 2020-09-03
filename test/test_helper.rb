@@ -1,4 +1,5 @@
 require 'support/simplecov'
+require 'support/file_helper'
 
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'

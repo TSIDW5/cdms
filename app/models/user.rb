@@ -2,17 +2,13 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
 
   validates :name, presence: true
-  validates :username, presence: true, uniqueness: true, format: { with: /\A[a-z0-9]+\Z/ }
   validates :register_number, presence: true
-  validates :cpf, presence: true
-  validates :status, inclusion: [true, false]
-  validate :validate_cpf
+  validates :username, uniqueness: true, format: { with: /\A[a-z0-9]+\Z/ }
+  validates_cpf_format_of :cpf, message: I18n.t('errors.messages.invalid')
 
-  before_save do
-    self.email = username + '@utfpr.edu.br'
-  end
+  def username=(username)
+    super(username)
 
-  def validate_cpf
-    errors.add(:cpf, I18n.t('flash.users.validations.cpf')) unless CPF.valid?(cpf)
+    self.email = "#{username}@utfpr.edu.br"
   end
 end

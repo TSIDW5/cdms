@@ -4,9 +4,26 @@ detectors:
   # You can disable smells completely
   IrresponsibleModule:
     enabled: false
-  UtilityFunction:
-    exclude:
-      - "ApplicationHelper#bootstrap_class_for"
-  InstanceVariableAssumption:
-    exclude:
-      - "CheckboxTablerInput"
+directories:
+  "app/controllers":
+    NestedIterators:
+      max_allowed_nesting: 2
+    UnusedPrivateMethod:
+      enabled: false
+    InstanceVariableAssumption:
+      enabled: false
+  "app/helpers":
+    UtilityFunction:
+      enabled: false
+  "app/mailers":
+    InstanceVariableAssumption:
+      enabled: false
+  "app/models":
+    InstanceVariableAssumption:
+      enabled: false
+  "app/inputs":
+    InstanceVariableAssumption:
+      enabled: false
+  "app/uploaders":
+    UtilityFunction:
+      enabled: false

@@ -3,10 +3,10 @@ class CreateUsers < ActiveRecord::Migration[6.0]
     create_table :users do |t|
       t.string :name
       t.string :email
-      t.string :username
+      t.string :username, index: { unique: true }
       t.string :register_number
-      t.string :cpf
-      t.boolean :status
+      t.string :cpf, index: { unique: true }
+      t.boolean :active
 
       t.timestamps
     end
