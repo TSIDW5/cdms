@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ruby:2.7.1
+      volumes:
+        - /var/www/cdms/test/samples:/var/www/cdms/test/samples
       options: >-
         --network-alias testHost
     services:
@@ -29,7 +31,7 @@ jobs:
       selenium:
         image: selenium/standalone-chrome-debug:latest
         ports: ['4444:4444']
-        options: --name selenium
+        # options: --name selenium
         volumes:
           - /var/www/cdms/test/samples:/var/www/cdms/test/samples
     steps:
@@ -43,7 +45,7 @@ jobs:
           ls -la /var/www/cdms/test/samples
           cp config/application.ci.yml config/application.yml
           echo ${{ github.workspace }}
-          docker exec selenium ls /var/www/cdms/test/samples
+          # docker exec selenium ls /var/www/cdms/test/samples
 
       - name: Install libpq-dev for postgres
         run: apt-get -yqq install libpq-dev
