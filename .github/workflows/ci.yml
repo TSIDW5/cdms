@@ -29,6 +29,7 @@ jobs:
       selenium:
         image: selenium/standalone-chrome-debug:latest
         ports: ['4444:4444']
+        options: --name selenium
         volumes:
           - /var/www/cdms/test/samples:/var/www/cdms/test/samples
     steps:
