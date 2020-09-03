@@ -36,8 +36,8 @@ jobs:
         run: |
           pwd
           mkdir -p /var/www/cdms/test/samples
-          cp -r test/samples/* /var/www/cdms/test/samples
-          ls -la /var/www/cdms/test/sample
+          cp -r test/samples/* /var/www/cdms/test/samples/
+          ls -la /var/www/cdms/test/samples
           cp config/application.ci.yml config/application.yml
           echo ${{ github.workspace }}
 
