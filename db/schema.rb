@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 2020_08_28_001525) do
     t.string "cpf", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["cpf"], name: "index_audience_members_on_cpf", unique: true
+    t.index ["email"], name: "index_audience_members_on_email", unique: true
   end
 
   create_table "department_modules", force: :cascade do |t|

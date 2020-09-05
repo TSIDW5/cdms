@@ -1,19 +1,20 @@
-<% provide(:head_title, I18n.t('simple_form.buttons.edit', { entity: I18n.t('activerecord.models.audience_member.one_lower_case') })) %>
-<% provide(:page_title, I18n.t('simple_form.buttons.edit', { entity: I18n.t('activerecord.models.audience_member.one_lower_case') })) %>
+<% provide(:head_title, I18n.t('simple_form.buttons.view', entity: I18n.t('activerecord.models.audience_member.one').downcase)) %>
+<% provide(:page_title, I18n.t('simple_form.buttons.view', entity: I18n.t('activerecord.models.audience_member.one').downcase)) %>
 
-<div class="card-body">
-  <div class="h6"><%= t('activerecord.attributes.attribute_commons.name') %></div>
-  <p><%= @audience_member.name %></p>
-  <div class="h6"><%= t('activerecord.attributes.attribute_commons.cpf') %></div>
-  <p><%= @audience_member.cpf %></p>
-  <div class="h6"><%= t('activerecord.attributes.attribute_commons.email') %></div>
-  <p><%= @audience_member.email %></p>
+<p>
+  <strong><%= t('activerecord.attributes.attribute_commons.name') %>: </strong>
+  <%= @audience_member.name %>
+</p>
+<p>
+  <strong><%= t('activerecord.attributes.attribute_commons.cpf') %>: </strong>
+  <%= @audience_member.cpf %>
+</p>
+<p>
+  <strong><%= t('activerecord.attributes.attribute_commons.email') %>: </strong>
+  <%= @audience_member.email %>
+</p>
+
+<div class="d-flex mt-3 footer">
+  <%= link_to t('views.links.back'), admins_audience_members_path, class: 'btn btn-secondary' %>
+  <%= link_to t('views.links.edit'), edit_admins_audience_member_path(@audience_member), class: 'btn btn-primary ml-auto' %>
 </div>
-
-<%= link_to edit_admins_audience_member_path(@audience_member.id), class: 'btn btn-secondary' do %>
-  <%= t('simple_form.buttons.edit', { entity: I18n.t('activerecord.models.audience_member.one_lower_case') }) %>
-<% end %>
-
-<%= link_to admins_audience_member_path(@audience_member.id), class: 'btn btn-secondary', method: :delete, data: {confirm: I18n.t('simple_form.confirm')}, active: :exclusive do %>
-  <%= t('simple_form.buttons.remove', { entity: I18n.t('activerecord.models.audience_member.one_lower_case') }) %>
-<% end %>

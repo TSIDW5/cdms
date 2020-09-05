@@ -92,3 +92,6 @@ pt-BR:
         title: 'Novo módulo para o departamento #%{dp}'
       edit:
         title: 'Editar módulo do departamento #%{dp}'
+    audience_member:
+      links:
+        new: Novo membro de audiência

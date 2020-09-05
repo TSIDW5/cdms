@@ -1,48 +1,39 @@
 require 'application_system_test_case'
 
-class ListAudienceMembersTest < ApplicationSystemTestCase
-  context 'when user is authenticated' do
-    should 'list audience members' do
+class IndexTest < ApplicationSystemTestCase
+  context 'audience_members' do
+    setup do
       admin = create(:admin)
-      audience_member = create(:audience_member)
       login_as(admin, scope: :admin)
-      visit admins_audience_members_path
-      assert_current_path admins_audience_members_path
-      assert_selector('h1.page-title', text: I18n.t('activerecord.models.audience_member.other'))
-      assert_text audience_member.email
-      assert_text audience_member.cpf
-      assert_text audience_member.name
     end
 
-    should 'delete audience member' do
-      admin = create(:admin)
-      audience_member = create(:audience_member)
-      login_as(admin, scope: :admin)
+    should 'list all' do
+      audience_members = create_list(:audience_member, 3)
       visit admins_audience_members_path
-      assert_current_path admins_audience_members_path
-      assert_selector('h1.page-title', text: I18n.t('activerecord.models.audience_member.other'))
-      assert_text audience_member.email
-      assert_text audience_member.cpf
-      assert_text audience_member.name
 
-      find(:css, 'i.fe.fe-trash-2').click
-      confirm_dialog = page.driver.browser.switch_to.alert
-      confirm_dialog.accept
-      assert_current_path admins_list_audience_members_path
-      assert_selector(
-        'div.alert.alert-success',
-        text: t('flash.actions.destroy.m', { resource_name: t('activerecord.models.audience_member.one') })
-      )
-      assert_no_text audience_member.email
-      assert_no_text audience_member.cpf
-      assert_no_text audience_member.name
+      within('table.table tbody') do
+        audience_members.each_with_index do |audience_member, index|
+          child = index + 1
+          base_selector = "tr:nth-child(#{child})"
+
+          assert_selector "#{base_selector} a[href='#{admins_audience_member_path(audience_member)}']",
+                          text: audience_member.name
+          assert_selector base_selector, text: audience_member.email
+          assert_selector base_selector, text: audience_member.cpf
+
+          assert_selector "#{base_selector} a[href='#{edit_admins_audience_member_path(audience_member)}']"
+          href = admins_audience_member_path(audience_member)
+          assert_selector "#{base_selector} a[href='#{href}'][data-method='delete']"
+        end
+      end
     end
-  end
 
-  context 'when user is not authenticated' do
-    should 'redirect to login page' do
+    should 'display' do
       visit admins_audience_members_path
-      assert_current_path new_admin_session_path
+
+      assert_selector '#main-content .card-header', text: I18n.t('activerecord.models.audience_member.other')
+      assert_selector "#main-content a[href='#{new_admins_audience_member_path}']",
+                      text: I18n.t('views.audience_member.links.new')
     end
   end
 end

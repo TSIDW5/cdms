@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :audience_member do
     name { 'Pedro Gonzaga' }
-    email { 'pedro@gonzaga.com' }
-    cpf { '086.571.690-02' }
+    sequence(:email) { |n| "email#{n}@utfpr.edu.br" }
+    cpf { CPF.generate(true) }
   end
 end

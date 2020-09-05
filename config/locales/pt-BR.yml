@@ -16,7 +16,6 @@ pt-BR:
       audience_member:
         one: Membro de audiência
         other: Membros de audiência
-        one_lower_case: membro de audiência
     attributes:
       attribute_commons: &commons
         name: Nome
@@ -51,11 +50,3 @@ pt-BR:
         cpf: CPF
         id: Código
         <<: *commons
-    errors:
-      models:
-        audience_member:
-          attributes:
-            email:
-              bad_email: formato inválido
-            cpf:
-              bad_cpf: formato inválido

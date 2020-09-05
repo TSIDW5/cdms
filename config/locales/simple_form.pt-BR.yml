@@ -14,6 +14,7 @@ pt-BR:
       new: Novo %{entity}
       save: Salvar
       remove: Deletar %{entity}
+      view: Visualizar %{entity}
     error_notification:
       default_message: 'Alguns erros foram encontrados, por favor verifique:'
     hints:
