@@ -1,4 +1,4 @@
-<% provide(:head_title, t('activerecord.models.department_module.one')) %>
-<% provide(:page_title, t('views.department_module.links.edit_department_module')) %>
+<% provide(:head_title, t('views.department_module.edit.title', dp: @department.id)) %>
+<% provide(:page_title, t('views.department_module.edit.title', dp: @department.id)) %>
 
-<%= render 'form'%>
+<%= render 'form', url: admins_department_module_path(@department, @module) %>

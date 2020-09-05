@@ -9,3 +9,8 @@ body {
 .form-group-invalid .invalid-feedback {
   display: block;
 }
+
+table.table-options td:last-child {
+  text-align: right;
+  padding-right: 0;
+}

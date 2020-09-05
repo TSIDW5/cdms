@@ -8,8 +8,8 @@ pt-BR:
         one: Departamento
         other: Departamentos
       department_module:
-        one: Módulo Departamento
-        other: Módulos Departamento
+        one: Módulo de departamento
+        other: Módulos de departamento
       user:
         one: Usuário
         other: Usuários
@@ -19,8 +19,6 @@ pt-BR:
         email: Email
         created_at: Criado em
         updated_at: Atualizado em
-        turn_back: Retornar
-        are_you_sure: você tem certeza ?
       admin:
         password: Senha
         current_password: Senha atual

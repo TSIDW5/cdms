@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       root to: 'dashboard#index'
       resources :users
       resources :departments do
-        resources :department_modules
+        resources :department_modules, except: [:index, :show], as: :modules, path: 'modules'
       end
     end
   end

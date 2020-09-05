@@ -58,7 +58,7 @@ class Admins::UsersControllerTest < ActionDispatch::IntegrationTest
       end
 
       should 'unsuccessfully' do
-        post admins_users_path, params: { user: { name: '' } }
+        patch admins_user_path(@user), params: { user: { name: '' } }
         assert_response :success
         assert_equal I18n.t('flash.actions.errors'), flash[:error]
 

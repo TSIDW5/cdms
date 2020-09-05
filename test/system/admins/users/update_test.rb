@@ -10,7 +10,7 @@ class UpdateTest < ApplicationSystemTestCase
       visit edit_admins_user_path(@user)
     end
 
-    should 'fill the field' do
+    should 'fill the fields' do
       assert_field 'user_name', with: @user.name
       assert_field 'user_username', with: @user.username
       assert_field 'user_cpf', with: @user.cpf

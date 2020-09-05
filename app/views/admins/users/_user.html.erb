@@ -9,7 +9,7 @@
     <%= link_to edit_admins_user_path(user) do %>
       <%= icon('fas', 'edit', class: 'icon', data: { toggle: 'tooltip' }, title: t('views.links.edit')) %>
     <% end %>
-    <%= link_to admins_user_path(user), method: :delete, data: { confirm: 'Are you sure?' } do %>
+    <%= link_to admins_user_path(user), method: :delete, data: { confirm: t('views.prompt.confirm') } do %>
       <%= icon('fas', 'trash', class: 'icon', data: { toggle: 'tooltip' }, title: t('views.links.destroy')) %>
     <% end %>
   </td>

@@ -17,6 +17,8 @@ pt-BR:
           sign_in: Clique aqui para acessar a área administrativa
         user:
           sign_in: Clique aqui para acessar a área do usuário
+    prompt:
+      confirm: Tem certeza?
     links:
       back: Voltar
       edit: Editar
@@ -75,13 +77,16 @@ pt-BR:
         singular: Departamento
         plural:  Departamentos
       links:
-        new_department: Novo Departamento
-        edit_department: Editar Departamento
-        show_department: Mostrar Departamento
+        new: Novo departamento
+        edit: Editar departamento
+        show: Visualizar departamento
     department_module:
       name:
-        singular: Módulo Departamento
-        plural: Módulos Departamento
+        singular: Módulo departamento
+        plural: Módulos departamento
       links:
-        new_department_module: Novo Módulo
-        edit_department_module: Editar Módulo
+        new: Novo módulo
+      new:
+        title: 'Novo módulo para o departamento #%{dp}'
+      edit:
+        title: 'Editar módulo do departamento #%{dp}'

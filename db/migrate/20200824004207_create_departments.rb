@@ -3,10 +3,10 @@ class CreateDepartments < ActiveRecord::Migration[6.0]
     create_table :departments do |t|
       t.string :name
       t.text :description
-      t.string :initials
+      t.string :initials, index: { unique: true }
       t.string :local
       t.string :phone
-      t.string :email
+      t.string :email, index: { unique: true }
 
       t.timestamps
     end
