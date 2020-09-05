@@ -17,7 +17,7 @@ class CreateTest < ApplicationSystemTestCase
         fill_in 'user_username', with: user.username
         fill_in 'user_register_number', with: user.register_number
         find('div.user_active label.custom-switch').click
-        find("input[type='submit']").click
+        submit_form
 
         flash_message = I18n.t('flash.actions.create.m', resource_name: User.model_name.human)
         assert_selector('div.alert.alert-success', text: flash_message)
@@ -44,8 +44,7 @@ class CreateTest < ApplicationSystemTestCase
         fill_in 'user_username', with: user.username
         fill_in 'user_register_number', with: user.register_number
         attach_file 'user_avatar', FileHelper.image.path, make_visible: true
-
-        find("input[type='submit']").click
+        submit_form
 
         user = User.last
         visit admins_user_path(user)
@@ -54,7 +53,7 @@ class CreateTest < ApplicationSystemTestCase
     end
 
     should 'unsuccessfully' do
-      find("input[type='submit']").click
+      submit_form
 
       assert_selector('div.alert.alert-danger', text: I18n.t('flash.actions.errors'))
 

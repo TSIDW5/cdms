@@ -15,7 +15,7 @@ class CreateTest < ApplicationSystemTestCase
 
       fill_in 'department_module_name', with: d_module.name
       fill_in 'department_module_description', with: d_module.description
-      find("input[type='submit']").click
+      submit_form
 
       flash_message = I18n.t('flash.actions.create.m', resource_name: DepartmentModule.model_name.human)
       assert_selector('div.alert.alert-success', text: flash_message)
@@ -31,7 +31,7 @@ class CreateTest < ApplicationSystemTestCase
     end
 
     should 'unsuccessfully' do
-      find("input[type='submit']").click
+      submit_form
 
       assert_selector('div.alert.alert-danger', text: I18n.t('flash.actions.errors'))
 

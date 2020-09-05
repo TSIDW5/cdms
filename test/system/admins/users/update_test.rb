@@ -27,7 +27,7 @@ class UpdateTest < ApplicationSystemTestCase
         fill_in 'user_username', with: user.username
         fill_in 'user_register_number', with: user.register_number
         find('div.user_active label.custom-switch').click
-        find("input[type='submit']").click
+        submit_form
 
         flash_message = I18n.t('flash.actions.update.m', resource_name: User.model_name.human)
         assert_selector('div.alert.alert-success', text: flash_message)
@@ -47,7 +47,7 @@ class UpdateTest < ApplicationSystemTestCase
 
       should 'image' do
         attach_file 'user_avatar', FileHelper.image.path, make_visible: true
-        find("input[type='submit']").click
+        submit_form
 
         @user.reload
         visit admins_user_path(@user)
@@ -60,8 +60,7 @@ class UpdateTest < ApplicationSystemTestCase
       fill_in 'user_cpf', with: ''
       fill_in 'user_username', with: ''
       fill_in 'user_register_number', with: ''
-
-      find("input[type='submit']").click
+      submit_form
 
       assert_selector('div.alert.alert-danger', text: I18n.t('flash.actions.errors'))
 

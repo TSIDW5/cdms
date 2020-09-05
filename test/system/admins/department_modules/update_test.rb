@@ -16,7 +16,7 @@ class UpdateTest < ApplicationSystemTestCase
 
       fill_in 'department_module_name', with: d_module.name
       fill_in 'department_module_description', with: d_module.description
-      find("input[type='submit']").click
+      submit_form
 
       flash_message = I18n.t('flash.actions.update.m', resource_name: DepartmentModule.model_name.human)
       assert_selector('div.alert.alert-success', text: flash_message)
@@ -30,8 +30,7 @@ class UpdateTest < ApplicationSystemTestCase
     should 'unsuccessfully' do
       fill_in 'department_module_name', with: ''
       fill_in 'department_module_description', with: ''
-
-      find("input[type='submit']").click
+      submit_form
 
       assert_selector('div.alert.alert-danger', text: I18n.t('flash.actions.errors'))
 

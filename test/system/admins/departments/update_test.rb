@@ -28,7 +28,7 @@ class UpdateTest < ApplicationSystemTestCase
       fill_in 'department_local', with: department.local
       fill_in 'department_email', with: department.email
       fill_in 'department_description', with: department.description
-      find("input[type='submit']").click
+      submit_form
 
       flash_message = I18n.t('flash.actions.update.m', resource_name: Department.model_name.human)
       assert_selector('div.alert.alert-success', text: flash_message)
@@ -48,7 +48,7 @@ class UpdateTest < ApplicationSystemTestCase
       fill_in 'department_phone', with: ''
       fill_in 'department_local', with: ''
       fill_in 'department_email', with: ''
-      find("input[type='submit']").click
+      submit_form
 
       assert_selector('div.alert.alert-danger', text: I18n.t('flash.actions.errors'))
 
