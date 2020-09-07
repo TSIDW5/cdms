@@ -12,5 +12,8 @@
       <%= link_to admins_department_path(department), method: :delete, data: { confirm: t('views.prompt.confirm') } do %>
         <%= icon('fas', 'trash', class: 'icon', data: { toggle: 'tooltip' }, title: t('views.links.destroy')) %>
       <% end %>
+      <%= link_to admins_department_users_list_path(department) do %>
+        <%= icon('fas', 'users', class: 'icon', data: { toggle: 'tooltip' }, title: t('views.user.name.plural')) %>
+      <% end %>
     </td>
 </tr>

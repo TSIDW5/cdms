@@ -1,0 +1,28 @@
+<span data-id="new-path" data-path="<%= new_path %>"></span>
+<span data-id="search-path" data-path="<%= search_admins_users_path %>"></span>
+<input type="hidden" id="user-id" value="" />
+<input type="hidden" id="entity-name" value="<%= entity_name %>" />
+<input type="hidden" data-id="entity-id" value="<%= entity_id %>" />
+
+<%= simple_form_for(:user, url: new_path, html: { autocomplete:'off', class: 'row' }, data: { id: "form_user"} ) do |f| %>
+  <div class="col-sm-12 col-lg-5 mb-2">
+    <div class="input-group mb-3">
+      <div class="input-group">
+        <%= f.input :search, label: false, placeholder: t('views.search.placeholder'), wrapper_html: { id: 'search-input', data: { id: 'search-input' }, class: 'w-100 enter-to-submit-search' } %>
+        <div data-id="dropdown" class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="width: 100%; position: absolute; transform: translate3d(0, 38px, 0px); top: 0px; left: 0px; will-change: transform;"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-lg-5 mb-2">
+    <div class="input-group">
+      <%= f.input :type, collection: @user_types, label: false, include_blank: false, wrapper_html: { class: 'w-100' } %>
+    </div>
+  </div>
+  <div class="col-sm-12 col-lg-2 w-100">
+    <%= f.button :button, class: 'btn btn-outline-info submit-search w-100' do %>
+      <%= icon('fas', 'plus') %>
+    <% end %>
+  </div>
+<% end %>
+
+<%= javascript_pack_tag 'admins/search_user' %>

@@ -75,6 +75,7 @@ pt-BR:
       links:
         new: Novo usuário
     department:
+      list_user: Usuários do departamento %{name}
       name:
         singular: Departamento
         plural:  Departamentos
@@ -82,7 +83,9 @@ pt-BR:
         new: Novo departamento
         edit: Editar departamento
         show: Visualizar departamento
+        list_users: Visualizar usuários do departamento
     department_module:
+      list_user: Usuários do módulo %{name}
       name:
         singular: Módulo departamento
         plural: Módulos departamento

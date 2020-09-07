@@ -11,7 +11,7 @@ class ShowTest < ApplicationSystemTestCase
     end
 
     should 'display department data' do
-      within('#main-content .card.department-data .card-body') do
+      within('#main-content .card.department-data') do
         assert_text @department.name
         assert_text @department.initials
         assert_text @department.phone
@@ -21,8 +21,14 @@ class ShowTest < ApplicationSystemTestCase
       end
     end
 
+    should 'display amount of collaborators' do
+      within('#department-collaborators') do
+        assert_text 0
+      end
+    end
+
     should 'display text and options' do
-      within('#main-content .card-body .footer') do
+      within('#main-content .footer') do
         assert_link(I18n.t('views.links.back'), href: admins_departments_path)
         assert_link(I18n.t('views.links.edit'), href: edit_admins_department_path(@department))
       end

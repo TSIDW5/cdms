@@ -7,9 +7,11 @@ pt-BR:
       department:
         one: Departamento
         other: Departamentos
+        duplicated_responsible: já possui um responsável
       department_module:
         one: Módulo de departamento
         other: Módulos de departamento
+        duplicated_responsible: já possui um responsável
       user:
         one: Usuário
         other: Usuários
@@ -22,6 +24,7 @@ pt-BR:
         email: Email
         created_at: Criado em
         updated_at: Atualizado em
+        type: Tipo
       admin:
         password: Senha
         current_password: Senha atual
@@ -36,13 +39,20 @@ pt-BR:
         local: Local
         phone: Telefone
         email: Email
+        responsible: Reponsável
+        collaborator: Colaborador
+        collaborators: Colaboradores
         <<: *commons
       department_module:
         name: Nome
         description: Descrição
+        responsible: Reponsável
+        collaborator: Colaborador
+        collaborators: Colaboradores
         <<: *commons
       user:
         username: Usuário
+        name: Nome
         register_number: Número do registro
         cpf: CPF
         active: Status
@@ -50,3 +60,11 @@ pt-BR:
         cpf: CPF
         id: Código
         <<: *commons
+      department_user:
+        user: Usuário
+        role: Função
+        department: Departamento
+      module_user:
+        user: Usuário
+        role: Função
+        department_module: Módulo

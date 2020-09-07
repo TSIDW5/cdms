@@ -13,6 +13,11 @@ class Admins::DepartmentModulesControllerTest < ActionDispatch::IntegrationTest
       assert_response :success
     end
 
+    should 'get users' do
+      get admins_department_users_list_path(@department, @module)
+      assert_response :success
+    end
+
     should 'get edit' do
       get edit_admins_department_path(@department, @module)
       assert_response :success

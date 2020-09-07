@@ -40,6 +40,26 @@ class Admins::UsersController < Admins::BaseController
     redirect_to admins_users_path
   end
 
+  def search
+    keyword = params[:keyword]
+
+    if !params[:department_id].nil?
+      department_id = params[:department_id]
+      department = Department.find(department_id)
+      users = User.filter_of_department_by_name(keyword, department).sorted
+
+      render json: { ok: true, users: users }
+    elsif !params[:module_id].nil?
+      module_id = params[:module_id]
+      department_module = DepartmentModule.find(module_id)
+      users = User.filter_of_module_by_name(keyword, department_module).sorted
+
+      render json: { ok: true, users: users }
+    else
+      render json: { ok: false }
+    end
+  end
+
   private
 
   def set_user

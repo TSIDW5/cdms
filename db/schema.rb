@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_28_001525) do
+ActiveRecord::Schema.define(version: 2020_09_13_232810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,17 @@ ActiveRecord::Schema.define(version: 2020_08_28_001525) do
     t.index ["name"], name: "index_department_modules_on_name", unique: true
   end
 
+  create_table "department_users", force: :cascade do |t|
+    t.bigint "department_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "role"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["department_id", "user_id"], name: "index_department_users_on_department_id_and_user_id", unique: true
+    t.index ["department_id"], name: "index_department_users_on_department_id"
+    t.index ["user_id"], name: "index_department_users_on_user_id"
+  end
+
   create_table "departments", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -59,6 +70,17 @@ ActiveRecord::Schema.define(version: 2020_08_28_001525) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_departments_on_email", unique: true
     t.index ["initials"], name: "index_departments_on_initials", unique: true
+  end
+
+  create_table "module_users", force: :cascade do |t|
+    t.bigint "department_module_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "role"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["department_module_id", "user_id"], name: "index_module_users_on_department_module_id_and_user_id", unique: true
+    t.index ["department_module_id"], name: "index_module_users_on_department_module_id"
+    t.index ["user_id"], name: "index_module_users_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -76,4 +98,8 @@ ActiveRecord::Schema.define(version: 2020_08_28_001525) do
   end
 
   add_foreign_key "department_modules", "departments"
+  add_foreign_key "department_users", "departments"
+  add_foreign_key "department_users", "users"
+  add_foreign_key "module_users", "department_modules"
+  add_foreign_key "module_users", "users"
 end

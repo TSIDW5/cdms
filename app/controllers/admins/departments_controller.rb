@@ -45,6 +45,33 @@ class Admins::DepartmentsController < Admins::BaseController
     redirect_to admins_departments_path
   end
 
+  def destroy_user
+    user = DepartmentUser.by_user_and_department(params[:user_id], params[:department_id]).first
+    user.destroy
+    flash[:success] = t('flash.actions.destroy.m', resource_name: t('activerecord.models.user.one'))
+    redirect_to admins_department_users_list_path(params[:department_id])
+  end
+
+  def users
+    @department = Department.find(params[:department_id])
+    @user_types = [
+      [I18n.t('activerecord.attributes.department.collaborator'), DepartmentUser.roles[:collaborator]],
+      [I18n.t('activerecord.attributes.department.responsible'), DepartmentUser.roles[:responsible]]
+    ]
+  end
+
+  def add_user
+    department = Department.find_by(id: params[:department_id])
+    user = User.find_by(id: params[:user_id])
+    department_user = DepartmentUser.new(user: user, department: department, role: params[:type_id].to_i)
+
+    if department_user.save
+      render json: { ok: true }
+    else
+      render json: { ok: false, errors: translate_errors(department_user.errors.messages) }
+    end
+  end
+
   private
 
   def set_department
@@ -53,5 +80,9 @@ class Admins::DepartmentsController < Admins::BaseController
 
   def department_params
     params.require(:department).permit(:name, :description, :initials, :local, :phone, :email)
+  end
+
+  def translate_errors(errors)
+    errors.keys.map { |key| "#{t("activerecord.attributes.department_user.#{key}")} #{errors[key].join(', ')}" }
   end
 end

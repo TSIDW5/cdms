@@ -1,0 +1,36 @@
+<% provide(:head_title, t('views.department.list_user', name: @department.name)) %>
+<% provide(:page_title, t('views.department.list_user', name: @department.name)) %>
+
+<%= render 'shared/search_and_new_user', entity_name: 'department_id', entity_id: @department.id, new_path: admins_department_user_create_path(@department) %>
+
+<div class="table-responsive">
+  <table class="table card-table table-striped table-vcenter table-options">
+    <thead>
+      <tr>
+        <th><%= User.human_attribute_name(:name) %></th>
+        <th><%= User.human_attribute_name(:email) %></th>
+        <th><%= User.human_attribute_name(:active) %></th>
+        <th><%= t('activerecord.attributes.attribute_commons.type') %></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @department.users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= t("views.status.#{user.active?}") %></td>
+          <td><%= t("activerecord.attributes.department.#{user.role}") %></td>
+          <td>
+            <%= link_to admins_department_users_destroy_path(@department.id, user.user_id), method: :delete, data: { confirm: t('views.prompt.confirm') } do %>
+              <%= icon('fas', 'trash', class: 'icon', data: { toggle: 'tooltip' }, title: t('views.links.destroy')) %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+

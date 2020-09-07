@@ -1,5 +1,7 @@
 class Department < ApplicationRecord
   has_many :department_modules, dependent: :destroy
+  has_many :department_users, dependent: :destroy
+  has_many :users, through: :department_users
 
   validates :name, presence: true
   validates :initials, presence: true, uniqueness: true
@@ -10,5 +12,13 @@ class Department < ApplicationRecord
 
   def modules
     department_modules
+  end
+
+  def users
+    DepartmentUser.by_department(id).includes([:user])
+  end
+
+  def collaborators
+    DepartmentUser.collaborators_by_department(id)
   end
 end
