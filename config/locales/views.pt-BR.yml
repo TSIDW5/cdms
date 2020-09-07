@@ -3,22 +3,36 @@ pt-BR:
     app:
       title: SGCD
       name: Sistema Gerenciador de Certificados e Declarações da UTFPR-GP
+      sidebar:
+        audience_members: Membros de audiência
     boolean:
       'true': Sim
       'false': Não
+    status:
+      true: Ativo
+      false: Inativo
+    file:
+      choose: Procurar...
     tooltips:
       home:
         admin:
           sign_in: Clique aqui para acessar a área administrativa
         user:
           sign_in: Clique aqui para acessar a área do usuário
+    prompt:
+      confirm: Tem certeza?
     links:
       back: Voltar
+      edit: Editar
+      destroy: Deletar
+      show: Visualizar
       home:
         admin:
           sign_in: Acessar a área do administrativa
         user:
           sign_in: Acessar a área do usuário
+    search:
+      placeholder: Procurar...
     session:
       new:
         head_title: Entrar
@@ -52,4 +66,32 @@ pt-BR:
       name:
         singular: Usuário
         plural:  Usuários
-
+      new:
+        title: Novo usuário
+      show:
+        title: Visualizar usuário
+      edit:
+        title: Editar usuário
+      links:
+        new: Novo usuário
+    department:
+      name:
+        singular: Departamento
+        plural:  Departamentos
+      links:
+        new: Novo departamento
+        edit: Editar departamento
+        show: Visualizar departamento
+    department_module:
+      name:
+        singular: Módulo departamento
+        plural: Módulos departamento
+      links:
+        new: Novo módulo
+      new:
+        title: 'Novo módulo para o departamento #%{dp}'
+      edit:
+        title: 'Editar módulo do departamento #%{dp}'
+    audience_member:
+      links:
+        new: Novo membro de audiência

@@ -45,3 +45,6 @@ docker-sync.yml
 config/application.yml
 
 coverage/*
+.idea
+
+public/uploads/

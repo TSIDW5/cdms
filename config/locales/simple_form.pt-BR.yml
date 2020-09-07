@@ -7,23 +7,27 @@ pt-BR:
       mark: '*'
     buttons:
       cancel: Cancelar
-      edit: Editar
+      edit: Editar %{entity}
       update: Atualizar
       back: Voltar
+      submit: Enviar
+      new: Novo %{entity}
+      save: Salvar
+      remove: Deletar %{entity}
+      view: Visualizar %{entity}
     error_notification:
       default_message: 'Alguns erros foram encontrados, por favor verifique:'
-    labels:
-      user:
-        username: 'Usuário'
-        password: 'Senha'
     hints:
       user:
-        username: 'Usuário para logar'
-        password: 'Sem caracteres especiais, por favor!'
+        password: Sem caracteres especiais, por favor!
     placeholders:
       user:
-        username: 'Seu usuário'
+        username: usuário institucional
+        name: Nome
+        register_number: Número do registro
+        cpf: CPF
         password: '****'
     prompts:
       user:
-        role: 'Selecione um opção'
+        role: Selecione um opção
+    confirm: Deseja deletar este registro?

@@ -1,0 +1,22 @@
+<% provide(:head_title, I18n.t('activerecord.models.audience_member.other')) %>
+<% provide(:page_title, I18n.t('activerecord.models.audience_member.other')) %>
+
+<%= render 'shared/search_and_new', search_path: '#', new_path: new_admins_audience_member_path,
+                                    new_link: 'views.audience_member.links.new' %>
+
+<div class="table-responsive">
+  <table class="table card-table table-striped table-vcenter table-options">
+    <thead>
+      <tr>
+        <th><%= t('activerecord.attributes.audience_member.name') %></th>
+        <th><%= t('activerecord.attributes.audience_member.cpf') %></th>
+        <th><%= t('activerecord.attributes.audience_member.email') %></th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= render @audience_members %>
+    </tbody>
+  </table>
+</div>

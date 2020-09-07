@@ -1,0 +1,23 @@
+<%= simple_form_for([:admins, @department]) do |f| %>
+
+  <div class="row">
+    <%= f.input :name, wrapper_html: { class: 'col-sm-6' } %>
+    <%= f.input :initials, wrapper_html: { class: 'col-sm-2' } %>
+    <%= f.input :phone, wrapper_html: { class: 'col-sm-4' } %>
+  </div>
+
+  <div class="row">
+    <%= f.input :local, wrapper_html: { class: 'col-sm-6' } %>
+    <%= f.input :email, wrapper_html: { class: 'col-sm-6' } %>
+  </div>
+
+  <%= f.input :description %>
+
+  <div class="form-footer">
+    <div class="d-flex">
+      <%= link_to t('views.links.back'), admins_departments_path, class: 'btn btn-secondary' %>
+      <%= f.button :submit, class: 'btn btn-primary ml-auto' %>
+    </div>
+  </div>
+
+<% end %>

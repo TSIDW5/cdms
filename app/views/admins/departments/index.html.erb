@@ -1,0 +1,26 @@
+<% provide(:head_title, t('activerecord.models.department.other')) %>
+<% provide(:page_title, t('activerecord.models.department.other')) %>
+
+<%= render 'shared/search_and_new', search_path: '#', new_path: new_admins_department_path,
+                                    new_link: 'views.department.links.new' %>
+
+<div class="table-responsive">
+  <table class="table card-table table-striped table-vcenter table-options">
+    <thead>
+      <tr>
+        <th><%= t('activerecord.attributes.department.initials') %></th>
+        <th><%= t('activerecord.attributes.department.name') %></th>
+        <th><%= t('activerecord.attributes.department.local') %></th>
+        <th><%= t('activerecord.attributes.department.phone') %></th>
+        <th><%= t('activerecord.attributes.department.email') %></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= render @departments %>
+    </tbody>
+  </table>
+</div>
+
+

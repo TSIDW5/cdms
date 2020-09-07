@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_19_164051) do
+ActiveRecord::Schema.define(version: 2020_08_28_001525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,4 +28,52 @@ ActiveRecord::Schema.define(version: 2020_07_19_164051) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "audience_members", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "cpf", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cpf"], name: "index_audience_members_on_cpf", unique: true
+    t.index ["email"], name: "index_audience_members_on_email", unique: true
+  end
+
+  create_table "department_modules", force: :cascade do |t|
+    t.bigint "department_id", null: false
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["department_id"], name: "index_department_modules_on_department_id"
+    t.index ["name"], name: "index_department_modules_on_name", unique: true
+  end
+
+  create_table "departments", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "initials"
+    t.string "local"
+    t.string "phone"
+    t.string "email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_departments_on_email", unique: true
+    t.index ["initials"], name: "index_departments_on_initials", unique: true
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "username"
+    t.string "register_number"
+    t.string "cpf"
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "avatar"
+    t.index ["cpf"], name: "index_users_on_cpf", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
+  end
+
+  add_foreign_key "department_modules", "departments"
 end

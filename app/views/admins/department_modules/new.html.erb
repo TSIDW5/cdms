@@ -1,0 +1,4 @@
+<% provide(:head_title, t('views.department_module.new.title', dp: @department.id)) %>
+<% provide(:page_title, t('views.department_module.new.title', dp: @department.id)) %>
+
+<%= render 'form', url: admins_department_modules_path(@department, @module) %>

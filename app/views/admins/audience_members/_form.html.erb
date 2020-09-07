@@ -1,0 +1,12 @@
+<%= simple_form_for([:admins, @audience_member]) do |f| %>
+  <%= f.input :name, required: true, autofocus: true %>
+  <%= f.input :email, required: true, type: 'email' %>
+  <%= f.input :cpf, required: true, :input_html => {'data-mask': '000.000.000-00'} %>
+
+  <div class="form-footer">
+    <div class="d-flex">
+      <%= link_to t('views.links.back'), admins_audience_members_path, class: 'btn btn-secondary' %>
+      <%= f.button :submit, class: 'btn btn-primary ml-auto' %>
+    </div>
+  </div>
+<% end %>

@@ -1,6 +1,9 @@
 require 'test_helper'
+require 'support/helpers/form'
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
+  include ::Helpers::Form
+
   def self.args
     args = ['--no-default-browser-check', '--start-maximized']
     args << 'headless' unless ENV['LAUNCH_BROWSER']

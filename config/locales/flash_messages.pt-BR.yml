@@ -13,3 +13,5 @@ pt-BR:
         bond: Não é possível remover %{resource_name} com vínculos!'
       errors: Existem dados incorretos!
     not_authorized: Acesso não autorizado!
+    not_found: Registro não encontrado!
+

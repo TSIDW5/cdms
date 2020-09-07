@@ -5,3 +5,12 @@ body {
 #main-content {
   margin-bottom: 80px;
 }
+
+.form-group-invalid .invalid-feedback {
+  display: block;
+}
+
+table.table-options td:last-child {
+  text-align: right;
+  padding-right: 0;
+}

@@ -1,0 +1,14 @@
+<tr>
+    <td><%= link_to audience_member.name, admins_audience_member_path(audience_member) %></td>
+    <td><%= audience_member.cpf %></td>
+    <td><%= audience_member.email %></td>
+
+    <td>
+        <%= link_to edit_admins_audience_member_path(audience_member) do %>
+            <%= icon('fas', 'edit', class: 'icon', data: { toggle: 'tooltip' }, title: t('views.links.edit')) %>
+        <% end %>
+        <%= link_to admins_audience_member_path(audience_member), method: :delete, data: { confirm: t('views.prompt.confirm') } do %>
+            <%= icon('fas', 'trash', class: 'icon', data: { toggle: 'tooltip' }, title: t('views.links.destroy')) %>
+        <% end %>
+    </td>
+</tr>
