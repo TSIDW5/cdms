@@ -7,17 +7,17 @@ class Admins::UsersController < Admins::BaseController
   end
 
   def show
-    add_breadcrumb "Usuário##{@user.id}", admins_user_path(@user.id)
+    add_breadcrumb I18n.t('views.breadcrumbs.user')+"##{@user.id}", admins_user_path(@user.id)
   end
 
   def new
     @user = User.new
-    add_breadcrumb "Novo", new_admins_user_path
+    add_breadcrumb I18n.t('views.breadcrumbs.new'), new_admins_user_path
   end
 
   def edit
-    add_breadcrumb "Usuário##{@user.id}", admins_user_path(@user.id)
-    add_breadcrumb "Editar", edit_admins_user_path
+    add_breadcrumb I18n.t('views.breadcrumbs.user')+"##{@user.id}", admins_user_path(@user.id)
+    add_breadcrumb I18n.t('views.breadcrumbs.edit'), edit_admins_user_path
   end
 
   def create
@@ -54,8 +54,8 @@ class Admins::UsersController < Admins::BaseController
   end
 
   def set_breadcrumbs
-    add_breadcrumb "Página Inicial", admins_root_path
-    add_breadcrumb "Usuários", admins_users_path
+    add_breadcrumb I18n.t('views.breadcrumbs.home'), admins_root_path
+    add_breadcrumb I18n.t('views.breadcrumbs.users'), admins_users_path
   end
 
   def user_params

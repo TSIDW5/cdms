@@ -8,11 +8,11 @@ class Admins::AudienceMembersController < Admins::BaseController
 
   def new
     @audience_member = AudienceMember.new
-    add_breadcrumb "Novo", new_admins_audience_member_path
+    add_breadcrumb I18n.t('views.breadcrumbs.new'), new_admins_audience_member_path
   end
 
   def show
-    add_breadcrumb "Membro##{@audience_member.id}", admins_audience_member_path(@audience_member.id)
+    add_breadcrumb I18n.t('views.breadcrumbs.audience_member')+"##{@audience_member.id}", admins_audience_member_path(@audience_member.id)
   end
 
   def create
@@ -21,8 +21,8 @@ class Admins::AudienceMembersController < Admins::BaseController
   end
 
   def edit
-    add_breadcrumb "Membro##{@audience_member.id}", admins_audience_member_path(@audience_member.id)
-    add_breadcrumb "Editar", edit_admins_audience_member_path
+    add_breadcrumb I18n.t('views.breadcrumbs.audience_member')+"##{@audience_member.id}", admins_audience_member_path(@audience_member.id)
+    add_breadcrumb I18n.t('views.breadcrumbs.edit'), edit_admins_audience_member_path
     
   end
 
@@ -47,8 +47,8 @@ class Admins::AudienceMembersController < Admins::BaseController
   end
   
   def set_breadcrumbs
-    add_breadcrumb "Página Inicial", admins_root_path
-    add_breadcrumb "Membros de audiência", admins_audience_members_path
+    add_breadcrumb I18n.t('views.breadcrumbs.home'), admins_root_path
+    add_breadcrumb I18n.t('views.breadcrumbs.audience_members'), admins_audience_members_path
   end
 
   def audience_member_params

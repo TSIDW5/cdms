@@ -95,3 +95,15 @@ pt-BR:
     audience_member:
       links:
         new: Novo membro de audiência
+    breadcrumbs:
+      edit: Editar
+      new: Novo
+      new_module: Novo Módulo
+      home: Página Inicial
+      departments: Departamentos
+      department: Departamento
+      users: Usuários
+      user: Usuário
+      module: Módulo
+      audience_members: Membros de Audiência
+      audience_member: Membro de Audiência    

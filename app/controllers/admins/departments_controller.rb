@@ -8,18 +8,18 @@ class Admins::DepartmentsController < Admins::BaseController
 
   def show
     @module = DepartmentModule.new(department_id: @department.id)
-    add_breadcrumb "Departamento##{@department.id}", admins_department_path(@department.id)
+    add_breadcrumb I18n.t('views.breadcrumbs.department')+"##{@department.id}", admins_department_path(@department.id)
   end
 
   def new
     @department = Department.new
-    add_breadcrumb "Novo", new_admins_department_path
+    add_breadcrumb I18n.t('views.breadcrumbs.new'), new_admins_department_path
   end
 
   def edit
     @department = Department.find(params[:id])
-    add_breadcrumb "Departamento##{@department.id}", admins_department_path(@department.id)
-    add_breadcrumb "Editar", edit_admins_department_path
+    add_breadcrumb I18n.t('views.breadcrumbs.department')+"##{@department.id}", admins_department_path(@department.id)
+    add_breadcrumb I18n.t('views.breadcrumbs.edit'), edit_admins_department_path
   end
 
   def create
@@ -57,8 +57,8 @@ class Admins::DepartmentsController < Admins::BaseController
   end
 
   def set_breadcrumbs
-    add_breadcrumb "Página Inicial", admins_root_path
-    add_breadcrumb "Departamentos", admins_departments_path
+    add_breadcrumb I18n.t('views.breadcrumbs.home'), admins_root_path
+    add_breadcrumb I18n.t('views.breadcrumbs.departments'), admins_departments_path
   end
 
   def department_params
