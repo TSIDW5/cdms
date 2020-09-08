@@ -11,4 +11,13 @@ module ApplicationHelper
       "#{page_title} | #{base_title}"
     end
   end
+
+  def current_path?(path)
+    if request.path == path
+      return 'list-group-item list-group-item-action active'
+    else
+      return 'list-group-item list-group-item-action'
+    end
+  end
+
 end
