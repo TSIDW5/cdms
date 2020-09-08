@@ -1,5 +1,6 @@
 class Admins::AudienceMembersController < Admins::BaseController
   before_action :set_audience_member, only: [:edit, :update, :show, :destroy]
+  before_action :set_breadcrumbs
 
   def index
     @audience_members = AudienceMember.all
@@ -7,16 +8,23 @@ class Admins::AudienceMembersController < Admins::BaseController
 
   def new
     @audience_member = AudienceMember.new
+    add_breadcrumb "Novo", new_admins_audience_member_path
   end
 
-  def show; end
+  def show
+    add_breadcrumb "Membro##{@audience_member.id}", admins_audience_member_path(@audience_member.id)
+  end
 
   def create
     @audience_member = AudienceMember.new(audience_member_params)
     save_audience_member
   end
 
-  def edit; end
+  def edit
+    add_breadcrumb "Membro##{@audience_member.id}", admins_audience_member_path(@audience_member.id)
+    add_breadcrumb "Editar", edit_admins_audience_member_path
+    
+  end
 
   def update
     @audience_member.assign_attributes(audience_member_params)
@@ -36,6 +44,11 @@ class Admins::AudienceMembersController < Admins::BaseController
   rescue ActiveRecord::RecordNotFound
     flash[:error] = t('flash.not_found')
     redirect_to admins_audience_members_path
+  end
+  
+  def set_breadcrumbs
+    add_breadcrumb "Página Inicial", admins_root_path
+    add_breadcrumb "Membros de audiência", admins_audience_members_path
   end
 
   def audience_member_params

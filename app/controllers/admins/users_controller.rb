@@ -1,17 +1,24 @@
 class Admins::UsersController < Admins::BaseController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_breadcrumbs
 
   def index
     @users = User.all
   end
 
-  def show; end
+  def show
+    add_breadcrumb "Usuário##{@user.id}", admins_user_path(@user.id)
+  end
 
   def new
     @user = User.new
+    add_breadcrumb "Novo", new_admins_user_path
   end
 
-  def edit; end
+  def edit
+    add_breadcrumb "Usuário##{@user.id}", admins_user_path(@user.id)
+    add_breadcrumb "Editar", edit_admins_user_path
+  end
 
   def create
     @user = User.new(user_params)
@@ -44,6 +51,11 @@ class Admins::UsersController < Admins::BaseController
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def set_breadcrumbs
+    add_breadcrumb "Página Inicial", admins_root_path
+    add_breadcrumb "Usuários", admins_users_path
   end
 
   def user_params

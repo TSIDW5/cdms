@@ -1,12 +1,18 @@
 class Admins::DepartmentModulesController < Admins::BaseController
   before_action :set_department
   before_action :set_module, only: [:edit, :update, :destroy]
+  before_action :set_breadcrumbs
 
   def new
     @module = @department.modules.new
+    add_breadcrumb "Novo Modulo", new_admins_department_module_path
   end
 
-  def edit; end
+
+  def edit
+    add_breadcrumb "Múdulo##{@module.id}", admins_department_path(@department.id)
+    add_breadcrumb "Editar", edit_admins_department_module_path
+  end
 
   def create
     @module = @department.modules.new(module_params)
@@ -44,6 +50,12 @@ class Admins::DepartmentModulesController < Admins::BaseController
 
   def set_module
     @module = @department.modules.find(params[:id])
+  end
+
+  def set_breadcrumbs
+    add_breadcrumb "Página Inicial", admins_root_path
+    add_breadcrumb "Departamentos", admins_departments_path
+    add_breadcrumb "Departamento##{@department.id}", admins_department_path(@department.id)
   end
 
   def module_params

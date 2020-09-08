@@ -1,5 +1,6 @@
 class Admins::DepartmentsController < Admins::BaseController
   before_action :set_department, only: [:show, :edit, :update, :destroy]
+  before_action :set_breadcrumbs
 
   def index
     @departments = Department.all
@@ -7,14 +8,18 @@ class Admins::DepartmentsController < Admins::BaseController
 
   def show
     @module = DepartmentModule.new(department_id: @department.id)
+    add_breadcrumb "Departamento##{@department.id}", admins_department_path(@department.id)
   end
 
   def new
     @department = Department.new
+    add_breadcrumb "Novo", new_admins_department_path
   end
 
   def edit
     @department = Department.find(params[:id])
+    add_breadcrumb "Departamento##{@department.id}", admins_department_path(@department.id)
+    add_breadcrumb "Editar", edit_admins_department_path
   end
 
   def create
@@ -49,6 +54,11 @@ class Admins::DepartmentsController < Admins::BaseController
 
   def set_department
     @department = Department.find(params[:id])
+  end
+
+  def set_breadcrumbs
+    add_breadcrumb "Página Inicial", admins_root_path
+    add_breadcrumb "Departamentos", admins_departments_path
   end
 
   def department_params
