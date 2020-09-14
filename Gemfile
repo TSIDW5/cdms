@@ -21,6 +21,7 @@ gem 'sprockets-rails', git: 'git://github.com/rails/sprockets-rails.git'
 gem 'validators'
 
 gem "breadcrumbs_on_rails"
+gem 'active_link_to'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
