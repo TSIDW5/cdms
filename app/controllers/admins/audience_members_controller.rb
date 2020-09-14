@@ -48,7 +48,6 @@ class Admins::AudienceMembersController < Admins::BaseController
   end
   
   def set_breadcrumbs
-    add_breadcrumb I18n.t('views.breadcrumbs.home'), admins_root_path
     add_breadcrumb I18n.t('views.breadcrumbs.audience_members'), admins_audience_members_path
   end
 

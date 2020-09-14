@@ -57,7 +57,6 @@ class Admins::DepartmentsController < Admins::BaseController
   end
 
   def set_breadcrumbs
-    add_breadcrumb I18n.t('views.breadcrumbs.home'), admins_root_path
     add_breadcrumb I18n.t('views.breadcrumbs.departments'), admins_departments_path
   end
 
