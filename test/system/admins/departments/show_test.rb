@@ -9,6 +9,12 @@ class ShowTest < ApplicationSystemTestCase
       @department = create(:department)
       visit admins_department_path(@department)
     end
+    
+    should 'display breadcrumbs' do
+      visit admins_department_path(@department)
+      assert_selector "#main-content a[href='#{admins_root_path}'", text: I18n.t('views.breadcrumbs.home')
+    end
+
 
     should 'display department data' do
       within('#main-content .card.department-data .card-body') do

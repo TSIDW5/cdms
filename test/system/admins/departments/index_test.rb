@@ -32,6 +32,7 @@ class IndexTest < ApplicationSystemTestCase
     should 'display' do
       visit admins_departments_path
 
+      assert_selector "#main-content a[href='#{admins_root_path}'", text: I18n.t('views.breadcrumbs.home')
       assert_selector '#main-content .card-header', text: I18n.t('views.department.name.plural')
       assert_selector "#main-content a[href='#{new_admins_department_path}']",
                       text: I18n.t('views.department.links.new')

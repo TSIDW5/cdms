@@ -2,6 +2,7 @@ class Admins::AudienceMembersController < Admins::BaseController
   before_action :set_audience_member, only: [:edit, :update, :show, :destroy]
   before_action :set_breadcrumbs
 
+
   def index
     @audience_members = AudienceMember.all
   end
