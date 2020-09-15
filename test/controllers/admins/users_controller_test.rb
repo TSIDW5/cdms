@@ -95,4 +95,30 @@ class Admins::UsersControllerTest < ActionDispatch::IntegrationTest
       end
     end
   end
+
+  context 'add breadcrumbs' do
+    should 'have index users path'do
+      element = BreadcrumbsOnRails::Breadcrumbs::Element.new(I18n.t('views.breadcrumbs.users'), admins_users_path)
+      assert_equal "/admins/users", element.path
+      assert_equal "Usuários", element.name
+    end 
+
+    should 'have new user path'do
+      element = BreadcrumbsOnRails::Breadcrumbs::Element.new(I18n.t('views.breadcrumbs.new'), new_admins_user_path)
+      assert_equal "/admins/users/new", element.path
+      assert_equal "Novo", element.name
+    end 
+
+    should 'have show user path'do
+      element = BreadcrumbsOnRails::Breadcrumbs::Element.new(I18n.t('views.breadcrumbs.user')+" #1", admins_user_path(1))
+      assert_equal "/admins/users/1", element.path
+      assert_equal "Usuário #1", element.name
+    end
+
+    should 'have edit user path' do
+      element = BreadcrumbsOnRails::Breadcrumbs::Element.new(I18n.t('views.breadcrumbs.edit'), edit_admins_user_path(1))
+      assert_equal "/admins/users/1/edit", element.path
+      assert_equal "Editar", element.name
+    end
+  end
 end

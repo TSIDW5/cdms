@@ -17,4 +17,6 @@ class Admins::DashboardControllerTest < ActionDispatch::IntegrationTest
       assert_response :success
     end
   end
+
+  
 end

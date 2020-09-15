@@ -95,4 +95,30 @@ class Admins::DepartmentsControllerTest < ActionDispatch::IntegrationTest
       end
     end
   end
+
+  context 'add breadcrumbs' do
+    should 'have index departments path'do
+      element = BreadcrumbsOnRails::Breadcrumbs::Element.new(I18n.t('views.breadcrumbs.departments'), admins_departments_path)
+      assert_equal "/admins/departments", element.path
+      assert_equal "Departamentos", element.name
+    end 
+
+    should 'have new department path'do
+      element = BreadcrumbsOnRails::Breadcrumbs::Element.new(I18n.t('views.breadcrumbs.new'), new_admins_department_path)
+      assert_equal "/admins/departments/new", element.path
+      assert_equal "Novo", element.name
+    end 
+
+    should 'have show department path'do
+      element = BreadcrumbsOnRails::Breadcrumbs::Element.new(I18n.t('views.breadcrumbs.department')+ " #1", admins_department_path(1))
+      assert_equal "/admins/departments/1", element.path
+      assert_equal "Departamento #1", element.name
+    end
+
+    should 'have edit department path' do
+      element = BreadcrumbsOnRails::Breadcrumbs::Element.new(I18n.t('views.breadcrumbs.edit'), edit_admins_department_path(1))
+      assert_equal "/admins/departments/1/edit", element.path
+      assert_equal "Editar", element.name
+    end
+  end
 end

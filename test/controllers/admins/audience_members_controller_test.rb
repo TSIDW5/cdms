@@ -88,4 +88,32 @@ class Admins::AudienceMembersControllerTest < ActionDispatch::IntegrationTest
       end
     end
   end
+
+  context 'add breadcrumbs' do
+    should 'have index audience members path'do
+      element = BreadcrumbsOnRails::Breadcrumbs::Element.new(I18n.t('views.breadcrumbs.audience_members'), admins_audience_members_path)
+      assert_equal "/admins/audience_members", element.path
+      assert_equal "Membros de Audiência", element.name
+    end 
+
+    should 'have new audience member path'do
+      element = BreadcrumbsOnRails::Breadcrumbs::Element.new(I18n.t('views.breadcrumbs.new'), new_admins_audience_member_path)
+      assert_equal "/admins/audience_members/new", element.path
+      assert_equal "Novo", element.name
+    end 
+
+    should 'have show audience member path'do
+      element = BreadcrumbsOnRails::Breadcrumbs::Element.new( I18n.t('views.breadcrumbs.audience_member')+" #1", admins_audience_member_path(1))
+      assert_equal "/admins/audience_members/1", element.path
+      assert_equal "Membro de Audiência #1", element.name
+    end
+
+    should 'have edit audience member path' do
+      element = BreadcrumbsOnRails::Breadcrumbs::Element.new(I18n.t('views.breadcrumbs.edit'), edit_admins_audience_member_path(1))
+      assert_equal "/admins/audience_members/1/edit", element.path
+      assert_equal "Editar", element.name
+
+    end
+
+  end
 end

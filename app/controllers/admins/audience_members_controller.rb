@@ -13,7 +13,7 @@ class Admins::AudienceMembersController < Admins::BaseController
   end
 
   def show
-    add_breadcrumb I18n.t('views.breadcrumbs.audience_member')+"##{@audience_member.id}", admins_audience_member_path(@audience_member.id)
+    add_breadcrumb I18n.t('views.breadcrumbs.audience_member')+" ##{@audience_member.id}", admins_audience_member_path(@audience_member.id)
   end
 
   def create
@@ -22,7 +22,7 @@ class Admins::AudienceMembersController < Admins::BaseController
   end
 
   def edit
-    add_breadcrumb I18n.t('views.breadcrumbs.audience_member')+"##{@audience_member.id}", admins_audience_member_path(@audience_member.id)
+    add_breadcrumb I18n.t('views.breadcrumbs.audience_member')+" ##{@audience_member.id}", admins_audience_member_path(@audience_member.id)
     add_breadcrumb I18n.t('views.breadcrumbs.edit'), edit_admins_audience_member_path
     
   end

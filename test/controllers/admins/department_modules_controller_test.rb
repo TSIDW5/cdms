@@ -88,4 +88,18 @@ class Admins::DepartmentModulesControllerTest < ActionDispatch::IntegrationTest
       end
     end
   end
+
+  context 'add breadcrumbs' do
+    should 'have new department module path'do
+      element = BreadcrumbsOnRails::Breadcrumbs::Element.new(I18n.t('views.breadcrumbs.new_module'), new_admins_department_module_path(1))
+      assert_equal "/admins/departments/1/modules/new", element.path
+      assert_equal "Novo Módulo", element.name
+    end 
+
+    should 'have edit department module path' do
+      element = BreadcrumbsOnRails::Breadcrumbs::Element.new(I18n.t('views.breadcrumbs.edit'), edit_admins_department_module_path(1,1))
+      assert_equal "/admins/departments/1/modules/1/edit", element.path
+      assert_equal "Editar", element.name
+    end
+  end
 end

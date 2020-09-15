@@ -7,7 +7,7 @@ class Admins::UsersController < Admins::BaseController
   end
 
   def show
-    add_breadcrumb I18n.t('views.breadcrumbs.user')+"##{@user.id}", admins_user_path(@user.id)
+    add_breadcrumb I18n.t('views.breadcrumbs.user')+" ##{@user.id}", admins_user_path(@user.id)
   end
 
   def new
@@ -16,7 +16,7 @@ class Admins::UsersController < Admins::BaseController
   end
 
   def edit
-    add_breadcrumb I18n.t('views.breadcrumbs.user')+"##{@user.id}", admins_user_path(@user.id)
+    add_breadcrumb I18n.t('views.breadcrumbs.user')+" ##{@user.id}", admins_user_path(@user.id)
     add_breadcrumb I18n.t('views.breadcrumbs.edit'), edit_admins_user_path
   end
 

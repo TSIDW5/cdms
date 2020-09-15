@@ -8,7 +8,7 @@ class Admins::DepartmentsController < Admins::BaseController
 
   def show
     @module = DepartmentModule.new(department_id: @department.id)
-    add_breadcrumb I18n.t('views.breadcrumbs.department')+"##{@department.id}", admins_department_path(@department.id)
+    add_breadcrumb I18n.t('views.breadcrumbs.department')+" ##{@department.id}", admins_department_path(@department)
   end
 
   def new
@@ -18,7 +18,7 @@ class Admins::DepartmentsController < Admins::BaseController
 
   def edit
     @department = Department.find(params[:id])
-    add_breadcrumb I18n.t('views.breadcrumbs.department')+"##{@department.id}", admins_department_path(@department.id)
+    add_breadcrumb I18n.t('views.breadcrumbs.department')+" ##{@department.id}", admins_department_path(@department.id)
     add_breadcrumb I18n.t('views.breadcrumbs.edit'), edit_admins_department_path
   end
 
