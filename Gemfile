@@ -19,6 +19,7 @@ gem 'cpf_cnpj'
 gem 'devise'
 gem 'font-awesome-sass', '~> 5.13.0'
 gem 'rails-i18n', '~> 6.0.0'
+gem 'require_all'
 gem 'simple_form'
 gem 'sprockets-rails', git: 'git://github.com/rails/sprockets-rails.git'
 gem 'validators'
@@ -26,6 +27,7 @@ gem 'validators'
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails'
+  gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
 
   gem 'guard'
   gem 'guard-minitest'
