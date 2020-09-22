@@ -1,6 +1,6 @@
 class Admins::DepartmentsController < Admins::BaseController
   before_action :set_department, only: [:show, :edit, :update, :destroy]
-  before_action :set_breadcrumbs
+  include Breadcrumbs
 
   def index
     @departments = Department.all
@@ -8,18 +8,14 @@ class Admins::DepartmentsController < Admins::BaseController
 
   def show
     @module = DepartmentModule.new(department_id: @department.id)
-    add_breadcrumb I18n.t('views.breadcrumbs.department')+" ##{@department.id}", admins_department_path(@department)
   end
 
   def new
     @department = Department.new
-    add_breadcrumb I18n.t('views.breadcrumbs.new'), new_admins_department_path
   end
 
   def edit
     @department = Department.find(params[:id])
-    add_breadcrumb I18n.t('views.breadcrumbs.department')+" ##{@department.id}", admins_department_path(@department.id)
-    add_breadcrumb I18n.t('views.breadcrumbs.edit'), edit_admins_department_path
   end
 
   def create
@@ -29,7 +25,7 @@ class Admins::DepartmentsController < Admins::BaseController
       flash[:success] = I18n.t('flash.actions.create.m', resource_name: I18n.t('activerecord.models.department.one'))
       redirect_to admins_departments_path
     else
-      flash[:error] = I18n.t('flash.actions.errors')
+      flash.now[:error] = I18n.t('flash.actions.errors')
       render :new
     end
   end
@@ -39,7 +35,7 @@ class Admins::DepartmentsController < Admins::BaseController
       flash[:success] = I18n.t('flash.actions.update.m', resource_name: I18n.t('activerecord.models.department.one'))
       redirect_to admins_departments_path
     else
-      flash[:error] = I18n.t('flash.actions.errors')
+      flash.now[:error] = I18n.t('flash.actions.errors')
       render :edit
     end
   end
@@ -54,10 +50,6 @@ class Admins::DepartmentsController < Admins::BaseController
 
   def set_department
     @department = Department.find(params[:id])
-  end
-
-  def set_breadcrumbs
-    add_breadcrumb I18n.t('views.breadcrumbs.departments'), admins_departments_path
   end
 
   def department_params

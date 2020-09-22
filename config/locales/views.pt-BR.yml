@@ -97,13 +97,9 @@ pt-BR:
         new: Novo membro de audiência
     breadcrumbs:
       edit: Editar
-      new: Novo
-      new_module: Novo Módulo
+      new:
+        m: Novo
+        f: Nova
+      show: '%{model} #%{id}'
       home: Página Inicial
-      departments: Departamentos
-      department: Departamento
-      users: Usuários
-      user: Usuário
-      module: Módulo
-      audience_members: Membros de Audiência
-      audience_member: Membro de Audiência    
+

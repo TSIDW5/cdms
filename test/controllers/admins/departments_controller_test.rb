@@ -7,6 +7,10 @@ class Admins::DepartmentsControllerTest < ActionDispatch::IntegrationTest
       sign_in create(:admin)
     end
 
+    teardown do
+      assert_active_link(href: admins_departments_path)
+    end
+
     should 'get index' do
       get admins_departments_path
       assert_response :success
@@ -35,6 +39,7 @@ class Admins::DepartmentsControllerTest < ActionDispatch::IntegrationTest
         assert_redirected_to admins_departments_path
         assert_equal I18n.t('flash.actions.create.m', resource_name: Department.model_name.human),
                      flash[:success]
+        follow_redirect!
       end
 
       should 'unsuccessfully' do
@@ -55,6 +60,7 @@ class Admins::DepartmentsControllerTest < ActionDispatch::IntegrationTest
                      flash[:success]
         @department.reload
         assert_equal 'updated', @department.name
+        follow_redirect!
       end
 
       should 'unsuccessfully' do
@@ -74,6 +80,7 @@ class Admins::DepartmentsControllerTest < ActionDispatch::IntegrationTest
       end
 
       assert_redirected_to admins_departments_path
+      follow_redirect!
     end
   end
 
@@ -93,32 +100,6 @@ class Admins::DepartmentsControllerTest < ActionDispatch::IntegrationTest
           assert_redirected_to new_admin_session_path
         end
       end
-    end
-  end
-
-  context 'add breadcrumbs' do
-    should 'have index departments path'do
-      element = BreadcrumbsOnRails::Breadcrumbs::Element.new(I18n.t('views.breadcrumbs.departments'), admins_departments_path)
-      assert_equal "/admins/departments", element.path
-      assert_equal "Departamentos", element.name
-    end 
-
-    should 'have new department path'do
-      element = BreadcrumbsOnRails::Breadcrumbs::Element.new(I18n.t('views.breadcrumbs.new'), new_admins_department_path)
-      assert_equal "/admins/departments/new", element.path
-      assert_equal "Novo", element.name
-    end 
-
-    should 'have show department path'do
-      element = BreadcrumbsOnRails::Breadcrumbs::Element.new(I18n.t('views.breadcrumbs.department')+ " #1", admins_department_path(1))
-      assert_equal "/admins/departments/1", element.path
-      assert_equal "Departamento #1", element.name
-    end
-
-    should 'have edit department path' do
-      element = BreadcrumbsOnRails::Breadcrumbs::Element.new(I18n.t('views.breadcrumbs.edit'), edit_admins_department_path(1))
-      assert_equal "/admins/departments/1/edit", element.path
-      assert_equal "Editar", element.name
     end
   end
 end

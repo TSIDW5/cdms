@@ -2,17 +2,14 @@ class Admins::DepartmentModulesController < Admins::BaseController
   before_action :set_department
   before_action :set_module, only: [:edit, :update, :destroy]
   before_action :set_breadcrumbs
+  before_action :set_update_breadcrumbs, only: [:edit, :update]
+  before_action :set_create_breadcrumbs, only: [:new, :create]
 
   def new
     @module = @department.modules.new
-    add_breadcrumb I18n.t('views.breadcrumbs.new_module'), new_admins_department_module_path
   end
 
-
-  def edit
-    add_breadcrumb I18n.t('views.breadcrumbs.module')+" ##{@module.id}", admins_department_path(@department.id)
-    add_breadcrumb I18n.t('views.breadcrumbs.edit'), edit_admins_department_module_path
-  end
+  def edit; end
 
   def create
     @module = @department.modules.new(module_params)
@@ -52,12 +49,23 @@ class Admins::DepartmentModulesController < Admins::BaseController
     @module = @department.modules.find(params[:id])
   end
 
-  def set_breadcrumbs
-    add_breadcrumb I18n.t('views.breadcrumbs.departments'), admins_departments_path
-    add_breadcrumb I18n.t('views.breadcrumbs.department')+" ##{@department.id}", admins_department_path(@department)
-  end
-
   def module_params
     params.require(:department_module).permit(:name, :description)
+  end
+
+  def set_breadcrumbs
+    add_breadcrumb @department.model_name.human(count: 2), admins_departments_path
+    add_breadcrumb I18n.t('views.breadcrumbs.show', model: @department.model_name.human, id: @department.id),
+                   admins_department_path(@department)
+  end
+
+  def set_update_breadcrumbs
+    add_breadcrumb I18n.t('views.breadcrumbs.show', model: @module.model_name.human, id: @module.id),
+                   admins_department_path(@department.id)
+    add_breadcrumb I18n.t('views.breadcrumbs.edit'), edit_admins_department_module_path
+  end
+
+  def set_create_breadcrumbs
+    add_breadcrumb I18n.t('views.breadcrumbs.new.m'), new_admins_department_module_path
   end
 end

@@ -7,6 +7,10 @@ class Admins::UsersControllerTest < ActionDispatch::IntegrationTest
       sign_in create(:admin)
     end
 
+    teardown do
+      assert_active_link(href: admins_users_path)
+    end
+
     should 'get index' do
       get admins_users_path
       assert_response :success
@@ -35,6 +39,7 @@ class Admins::UsersControllerTest < ActionDispatch::IntegrationTest
         assert_redirected_to admins_users_path
         assert_equal I18n.t('flash.actions.create.m', resource_name: User.model_name.human),
                      flash[:success]
+        follow_redirect!
       end
 
       should 'unsuccessfully' do
@@ -55,6 +60,7 @@ class Admins::UsersControllerTest < ActionDispatch::IntegrationTest
                      flash[:success]
         @user.reload
         assert_equal 'updated', @user.name
+        follow_redirect!
       end
 
       should 'unsuccessfully' do
@@ -74,6 +80,7 @@ class Admins::UsersControllerTest < ActionDispatch::IntegrationTest
       end
 
       assert_redirected_to admins_users_path
+      follow_redirect!
     end
   end
 
@@ -93,32 +100,6 @@ class Admins::UsersControllerTest < ActionDispatch::IntegrationTest
           assert_redirected_to new_admin_session_path
         end
       end
-    end
-  end
-
-  context 'add breadcrumbs' do
-    should 'have index users path'do
-      element = BreadcrumbsOnRails::Breadcrumbs::Element.new(I18n.t('views.breadcrumbs.users'), admins_users_path)
-      assert_equal "/admins/users", element.path
-      assert_equal "Usuários", element.name
-    end 
-
-    should 'have new user path'do
-      element = BreadcrumbsOnRails::Breadcrumbs::Element.new(I18n.t('views.breadcrumbs.new'), new_admins_user_path)
-      assert_equal "/admins/users/new", element.path
-      assert_equal "Novo", element.name
-    end 
-
-    should 'have show user path'do
-      element = BreadcrumbsOnRails::Breadcrumbs::Element.new(I18n.t('views.breadcrumbs.user')+" #1", admins_user_path(1))
-      assert_equal "/admins/users/1", element.path
-      assert_equal "Usuário #1", element.name
-    end
-
-    should 'have edit user path' do
-      element = BreadcrumbsOnRails::Breadcrumbs::Element.new(I18n.t('views.breadcrumbs.edit'), edit_admins_user_path(1))
-      assert_equal "/admins/users/1/edit", element.path
-      assert_equal "Editar", element.name
     end
   end
 end

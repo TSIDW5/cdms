@@ -39,6 +39,10 @@ Metrics/BlockLength:
     - 'config/environments/development.rb'
     - 'config/routes.rb'
 
+Metrics/ClassLength:
+  Max: 150
+
 Rails/ApplicationController:
   Exclude:
     - 'app/controllers/admins/base_controller.rb'
+    - 'test/controllers/concerns/breadcrumbs_test.rb'

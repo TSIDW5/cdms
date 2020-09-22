@@ -10,7 +10,6 @@ class ShowTest < ApplicationSystemTestCase
       visit admins_department_path(@department)
     end
 
-
     should 'display department data' do
       within('#main-content .card.department-data .card-body') do
         assert_text @department.name

@@ -1,5 +1,7 @@
 require 'support/simplecov'
 require 'support/file_helper'
+require 'support/asserts/breadcrumbs'
+require 'support/asserts/active_link'
 
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
@@ -24,6 +26,11 @@ class ActiveSupport::TestCase
   include Devise::Test::IntegrationHelpers
   include Warden::Test::Helpers
   include FactoryBot::Syntax::Methods
+end
+
+class ActionDispatch::IntegrationTest
+  include ::Asserts::Breadcrumbs
+  include ::Asserts::ActiveLink
 end
 
 Shoulda::Matchers.configure do |config|

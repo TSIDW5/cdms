@@ -11,5 +11,4 @@ module ApplicationHelper
       "#{page_title} | #{base_title}"
     end
   end
-
 end
