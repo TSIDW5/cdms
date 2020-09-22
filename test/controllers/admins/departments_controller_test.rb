@@ -7,6 +7,10 @@ class Admins::DepartmentsControllerTest < ActionDispatch::IntegrationTest
       sign_in create(:admin)
     end
 
+    teardown do
+      assert_active_link(href: admins_departments_path)
+    end
+
     should 'get index' do
       get admins_departments_path
       assert_response :success
@@ -40,6 +44,7 @@ class Admins::DepartmentsControllerTest < ActionDispatch::IntegrationTest
         assert_redirected_to admins_departments_path
         assert_equal I18n.t('flash.actions.create.m', resource_name: Department.model_name.human),
                      flash[:success]
+        follow_redirect!
       end
 
       should 'unsuccessfully' do
@@ -60,6 +65,7 @@ class Admins::DepartmentsControllerTest < ActionDispatch::IntegrationTest
                      flash[:success]
         @department.reload
         assert_equal 'updated', @department.name
+        follow_redirect!
       end
 
       should 'unsuccessfully' do
@@ -79,6 +85,7 @@ class Admins::DepartmentsControllerTest < ActionDispatch::IntegrationTest
       end
 
       assert_redirected_to admins_departments_path
+      follow_redirect!
     end
   end
 
