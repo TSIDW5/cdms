@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :audience_members
   root to: 'home#index'
 
   devise_for :admins
