@@ -1,5 +1,6 @@
 class Admins::DepartmentsController < Admins::BaseController
   before_action :set_department, only: [:show, :edit, :update, :destroy]
+  include Breadcrumbs
 
   def index
     @departments = Department.all
@@ -24,7 +25,7 @@ class Admins::DepartmentsController < Admins::BaseController
       flash[:success] = I18n.t('flash.actions.create.m', resource_name: I18n.t('activerecord.models.department.one'))
       redirect_to admins_departments_path
     else
-      flash[:error] = I18n.t('flash.actions.errors')
+      flash.now[:error] = I18n.t('flash.actions.errors')
       render :new
     end
   end
@@ -34,7 +35,7 @@ class Admins::DepartmentsController < Admins::BaseController
       flash[:success] = I18n.t('flash.actions.update.m', resource_name: I18n.t('activerecord.models.department.one'))
       redirect_to admins_departments_path
     else
-      flash[:error] = I18n.t('flash.actions.errors')
+      flash.now[:error] = I18n.t('flash.actions.errors')
       render :edit
     end
   end

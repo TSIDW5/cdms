@@ -95,3 +95,11 @@ pt-BR:
     audience_member:
       links:
         new: Novo membro de audiência
+    breadcrumbs:
+      edit: Editar
+      new:
+        m: Novo
+        f: Nova
+      show: '%{model} #%{id}'
+      home: Página Inicial
+

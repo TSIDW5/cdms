@@ -15,6 +15,8 @@ class Admins::DashboardControllerTest < ActionDispatch::IntegrationTest
 
       get admins_root_url
       assert_response :success
+      assert_breadcrumbs({ text: I18n.t('views.breadcrumbs.home') })
+      assert_active_link(href: admins_root_path)
     end
   end
 end
