@@ -1,10 +1,9 @@
 <% provide(:head_title, t('activerecord.models.department.other')) %>
 <% provide(:page_title, t('activerecord.models.department.other')) %>
 
-<%= render 'shared/search_and_new', search_path: '#', new_path: new_admins_department_path,
-                                    new_link: 'views.department.links.new' %>
+<%= render 'shared/search_and_new', new_path: new_admins_department_path, new_link: 'views.department.links.new' %>
 
-<div class="table-responsive">
+<div class="table-responsive dataTables_wrapper">
   <table class="table card-table table-striped table-vcenter table-options">
     <thead>
       <tr>
@@ -21,6 +20,11 @@
       <%= render @departments %>
     </tbody>
   </table>
+
+  <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">
+    <%= page_entries_info @departments, entry_name: t('views.search.registers').downcase %>
+  </div>
+  <%= paginate @departments %>
 </div>
 
 

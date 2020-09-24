@@ -1,9 +1,12 @@
 class Admins::AudienceMembersController < Admins::BaseController
   before_action :set_audience_member, only: [:edit, :update, :show, :destroy]
   include Breadcrumbs
+  include Paginate
 
   def index
-    @audience_members = AudienceMember.all
+    paginate(:audience_member, method(:search_admins_audience_members_path)) do
+      @audience_members = AudienceMember.search(['name'], params[:keyword]).page(params[:page])
+    end
   end
 
   def new

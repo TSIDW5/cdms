@@ -1,4 +1,6 @@
 class Department < ApplicationRecord
+  include Search
+
   has_many :department_modules, dependent: :destroy
   has_many :department_users, dependent: :destroy
   has_many :users, through: :department_users

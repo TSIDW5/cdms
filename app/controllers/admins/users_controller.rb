@@ -1,9 +1,12 @@
 class Admins::UsersController < Admins::BaseController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   include Breadcrumbs
+  include Paginate
 
   def index
-    @users = User.all
+    paginate(:user, method(:search_admins_users_path)) do
+      @users = User.search(['name'], params[:keyword]).page(params[:page])
+    end
   end
 
   def show; end

@@ -36,6 +36,7 @@ pt-BR:
           sign_in: Acessar a área do usuário
     search:
       placeholder: Procurar...
+      registers: Registros
     session:
       new:
         head_title: Entrar

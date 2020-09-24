@@ -129,4 +129,18 @@ class UserTest < ActiveSupport::TestCase
       assert_equal User.search_non_admins('u'), users
     end
   end
+
+  context 'queries' do
+    should 'search' do
+      first_name = 'Eduardo'
+      second_name = 'Pedro'
+
+      FactoryBot.create(:user, name: first_name)
+      FactoryBot.create(:user, name: second_name)
+
+      assert_equal(1, User.search(['name'], first_name).count)
+      assert_equal(1, User.search(['name'], second_name).count)
+      assert_equal(2, User.search(['name'], '').count)
+    end
+  end
 end

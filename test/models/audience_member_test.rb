@@ -44,4 +44,18 @@ class AudienceMemberTest < ActiveSupport::TestCase
       end
     end
   end
+
+  context 'queries' do
+    should 'search' do
+      first_name = 'Eduardo'
+      second_name = 'Pedro'
+
+      FactoryBot.create(:audience_member, name: first_name)
+      FactoryBot.create(:audience_member, name: second_name)
+
+      assert_equal(1, AudienceMember.search(['name'], first_name).count)
+      assert_equal(1, AudienceMember.search(['name'], second_name).count)
+      assert_equal(2, AudienceMember.search(['name'], '').count)
+    end
+  end
 end

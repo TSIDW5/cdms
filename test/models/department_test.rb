@@ -59,4 +59,18 @@ class DepartmentTest < ActiveSupport::TestCase
       assert_equal [user_b], department.search_non_members('b')
     end
   end
+
+  context 'queries' do
+    should 'search' do
+      first_name = 'TSI'
+      second_name = 'TMI'
+
+      FactoryBot.create(:department, name: first_name)
+      FactoryBot.create(:department, name: second_name)
+
+      assert_equal(1, Department.search(['name'], first_name).count)
+      assert_equal(1, Department.search(['name'], second_name).count)
+      assert_equal(2, Department.search(['name'], '').count)
+    end
+  end
 end

@@ -1,9 +1,9 @@
 <% provide(:head_title, t('views.user.name.plural')) %>
 <% provide(:page_title, t('views.user.name.plural')) %>
 
-<%= render 'shared/search_and_new', search_path: '#', new_path: new_admins_user_path, new_link: 'views.user.links.new' %>
+<%= render 'shared/search_and_new', new_path: new_admins_user_path, new_link: 'views.user.links.new' %>
 
-<div class="table-responsive">
+<div class="table-responsive dataTables_wrapper">
 
   <table class="table card-table table-striped table-vcenter table-options">
     <thead>
@@ -22,4 +22,9 @@
       <%= render @users %>
     </tbody>
   </table>
+
+  <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">
+    <%= page_entries_info @users, entry_name: t('views.search.registers').downcase %>
+  </div>
+  <%= paginate @users %>
 </div>
