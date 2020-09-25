@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_out_path_for(*)
-    new_admin_session_path
+    current_admin ? new_admin_session_path : new_audience_member_session_path
   end
 
   def layout_by_resource

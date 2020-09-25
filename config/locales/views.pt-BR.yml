@@ -31,6 +31,8 @@ pt-BR:
           sign_in: Acessar a área do administrativa
         user:
           sign_in: Acessar a área do usuário
+        audience_member:
+          sign_in: Acessar a área do membro de audiência
     search:
       placeholder: Procurar...
     session:
@@ -93,6 +95,9 @@ pt-BR:
       edit:
         title: 'Editar módulo do departamento #%{dp}'
     audience_member:
+      name:
+        singular: Membro de audiência
+        plural:  Membros de audiência
       links:
         new: Novo membro de audiência
     breadcrumbs:
