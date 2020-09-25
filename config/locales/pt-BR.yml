@@ -49,4 +49,9 @@ pt-BR:
       audience_member:
         cpf: CPF
         id: Código
+        password: Senha
+        current_password: Senha atual
+        password_confirmation: Confirmação de senha
+        remember_me: Lembre-me
+        reset_password_token: Token para recuperação de senha
         <<: *commons
