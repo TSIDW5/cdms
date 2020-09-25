@@ -1,3 +1,3 @@
-class AudienceMember::DashboardController < AudienceMember::BaseController
+class AudienceMembers::DashboardController < AudienceMembers::BaseController
   def index; end
 end

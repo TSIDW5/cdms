@@ -7,8 +7,8 @@
 
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 
-    <%= stylesheet_link_tag 'audience_member/application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'audience_member/application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'audience_members/application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'audience_members/application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body id="<%= controller_name %>-<%= action_name %>">
@@ -18,10 +18,10 @@
         <div class="container-fluid mt-0">
 
           <div class="row">
-            <%= render 'layouts/audience_member/header' %>
+            <%= render 'layouts/audience_members/header' %>
 
             <div class="col-sm-12 col-md-3 col-lg-2">
-              <%= render 'layouts/audience_member/sidebar' %>
+              <%= render 'layouts/audience_members/sidebar' %>
             </div>
 
             <div class="col-md-9 col-lg-10">
@@ -45,7 +45,7 @@
 
         </div> <!-- .container -->
       </div>
-      <%= render 'layouts/audience_member/footer' %>
+      <%= render 'layouts/audience_members/footer' %>
     </div>
   </body>
 </html>
