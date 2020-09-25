@@ -1,0 +1,26 @@
+<div class="d-lg-block collapse d-md-flex" id="sidebarMenuCollapse">
+  <div class="list-group list-group-transparent mb-2 sidebar">
+
+    <span class="sidebar-heading pl-0 pt-2 pb-2">
+      <%= icon('fas', 'book-open', class: 'mr-1') %>
+      SGCD
+    </span>
+
+    <%= active_link_to admins_root_path, class: 'list-group-item list-group-item-action', active: :exclusive do %>
+      <span class="icon mr-3"><i class="fas fa-home"></i></span>Página inicial
+    <% end %>
+
+    <%= active_link_to admins_departments_path, class: 'list-group-item list-group-item-action' do %>
+      <span class="icon mr-3"><i class="fas fa-building"></i></span>Departamentos
+    <% end %>
+
+    <%= active_link_to admins_users_path, class: 'list-group-item list-group-item-action' do %>
+      <span class="icon mr-3"><i class="fas fa-user"></i></span>Usuários
+    <% end %>
+
+    <%= active_link_to admins_audience_members_path, class: 'list-group-item list-group-item-action' do %>
+      <span class="icon mr-3"><i class="fa fa-users"></i></span><%= I18n.t("views.app.sidebar.audience_members") %>
+    <% end %>
+
+  </div>
+</div>

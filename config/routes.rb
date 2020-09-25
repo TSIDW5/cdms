@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :audience_members
+
   root to: 'home#index'
+
+  devise_for :audience_members
+  authenticate :audience_member do
+    namespace :audience_members do
+      root to: 'dashboard#index'
+    end
+  end
 
   devise_for :admins
   authenticate :admin do
