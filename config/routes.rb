@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       root to: 'dashboard#index'
       resources :users
       resources :audience_members
+      post 'audience_members/import', to: 'audience_members#import', as: 'audience_members_import' 
       resources :departments do
         resources :department_modules, except: [:index, :show], as: :modules, path: 'modules'
       end

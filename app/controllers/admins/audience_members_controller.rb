@@ -30,6 +30,21 @@ class Admins::AudienceMembersController < Admins::BaseController
     redirect_to admins_audience_members_path
   end
 
+  def import
+    result = AudienceMember.my_import(params[:file])
+    
+    if result[0].num_inserts > 0
+      flash[:success] = t('flash.actions.create.m', resource_name: t('activerecord.models.audience_member.one'))
+    end
+    if result[1].length > 0
+      result[1].each do |audience_member|
+        add_message(:error, audience_member.name + " = " + audience_member.errors.full_messages.join(" - "))
+        puts @messages.to_json
+      end
+    end
+    redirect_to admins_audience_members_path
+  end
+
   private
 
   def set_audience_member

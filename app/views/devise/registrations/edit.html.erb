@@ -21,7 +21,7 @@
   </div>
 
   <div class="d-flex">
-    <%= link_to t('views.links.back'), current_admin ? :admin_root : :audience_members_root, class: 'btn btn-secondary' %>
+    <%= link_to t('views.links.back'), current_admin ? :admins_root : :audience_members_root, class: 'btn btn-secondary' %>
 
     <%= f.button :submit,
       t('.update'), class: 'btn-primary ml-auto' %>

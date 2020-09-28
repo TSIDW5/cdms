@@ -4,6 +4,10 @@
 <%= render 'shared/search_and_new', search_path: '#', new_path: new_admins_audience_member_path,
                                     new_link: 'views.audience_member.links.new' %>
 
+<%= render_messages %>
+
+<%= render 'form_import'%>
+
 <div class="table-responsive">
   <table class="table card-table table-striped table-vcenter table-options">
     <thead>

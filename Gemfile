@@ -20,8 +20,10 @@ gem 'simple_form'
 gem 'sprockets-rails', git: 'git://github.com/rails/sprockets-rails.git'
 gem 'validators'
 
+
 gem 'active_link_to'
 gem 'breadcrumbs_on_rails'
+gem 'activerecord-import'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
