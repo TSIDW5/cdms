@@ -56,7 +56,7 @@ class Admins::AudienceMembersController < Admins::BaseController
   end
 
   def audience_member_params
-    params.require(:audience_member).permit(:id, :name, :email, :cpf)
+    params.require(:audience_member).permit(:id, :name, :email, :cpf, :password, :password_confirmation)
   end
 
   def save_audience_member
