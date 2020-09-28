@@ -10,7 +10,6 @@ class CreateTest < ApplicationSystemTestCase
 
     should 'successfully' do
       audience_member = build(:audience_member)
-      puts audience_member.to_json
 
       fill_in 'audience_member_name', with: audience_member.name
       fill_in 'audience_member_email', with: audience_member.email
