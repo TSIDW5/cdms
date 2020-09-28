@@ -43,14 +43,6 @@ ActiveRecord::Schema.define(version: 2020_09_23_002931) do
     t.index ["reset_password_token"], name: "index_audience_members_on_reset_password_token", unique: true
   end
 
-  create_table "comments", force: :cascade do |t|
-    t.bigint "post_id", null: false
-    t.text "text"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["post_id"], name: "index_comments_on_post_id"
-  end
-
   create_table "department_modules", force: :cascade do |t|
     t.bigint "department_id", null: false
     t.string "name"
@@ -74,22 +66,6 @@ ActiveRecord::Schema.define(version: 2020_09_23_002931) do
     t.index ["initials"], name: "index_departments_on_initials", unique: true
   end
 
-  create_table "posts", force: :cascade do |t|
-    t.string "title"
-    t.text "text"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "roles", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "acronym", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["acronym"], name: "index_roles_on_acronym", unique: true
-    t.index ["name"], name: "index_roles_on_name", unique: true
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -100,13 +76,9 @@ ActiveRecord::Schema.define(version: 2020_09_23_002931) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "avatar"
-    t.bigint "role_id"
     t.index ["cpf"], name: "index_users_on_cpf", unique: true
-    t.index ["role_id"], name: "index_users_on_role_id"
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  add_foreign_key "comments", "posts"
   add_foreign_key "department_modules", "departments"
-  add_foreign_key "users", "roles"
 end

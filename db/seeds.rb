@@ -7,4 +7,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Admin.create_with(name: 'Administrador', password: '123456').find_or_create_by!(email: 'admin@admin.com')
-AudienceMember.create_with(name: 'Membro Audiencia', password: '123456', cpf: '724.395.240-26').find_or_create_by!(email: 'teste@teste.com')
+AudienceMember.create_with(name: 'Membro Audiencia', password: '123456', cpf: '724.395.240-26')
+    .find_or_create_by!(email: 'teste@teste.com')

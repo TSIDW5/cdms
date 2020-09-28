@@ -13,17 +13,14 @@ module ApplicationHelper
   end
 
   def render_message(type, text)
-    render partial: 'shared/multiple_flash_messages', locals: {type: type, text: text}
+    render partial: 'shared/multiple_flash_messages', locals: { type: type, text: text }
   end
 
   def render_messages
-    order = [:error]
     @messages ||= []
-    @messages.concat(flash.map{|k,v| {type: k.to_sym, text: v}}) if flash
-    @messages.sort_by{|m| order.index(m[:type]) || order.length}
-        .select {|m|  m[:type] == :error }
-        .map{|m| render_message(m[:type], m[:text]) }
-        .join.html_safe
+    @messages.concat(flash.map{ |k,v| {type: k.to_sym, text: v} }) if flash
+    @messages.select { |m|  m[:type] == :error }
+        .map{ |m| render_message(m[:type], m[:text]) }.join.html_safe
   end
 
 end
