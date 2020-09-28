@@ -17,13 +17,13 @@ module ApplicationHelper
   end
 
   def render_messages
-    puts "AAAAAAAAAQUIIIIIIIII"
-    puts @messages.to_json
-    order = [:error, :warning, :success, :info]
+    order = [:error]
     @messages ||= []
     @messages.concat(flash.map{|k,v| {type: k.to_sym, text: v}}) if flash
     @messages.sort_by{|m| order.index(m[:type]) || order.length}
-        .map{|m| render_message(m[:type], m[:text]) }.join.html_safe
+        .select {|m|  m[:type] == :error }
+        .map{|m| render_message(m[:type], m[:text]) }
+        .join.html_safe
   end
 
 end

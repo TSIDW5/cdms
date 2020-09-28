@@ -31,6 +31,8 @@ class Admins::AudienceMembersController < Admins::BaseController
   end
 
   def import
+    @audience_members = AudienceMember.all
+
     result = AudienceMember.my_import(params[:file])
     
     if result[0].num_inserts > 0
@@ -39,10 +41,9 @@ class Admins::AudienceMembersController < Admins::BaseController
     if result[1].length > 0
       result[1].each do |audience_member|
         add_message(:error, audience_member.name + " = " + audience_member.errors.full_messages.join(" - "))
-        puts @messages.to_json
       end
     end
-    redirect_to admins_audience_members_path
+    render :index
   end
 
   private

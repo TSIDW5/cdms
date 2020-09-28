@@ -14,9 +14,11 @@ class AudienceMember < ApplicationRecord
   def self.my_import(file)
     valid_audiencemembers = []
     invalid_audiencemembers = []
-    
     CSV.foreach(file, headers: true) do |row|
       audiencemember = AudienceMember.new(row.to_h)
+
+      audiencemember.password = '123456'
+      audiencemember.password_confirmation = '123456'
       if audiencemember.valid?
         valid_audiencemembers << audiencemember
       else
