@@ -3,8 +3,8 @@
   <%= f.input :email, required: true, type: 'email' %>
   <%= f.input :cpf, required: true, :input_html => {'data-mask': '000.000.000-00'} %>
 
-  <%= f.input :password %>
-  <%= f.input :password_confirmation %>
+  <%= f.input :password, required: true %>
+  <%= f.input :password_confirmation, required: true %>
 
   <div class="form-footer">
     <div class="d-flex">

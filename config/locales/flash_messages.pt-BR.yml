@@ -12,6 +12,8 @@ pt-BR:
         f: '%{resource_name} removida com sucesso!'
         bond: Não é possível remover %{resource_name} com vínculos!'
       errors: Existem dados incorretos!
+      import:
+        m: '%{resource_name} importados com sucesso!'
     not_authorized: Acesso não autorizado!
     not_found: Registro não encontrado!
 

@@ -4,16 +4,20 @@ class CreateTest < ApplicationSystemTestCase
   context 'create' do
     setup do
       admin = create(:admin)
-      login_as(admin, as: :admin)
+      login_as(admin, scope: :admin)
       visit new_admins_audience_member_path
     end
 
     should 'successfully' do
       audience_member = build(:audience_member)
+      puts audience_member.to_json
 
       fill_in 'audience_member_name', with: audience_member.name
       fill_in 'audience_member_email', with: audience_member.email
       fill_in 'audience_member_cpf', with: audience_member.cpf
+      fill_in 'audience_member_password', with: '123456'
+      fill_in 'audience_member_password_confirmation', with: '123456'
+
       submit_form
 
       flash_message = I18n.t('flash.actions.create.m', resource_name: audience_member.model_name.human)
@@ -46,6 +50,10 @@ class CreateTest < ApplicationSystemTestCase
 
       within('div.audience_member_cpf') do
         assert_text(I18n.t('errors.messages.invalid'))
+      end
+
+      within('div.audience_member_password') do
+        assert_text(I18n.t('errors.messages.blank'))
       end
     end
   end

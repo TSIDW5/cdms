@@ -32,14 +32,19 @@ class Admins::AudienceMembersController < Admins::BaseController
 
   def import
     @audience_members = AudienceMember.all
-    result = AudienceMember.my_import(params[:file])
-    if result[0].num_inserts.positive?
-      flash[:success] = t('flash.actions.create.m', resource_name: t('activerecord.models.audience_member.one'))
-    end
-    unless result[1].empty?
-      result[1].each do |audience_member|
-        add_message(:error, "#{audience_member.name} = #{audience_member.errors.full_messages.join(' - ')}")
+    file = params[:file]
+    if file.nil? || File.extname(file) != '.csv'
+      add_message(:error, I18n.t('views.audience_member.import.invalid_file'))
+    else
+      result = AudienceMember.my_import(file)
+      if result[0].num_inserts.positive?
+        flash[:success] = t('flash.actions.import.m', resource_name: t('activerecord.models.audience_member.other'))
       end
+      unless result[1].empty?
+        result[1].each do |audience_member|
+          add_message(:error, "#{audience_member.name} = #{audience_member.errors.full_messages.join(' - ')}")
+        end
+      end      
     end
     render :index
   end

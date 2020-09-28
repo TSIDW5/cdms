@@ -100,6 +100,8 @@ pt-BR:
         plural:  Membros de audiência
       import:
         btn_import: Importar membros
+        btn_download_sample_file: Baixar arquivo de exemplo
+        invalid_file: 'Arquivo inválido'
       links:
         new: Novo membro de audiência
         sign_out: Sair

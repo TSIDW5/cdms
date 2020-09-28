@@ -1,11 +1,17 @@
 <%= form_tag admins_audience_members_import_path, multipart: true do %>
   <div class="row pl-3 pr-3">
-    <div class="custom-file col-md-9 col-sm-12">
+    <div class="custom-file col-md-6 col-sm-12">
       <%= file_field_tag :file, class: 'custom-file-input'%>
       <label class="custom-file-label"><%= t('views.file.choose') %></label>
     </div>
     <div class="col-md-3 col-sm-12 p-sm-0">
       <%= submit_tag t('views.audience_member.import.btn_import'), class: 'btn btn-outline-primary btn-block' %>
+    </div>
+
+    <div class="col-md-3 col-sm-12">
+      <%= link_to "/import_audience_members.csv", class: "btn btn-outline-primary btn-block" do %>
+        <%= icon('fas', 'download', class: 'mr-2') %><%= t('views.audience_member.import.btn_download_sample_file') %>
+      <% end %>
     </div>
   </div>
 <% end %>
