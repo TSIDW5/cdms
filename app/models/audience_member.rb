@@ -14,7 +14,6 @@ class AudienceMember < ApplicationRecord
     invalid_audiencemembers = []
     CSV.foreach(file, headers: true) do |row|
       audiencemember = AudienceMember.new(row.to_h)
-
       audiencemember.password = '123456'
       audiencemember.password_confirmation = '123456'
       if audiencemember.valid?
@@ -23,6 +22,6 @@ class AudienceMember < ApplicationRecord
         invalid_audiencemembers << audiencemember
       end
     end
-    return AudienceMember.import(valid_audiencemembers, returning: :name), invalid_audiencemembers
+    [AudienceMember.import(valid_audiencemembers, returning: :name), invalid_audiencemembers]
   end
 end

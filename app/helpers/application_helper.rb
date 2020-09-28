@@ -16,11 +16,10 @@ module ApplicationHelper
     render partial: 'shared/multiple_flash_messages', locals: { type: type, text: text }
   end
 
-  def render_messages
-    @messages ||= []
-    @messages.concat(flash.map{ |k,v| {type: k.to_sym, text: v} }) if flash
-    @messages.select { |m|  m[:type] == :error }
-        .map{ |m| render_message(m[:type], m[:text]) }.join.html_safe
+  def render_messages(messages)
+    messages ||= []
+    messages.concat(flash.map { |k, v| { type: k.to_sym, text: v } }) if flash
+    messages.select { |m| m[:type] == :error }.map { |m| render_message(m[:type], m[:text]) }.join
   end
 
 end

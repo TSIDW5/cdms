@@ -32,15 +32,13 @@ class Admins::AudienceMembersController < Admins::BaseController
 
   def import
     @audience_members = AudienceMember.all
-
     result = AudienceMember.my_import(params[:file])
-    
-    if result[0].num_inserts > 0
+    if result[0].num_inserts.positive?
       flash[:success] = t('flash.actions.create.m', resource_name: t('activerecord.models.audience_member.one'))
     end
-    if result[1].length > 0
+    unless result[1].empty?
       result[1].each do |audience_member|
-        add_message(:error, audience_member.name + " = " + audience_member.errors.full_messages.join(" - "))
+        add_message(:error, "#{audience_member.name} = #{audience_member.errors.full_messages.join(' - ')}")
       end
     end
     render :index

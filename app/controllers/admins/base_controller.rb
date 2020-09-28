@@ -5,7 +5,6 @@ class Admins::BaseController < ActionController::Base
 
   def add_message(type, text)
     @messages ||= []
-    @messages.push({type: type, text: text})
+    @messages.push({ type: type, text: text })
   end
-
 end
