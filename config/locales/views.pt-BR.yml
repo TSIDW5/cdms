@@ -98,6 +98,8 @@ pt-BR:
       name:
         singular: Membro de audiência
         plural:  Membros de audiência
+      import:
+        btn_import: Importar membros
       links:
         new: Novo membro de audiência
         sign_out: Sair
