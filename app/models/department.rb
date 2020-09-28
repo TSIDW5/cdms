@@ -1,5 +1,7 @@
 class Department < ApplicationRecord
   has_many :department_modules, dependent: :destroy
+  has_many :department_users, dependent: :destroy
+  has_many :users, through: :department_users
 
   validates :name, presence: true
   validates :initials, presence: true, uniqueness: true
@@ -10,5 +12,9 @@ class Department < ApplicationRecord
 
   def modules
     department_modules
+  end
+
+  def search_non_members(term)
+    User.where('unaccent(name) ILIKE unaccent(?)', "%#{term}%").order('name ASC').where.not(id: user_ids)
   end
 end

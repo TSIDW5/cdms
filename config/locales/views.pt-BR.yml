@@ -21,6 +21,9 @@ pt-BR:
           sign_in: Clique aqui para acessar a área do usuário
     prompt:
       confirm: Tem certeza?
+      select:
+        m: 'Selecione um %{name}'
+        f: 'Selecione uma %{name}'
     links:
       back: Voltar
       edit: Editar
@@ -82,6 +85,9 @@ pt-BR:
         new: Novo departamento
         edit: Editar departamento
         show: Visualizar departamento
+      members:
+        name: Membros
+        nwdp: 'Membros do departamento %{name}'
     department_module:
       name:
         singular: Módulo departamento

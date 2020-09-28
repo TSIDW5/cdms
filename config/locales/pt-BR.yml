@@ -1,4 +1,8 @@
 pt-BR:
+  enums:
+    roles:
+      responsible: Responsável
+      collaborator: Colaborador
   activerecord:
     models:
       admin:
@@ -22,6 +26,7 @@ pt-BR:
         email: Email
         created_at: Criado em
         updated_at: Atualizado em
+        role: Papel
       admin:
         password: Senha
         current_password: Senha atual
@@ -46,7 +51,11 @@ pt-BR:
         register_number: Número do registro
         cpf: CPF
         active: Status
+        <<: *commons
       audience_member:
         cpf: CPF
         id: Código
         <<: *commons
+      department_user:
+        role: Papel
+        user: Usuário

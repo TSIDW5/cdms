@@ -11,6 +11,9 @@ gem 'sass-rails', '>= 6'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 4.0'
 
+gem 'active_link_to'
+gem 'activerecord-postgres_enum', git: 'https://github.com/dmarczal/activerecord-postgres_enum.git'
+gem 'breadcrumbs_on_rails'
 gem 'carrierwave', '~> 2.0'
 gem 'cpf_cnpj'
 gem 'devise'
@@ -19,9 +22,6 @@ gem 'rails-i18n', '~> 6.0.0'
 gem 'simple_form'
 gem 'sprockets-rails', git: 'git://github.com/rails/sprockets-rails.git'
 gem 'validators'
-
-gem 'active_link_to'
-gem 'breadcrumbs_on_rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

@@ -7,28 +7,28 @@ class Admins::DepartmentsControllerTest < ActionDispatch::IntegrationTest
       sign_in create(:admin)
     end
 
-    teardown do
-      assert_active_link(href: admins_departments_path)
-    end
-
     should 'get index' do
       get admins_departments_path
       assert_response :success
+      assert_active_link(href: admins_departments_path)
     end
 
     should 'get new' do
       get new_admins_department_path
       assert_response :success
+      assert_active_link(href: admins_departments_path)
     end
 
     should 'get show' do
       get admins_department_path(@department)
       assert_response :success
+      assert_active_link(href: admins_departments_path)
     end
 
     should 'get edit' do
       get edit_admins_department_path(@department)
       assert_response :success
+      assert_active_link(href: admins_departments_path)
     end
 
     context '#create' do
@@ -40,6 +40,7 @@ class Admins::DepartmentsControllerTest < ActionDispatch::IntegrationTest
         assert_equal I18n.t('flash.actions.create.m', resource_name: Department.model_name.human),
                      flash[:success]
         follow_redirect!
+        assert_active_link(href: admins_departments_path)
       end
 
       should 'unsuccessfully' do
@@ -49,6 +50,7 @@ class Admins::DepartmentsControllerTest < ActionDispatch::IntegrationTest
 
         assert_response :success
         assert_equal I18n.t('flash.actions.errors'), flash[:error]
+        assert_active_link(href: admins_departments_path)
       end
     end
 
@@ -61,6 +63,7 @@ class Admins::DepartmentsControllerTest < ActionDispatch::IntegrationTest
         @department.reload
         assert_equal 'updated', @department.name
         follow_redirect!
+        assert_active_link(href: admins_departments_path)
       end
 
       should 'unsuccessfully' do
@@ -71,6 +74,7 @@ class Admins::DepartmentsControllerTest < ActionDispatch::IntegrationTest
         name = @department.name
         @department.reload
         assert_equal name, @department.name
+        assert_active_link(href: admins_departments_path)
       end
     end
 
@@ -80,7 +84,59 @@ class Admins::DepartmentsControllerTest < ActionDispatch::IntegrationTest
       end
 
       assert_redirected_to admins_departments_path
-      follow_redirect!
+    end
+
+    context 'members' do
+      should 'get members' do
+        get admins_department_members_path(@department)
+        assert_response :success
+        assert_active_link(href: admins_departments_path)
+      end
+
+      should 'search non members' do
+        @check_active_link = false
+
+        user = create(:user)
+        get admins_department_search_non_members_path(@department, user.name)
+
+        json_response = JSON.parse(response.body)
+        assert_equal [user.as_json(only: [:id, :name])], json_response
+      end
+
+      context 'add' do
+        should 'successfully' do
+          user = create(:user)
+          params = { user_id: user.id, department_id: @department.id, role: :collaborator }
+
+          assert_difference('DepartmentUser.count', 1) do
+            post admins_department_add_member_path(@department), params: { department_user: params }
+          end
+
+          assert_redirected_to admins_department_members_path(@department)
+          assert_equal I18n.t('flash.actions.add.m', resource_name: User.model_name.human), flash[:success]
+          @department.reload
+          assert_equal 1, @department.users.count
+          follow_redirect!
+          assert_active_link(href: admins_departments_path)
+        end
+
+        should 'unsuccessfully' do
+          post admins_department_add_member_path(@department), params: { department_user: { user_id: '' } }
+          assert_response :success
+          @department.reload
+          assert_equal 0, @department.users.count
+        end
+      end
+
+      should 'remove' do
+        du = create(:department_user, :collaborator, department: @department)
+
+        assert_difference('DepartmentUser.count', -1) do
+          delete admins_department_remove_member_path(@department, du.user)
+        end
+
+        assert_redirected_to admins_department_members_path(@department)
+      end
     end
   end
 
@@ -88,10 +144,11 @@ class Admins::DepartmentsControllerTest < ActionDispatch::IntegrationTest
     should 'redirect to login' do
       requests = {
         get: [admins_departments_path, new_admins_department_path,
-              edit_admins_department_path(1), admins_department_path(1)],
-        post: [admins_departments_path],
+              edit_admins_department_path(1), admins_department_path(1),
+              admins_department_members_path(1)],
+        post: [admins_departments_path, admins_department_add_member_path(1)],
         patch: [admins_department_path(1)],
-        delete: [admins_department_path(1)]
+        delete: [admins_department_path(1), admins_department_remove_member_path(1, 1)]
       }
 
       requests.each do |method, routes|
