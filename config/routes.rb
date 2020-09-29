@@ -7,12 +7,16 @@ Rails.application.routes.draw do
       root to: 'dashboard#index'
       resources :users
 
+      get '/administrators/search/(:term)', to: 'administrators#search_non_admins',
+                                            as: 'search_non_administrators'
+      resources :administrators, only: [:index, :create, :destroy]
+
       resources :audience_members
       resources :departments do
         resources :department_modules, except: [:index, :show], as: :modules, path: 'modules'
 
         get '/members', to: 'departments#members', as: :members
-        get '/non-members/search/(:term)', costraints: { term: %r{[^/]+} },
+        get '/non-members/search/(:term)', costraints: { term: %r{[^/]+} }, # allows anything except a slash.
                                            to: 'departments#non_members',
                                            as: 'search_non_members'
 

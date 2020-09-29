@@ -7,3 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Admin.create_with(name: 'Administrador', password: '123456').find_or_create_by!(email: 'admin@admin.com')
+
+Role.create_with(name: 'Administrador geral').find_or_create_by!(identifier: :manager)
+Role.create_with(name: 'Administrador assistente').find_or_create_by!(identifier: :assistant)

@@ -6,4 +6,12 @@ FactoryBot.define do
     cpf { CPF.generate(true) }
     active { false }
   end
+
+  trait :manager do
+    role { create(:role_manager) }
+  end
+
+  trait :assistant do
+    role { create(:role_assistant) }
+  end
 end

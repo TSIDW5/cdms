@@ -7,7 +7,7 @@
     <%= f.input :user, label: false,
                 wrapper_html: { class: 'col-sm-6' },
                 placeholder: 'Pesquise por um usuário',
-                input_html: { data: { search_url: admins_department_search_non_members_path },
+                input_html: { data: { search: 'keypress', search_url: admins_department_search_non_members_path },
                               value: f.object.user&.name  } %>
 
     <%= f.input :role, label: false, wrapper_html: { class: 'col-sm-5' },

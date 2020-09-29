@@ -2,17 +2,18 @@ window.CDMS.classes.KeyPressInputSearch = class {
   constructor(selector) {
     this.selector = selector;
     this.field = $(selector);
-  }
-
-  init() {
-    if (!this.isOnPage()) return;
 
     this.dropdownId = `${this.field.attr('id')}-dropdown`;
     this.hiddenIdField = `${this.field.attr('id')}_id`;
     this.searchUrl = this.field.data('search-url');
 
+    this.disableBrowserAutoComplete();
     this.applyEnvents();
     this.insertDropdown();
+  }
+
+  disableBrowserAutoComplete() {
+    this.field.attr('autocomplete', 'off');
   }
 
   applyEnvents() {
@@ -89,8 +90,16 @@ window.CDMS.classes.KeyPressInputSearch = class {
     this.dropdown.removeClass('show');
   }
 
-  isOnPage() {
-    return this.field.length > 0;
+  static init(selector) {
+    if (!window.CDMS.classes.KeyPressInputSearch.isOnPage(selector)) return;
+
+    $(selector).each((index, el) => {
+      new window.CDMS.classes.KeyPressInputSearch(el); // eslint-disable-line no-new
+    });
+  }
+
+  static isOnPage(selector) {
+    return $(selector).length > 0;
   }
 
   static isLettersBackspaceOrDelete(e) {

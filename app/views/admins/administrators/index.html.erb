@@ -1,0 +1,44 @@
+<% provide(:head_title, t('activemodel.models.administrator.other')) %>
+<% provide(:page_title, t('activemodel.models.administrator.other')) %>
+
+<%= simple_form_for(@administrator, url: admins_administrators_path, method: :post) do |f| %>
+  <div class="row">
+    <%= f.hidden_field :user_id %>
+    <%= f.input :user, label: false,
+                wrapper_html: { class: 'col-sm-6' },
+                placeholder: 'Pesquise por um usuário',
+                input_html: { data: { search: 'keypress', search_url: admins_search_non_administrators_path } } %>
+
+    <%= f.input :role_id, label: false, wrapper_html: { class: 'col-sm-5' },
+                input_html: { class: 'apply-selectize' },
+                collection: Role.all,
+                prompt: t('views.prompt.select.m', name: User.human_attribute_name(:role)) %>
+
+    <div class="col-sm-1">
+      <%= button_tag type: 'submit', class: 'btn btn-primary' do %>
+        <i class="fe fe-user-plus"></i>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<div class="table-responsive">
+
+  <table class="table card-table table-striped table-vcenter table-options">
+    <thead>
+      <tr>
+        <th><%= User.human_attribute_name(:name) %></th>
+        <th><%= User.human_attribute_name(:email) %></th>
+        <th><%= User.human_attribute_name(:username) %></th>
+        <th><%= User.human_attribute_name(:register_number) %></th>
+        <th><%= User.human_attribute_name(:role) %></th>
+        <th><%= User.human_attribute_name(:active) %></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= render partial: "administrator", collection: @administrators %>
+    </tbody>
+  </table>
+</div>

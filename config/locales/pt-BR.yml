@@ -3,6 +3,16 @@ pt-BR:
     roles:
       responsible: Responsável
       collaborator: Colaborador
+  activemodel:
+    models:
+      administrator:
+        one: Administrador
+        other: Administradores
+    attributes:
+      administrator:
+        role: Papel
+        role_id: Papel
+        user: Usuário
   activerecord:
     models:
       admin:
