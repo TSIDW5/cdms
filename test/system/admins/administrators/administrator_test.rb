@@ -1,6 +1,6 @@
 require 'application_system_test_case'
 
-class MemberTest < ApplicationSystemTestCase
+class Admins::AdministratorTest < ApplicationSystemTestCase
   context 'administrators' do
     setup do
       admin = create(:admin)
@@ -49,7 +49,7 @@ class MemberTest < ApplicationSystemTestCase
     end
 
     should 'destroy' do
-      user = create(:user, :manager)
+      user = create_list(:user, 2, :manager).first
       visit admins_administrators_path
 
       within('#main-content table.table tbody') do

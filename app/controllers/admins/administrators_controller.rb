@@ -21,8 +21,13 @@ class Admins::AdministratorsController < Admins::BaseController
 
   def destroy
     user = User.find(params[:id])
-    user.update(role_id: nil)
-    flash[:success] = I18n.t('flash.actions.remove.m', resource_name: resource_name)
+    if user.last_manager?
+      flash[:warning] = I18n.t('flash.actions.least', resource_name: resource_name)
+    else
+      user.update(role_id: nil)
+      flash[:success] = I18n.t('flash.actions.remove.m', resource_name: resource_name)
+    end
+
     redirect_to admins_administrators_path
   end
 

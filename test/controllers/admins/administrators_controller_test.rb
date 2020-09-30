@@ -36,14 +36,28 @@ class Admins::AdministratorsControllerTest < ActionDispatch::IntegrationTest
       end
     end
 
-    should 'destroy' do
-      user = FactoryBot.create(:user, :manager)
-      delete admins_administrator_path(user)
+    context '#destroy' do
+      should 'successfully' do
+        user = FactoryBot.create(:user, :assistant)
+        delete admins_administrator_path(user)
 
-      user.reload
-      assert_not user.is?(:admin)
-      assert_not user.is?(:manager)
-      assert_redirected_to admins_administrators_path
+        user.reload
+        assert_not user.is?(:admin)
+        assert_not user.is?(:assistant)
+        assert_redirected_to admins_administrators_path
+      end
+
+      should 'unsuccessfully' do
+        user = FactoryBot.create(:user, :manager)
+        delete admins_administrator_path(user)
+
+        user.reload
+        assert user.is?(:admin)
+        assert user.is?(:manager)
+        assert_redirected_to admins_administrators_path
+        message = I18n.t('flash.actions.least', resource_name: Administrator.model_name.human)
+        assert_equal message, flash[:warning]
+      end
     end
   end
 

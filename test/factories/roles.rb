@@ -1,12 +1,12 @@
 FactoryBot.define do
   factory :role do
-    name { 'Role name' }
-
     trait :manager do
+      name { 'Administrator manager' }
       identifier { 'manager' }
     end
 
     trait :assistant do
+      name { 'Administrator assistant' }
       identifier { 'assistant' }
     end
 
@@ -14,9 +14,9 @@ FactoryBot.define do
     factory :role_assistant, traits: [:assistant]
 
     to_create do |instance|
-      instance.attributes = Role.find_or_create_by(name: instance.name,
-                                                   identifier: instance.identifier).attributes
-      instance.instance_variable_set('@new_record', false)
+      instance.attributes = Role.create_with(name: instance.name)
+                                .find_or_create_by(identifier: instance.identifier).attributes
+      instance
     end
   end
 end

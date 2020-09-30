@@ -7,7 +7,7 @@ class DestroyTest < ApplicationSystemTestCase
       login_as(admin, scope: :admin)
     end
 
-    should 'destroy a user' do
+    should 'destroy' do
       user = create(:user)
       visit admins_users_path
 
@@ -23,6 +23,25 @@ class DestroyTest < ApplicationSystemTestCase
         refute_text user.name
         refute_selector "a[href='#{edit_admins_user_path(user)}']"
         refute_selector "a[href='#{admins_user_path(user)}'][data-method='delete']"
+      end
+    end
+
+    should 'not destroy' do
+      user = create(:user, :manager)
+      visit admins_users_path
+
+      within('#main-content table.table tbody') do
+        accept_confirm do
+          find("a[href='#{admins_user_path(user)}'][data-method='delete']").click
+        end
+      end
+
+      assert_current_path admins_users_path
+
+      within('table.table tbody') do
+        assert_text user.name
+        assert_selector "a[href='#{edit_admins_user_path(user)}']"
+        assert_selector "a[href='#{admins_user_path(user)}'][data-method='delete']"
       end
     end
   end

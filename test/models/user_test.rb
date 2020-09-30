@@ -96,6 +96,21 @@ class UserTest < ActiveSupport::TestCase
         assert @user.is?(:admin)
         assert @user.is?(:assistant)
       end
+
+      should '#last_manager' do
+        user = create(:user, :manager)
+        assert user.last_manager?
+
+        create(:user, :manager)
+        assert_not user.last_manager?
+      end
+
+      should 'not destroy if the last manager' do
+        user = create(:user, :manager)
+        assert_not user.destroy
+        message = I18n.t('flash.actions.least', resource_name: Administrator.model_name.human)
+        assert_includes user.errors[:base], message
+      end
     end
 
     should '.admins' do

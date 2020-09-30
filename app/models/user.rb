@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  before_destroy :can_destroy?
+
   has_many :department_users, dependent: :destroy
   has_many :departments, through: :department_users
 
@@ -21,6 +23,20 @@ class User < ApplicationRecord
     return true if role.eql?(:admin) && self.role
 
     self.role&.identifier.eql?(role.to_s)
+  end
+
+  def last_manager?
+    role = Role.find_by(identifier: :manager)
+
+    is?(:manager) && role.users.count == 1
+  end
+
+  def can_destroy?
+    return unless last_manager?
+
+    errors.add :base, I18n.t('flash.actions.least', resource_name: Administrator.model_name.human)
+
+    throw :abort
   end
 
   def self.admins
