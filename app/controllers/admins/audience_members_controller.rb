@@ -30,6 +30,10 @@ class Admins::AudienceMembersController < Admins::BaseController
     redirect_to admins_audience_members_path
   end
 
+  def new_import
+    
+  end
+
   def import
     @audience_members = AudienceMember.all
     file = params[:file]

@@ -4,9 +4,16 @@
 <%= render 'shared/search_and_new', search_path: '#', new_path: new_admins_audience_member_path,
                                     new_link: 'views.audience_member.links.new' %>
 
-<%= raw(render_messages(@messages)) %>
-
-<%= render 'form_import'%>
+<div class="row">
+  <div class="col-sm-12 col-lg-8 mb-2">
+  </div>
+  <div class="col-sm-12 col-lg-4">
+    <%= link_to admins_audience_members_import_new_path, class: "btn btn-outline-primary btn-block" do %>
+      <%= icon('fas', 'plus', class: 'mr-2') %><%= t('views.audience_member.import.btn_import') %>
+    <% end %>
+  </div>
+</div>
+      
 
 <div class="table-responsive">
   <table class="table card-table table-striped table-vcenter table-options">

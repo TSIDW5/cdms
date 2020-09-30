@@ -1,3 +1,6 @@
+<% provide(:head_title, I18n.t('activerecord.models.audience_member.other')) %>
+<% provide(:page_title, I18n.t('activerecord.models.audience_member.other')) %>
+
 <%= form_tag admins_audience_members_import_path, multipart: true do %>
   <div class="row pl-3 pr-3">
     <div class="custom-file col-md-6 col-sm-12">

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       root to: 'dashboard#index'
       resources :users
       resources :audience_members
+      get 'import_audience_members', to: 'audience_members#new_import', as: 'audience_members_import_new'
       post 'audience_members/import', to: 'audience_members#import', as: 'audience_members_import'
 
       resources :departments do
