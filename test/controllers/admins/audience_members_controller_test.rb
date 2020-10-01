@@ -62,10 +62,12 @@ class Admins::AudienceMembersControllerTest < ActionDispatch::IntegrationTest
     end
 
     should 'redirect to index' do
+      id = (AudienceMember.last&.id || 0) + 1
+
       requests = {
-        get: [edit_admins_audience_member_path(1), admins_audience_member_path(1)],
-        patch: [admins_audience_member_path(1)],
-        delete: [admins_audience_member_path(1)]
+        get: [edit_admins_audience_member_path(id), admins_audience_member_path(id)],
+        patch: [admins_audience_member_path(id)],
+        delete: [admins_audience_member_path(id)]
       }
 
       requests.each do |method, routes|

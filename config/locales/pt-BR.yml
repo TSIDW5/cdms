@@ -1,4 +1,18 @@
 pt-BR:
+  enums:
+    roles:
+      responsible: Responsável
+      collaborator: Colaborador
+  activemodel:
+    models:
+      administrator:
+        one: Administrador
+        other: Administradores
+    attributes:
+      administrator:
+        role: Papel
+        role_id: Papel
+        user: Usuário
   activerecord:
     models:
       admin:
@@ -22,6 +36,7 @@ pt-BR:
         email: Email
         created_at: Criado em
         updated_at: Atualizado em
+        role: Papel
       admin:
         password: Senha
         current_password: Senha atual
@@ -46,6 +61,7 @@ pt-BR:
         register_number: Número do registro
         cpf: CPF
         active: Status
+        <<: *commons
       audience_member:
         cpf: CPF
         id: Código
@@ -55,3 +71,6 @@ pt-BR:
         remember_me: Lembre-me
         reset_password_token: Token para recuperação de senha
         <<: *commons
+      department_user:
+        role: Papel
+        user: Usuário

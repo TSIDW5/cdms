@@ -16,7 +16,7 @@
     "settings": {
         "import/resolver": {
             "node": {
-                "paths": ["app/javascript"],
+                "paths": ["app/javascript", "vendor/assets/javascripts"],
                 "extensions": [".js"]
             }
         }

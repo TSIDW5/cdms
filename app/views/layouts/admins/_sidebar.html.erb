@@ -14,12 +14,16 @@
       <span class="icon mr-3"><i class="fas fa-building"></i></span>Departamentos
     <% end %>
 
+    <%= active_link_to admins_audience_members_path, class: 'list-group-item list-group-item-action' do %>
+      <span class="icon mr-3"><i class="fa fa-users"></i></span><%= I18n.t("views.app.sidebar.audience_members") %>
+    <% end %>
+
     <%= active_link_to admins_users_path, class: 'list-group-item list-group-item-action' do %>
       <span class="icon mr-3"><i class="fas fa-user"></i></span>Usuários
     <% end %>
 
-    <%= active_link_to admins_audience_members_path, class: 'list-group-item list-group-item-action' do %>
-      <span class="icon mr-3"><i class="fa fa-users"></i></span><%= I18n.t("views.app.sidebar.audience_members") %>
+    <%= active_link_to admins_administrators_path, class: 'list-group-item list-group-item-action' do %>
+      <span class="icon mr-3"><i class="fas fa-user-tie"></i></span>Administradores
     <% end %>
 
   </div>

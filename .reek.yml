@@ -4,6 +4,9 @@ detectors:
   # You can disable smells completely
   IrresponsibleModule:
     enabled: false
+  DuplicateMethodCall:
+    exclude:
+      - 'Admins::DepartmentsController#department_users_params'
 directories:
   "app/controllers":
     NestedIterators:
@@ -12,6 +15,10 @@ directories:
       enabled: false
     InstanceVariableAssumption:
       enabled: false
+    TooManyInstanceVariables:
+      max_instance_variables: 6
+    TooManyStatements:
+      max_statements: 10
   "app/helpers":
     UtilityFunction:
       enabled: false

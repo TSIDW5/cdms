@@ -6,6 +6,9 @@
     <td><%= department.email %></td>
 
     <td>
+      <%= link_to admins_department_members_path(department) do %>
+          <%= icon('fas', 'users', class: 'icon', data: { toggle: 'tooltip' }, title: t('views.user.name.plural')) %>
+      <% end %>
       <%= link_to edit_admins_department_path(department) do %>
         <%= icon('fas', 'edit', class: 'icon', data: { toggle: 'tooltip' }, title: t('views.links.edit')) %>
       <% end %>

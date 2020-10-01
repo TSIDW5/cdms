@@ -11,6 +11,14 @@ pt-BR:
         m: '%{resource_name} removido com sucesso!'
         f: '%{resource_name} removida com sucesso!'
         bond: Não é possível remover %{resource_name} com vínculos!'
+      add:
+        m: '%{resource_name} adicionado com sucesso!'
+        f: '%{resource_name} adicionada com sucesso!'
+      remove:
+        m: '%{resource_name} removido com sucesso!'
+        f: '%{resource_name} removida com sucesso!'
+      least: 'Deve existir pelo menos um %{resource_name}'
+
       errors: Existem dados incorretos!
       import:
         m: '%{resource_name} importados com sucesso!'

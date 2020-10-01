@@ -1,0 +1,13 @@
+<tr>
+    <td><%= link_to administrator.name, admins_user_path(administrator) %></td>
+    <td><%= administrator.email %></td>
+    <td><%= administrator.username %></td>
+    <td><%= administrator.register_number %></td>
+    <td><%= administrator.role.name %></td>
+    <td><%= t("views.status.#{administrator.active?}") %></td>
+    <td>
+        <%= link_to admins_administrator_path(administrator), method: :delete, data: { confirm: t('views.prompt.confirm') } do %>
+            <%= icon('fas', 'trash', class: 'icon', data: { toggle: 'tooltip' }, title: t('views.links.destroy')) %>
+        <% end %>
+    </td>
+</tr>

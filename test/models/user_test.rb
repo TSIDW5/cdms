@@ -66,4 +66,67 @@ class UserTest < ActiveSupport::TestCase
       assert_equal('guest@utfpr.edu.br', @user.email)
     end
   end
+
+  context 'admin' do
+    should belong_to(:role).optional
+
+    context 'role' do
+      setup do
+        @user = create(:user)
+      end
+
+      should 'not be admin' do
+        assert_not @user.is?(:admin)
+        assert_not @user.is?(:assistant)
+        assert_not @user.is?(:manager)
+      end
+
+      should 'be manager' do
+        create(:role_manager)
+        @user.role = Role.find_by(identifier: :manager)
+
+        assert @user.is?(:admin)
+        assert @user.is?(:manager)
+      end
+
+      should 'be assistant' do
+        create(:role_assistant)
+        @user.role = Role.find_by(identifier: :assistant)
+
+        assert @user.is?(:admin)
+        assert @user.is?(:assistant)
+      end
+
+      should '#last_manager' do
+        user = create(:user, :manager)
+        assert user.last_manager?
+
+        create(:user, :manager)
+        assert_not user.last_manager?
+      end
+
+      should 'not destroy if the last manager' do
+        user = create(:user, :manager)
+        assert_not user.destroy
+        message = I18n.t('flash.actions.least', resource_name: Administrator.model_name.human)
+        assert_includes user.errors[:base], message
+      end
+    end
+
+    should '.admins' do
+      create_list(:user, 2)
+      create_list(:user, 2, :manager)
+      create_list(:user, 2, :assistant)
+
+      assert_equal 4, User.admins.count
+    end
+
+    should '.search_non_admins' do
+      users = create_list(:user, 2, name: 'User')
+      create_list(:user, 2, :manager)
+      create_list(:user, 2, :assistant)
+
+      assert_equal User.search_non_admins('u'), users
+    end
+  end
 end
