@@ -37,24 +37,27 @@ class Admins::AudienceMembersController < Admins::BaseController
   def import
     @errors = []
     @import_file = ImportFile.new(params[:import_file])
-    
     if @import_file.valid?
       result = AudienceMember.my_import(@import_file.file)
       if result[0].num_inserts.positive?
         flash.now[:success] = t('flash.actions.import.m', resource_name: t('activerecord.models.audience_member.other'))
       end
-      unless result[1].empty?
-        result[1].each do |audience_member|
-          @errors << "#{audience_member.name} = #{audience_member.errors.full_messages.join(' - ')}"
-        end
-      end 
+      add_errors_messages(result)
     else
       flash.now[:error] = @import_file.errors.full_messages.join(' - ')
     end
-    render :new_import     
+    render :new_import
   end
 
   private
+
+  def add_errors_messages(result)
+    return if result[1].empty?
+
+    result[1].each do |audience_member|
+      @errors << "#{audience_member.name} = #{audience_member.errors.full_messages.join(' - ')}"
+    end
+  end
 
   def set_audience_member
     @audience_member = AudienceMember.find(params[:id])

@@ -9,24 +9,18 @@ class ImportFile
   validate :validates_extends?
 
   def initialize(attributes = {})
-    if !attributes.nil?
-      attributes.each do |name, value|
-        send("#{name}=", value)
-      end
+    attributes&.each do |name, value|
+      send("#{name}=", value)
     end
   end
 
   def validates_extends?
-    if !self.file.nil?
-      if (File.extname(self.file&.original_filename) == '.csv')
-        return true
-      end 
-    end
+    return if !file.nil? && File.extname(file&.original_filename) == '.csv'
+
     errors.add :file, I18n.t('views.audience_member.import.extension_invalid')
   end
 
   def persisted?
     false
   end
-
 end
