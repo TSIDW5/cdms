@@ -105,6 +105,7 @@ pt-BR:
         singular: Membro de audiência
         plural:  Membros de audiência
       import:
+        errors: Erros
         btn_import: Importar membros
         btn_download_sample_file: Baixar arquivo de exemplo
         extension_invalid: 'Extensão inválida'
