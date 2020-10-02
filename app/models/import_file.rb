@@ -6,23 +6,27 @@ class ImportFile
   attr_accessor :file
 
   validates :file, presence: true
-  validates :validates_extends
-
-  validates_format_of :file.original_filename, 
-  :with => %r{\.csv$}i, :message => "file must be in .csv format", :multiline => true
+  validate :validates_extends?
 
   def initialize(attributes = {})
-    attributes.each do |name, value|
-      send("#{name}=", value)
+    if !attributes.nil?
+      attributes.each do |name, value|
+        send("#{name}=", value)
+      end
+    else
+      return false
     end
   end
 
   def validates_extends?
-    if (File.extname(:file) != '.csv')
-      errors.add(:role, I18n.t('errors.messages.taken'))
-      return false
-    end  
-    return true  
+    if !self.file.nil?
+      if (File.extname(self.file&.original_filename) == '.csv')
+        return true
+      end 
+    end
+
+    errors.add(:file, "erro na extenção") 
+    return false  
   end
 
   def persisted?

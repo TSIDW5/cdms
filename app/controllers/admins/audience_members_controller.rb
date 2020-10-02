@@ -40,7 +40,12 @@ class Admins::AudienceMembersController < Admins::BaseController
     @import_file = ImportFile.new(params[:import_file])
 
     puts "teeeeste"
-    puts @import_file.file.to_json
+
+    puts @import_file.valid?
+    flash[:success] = "tesssssssssssste"
+    flash[:error] = @import_file.errors.full_messages.join(' - ')
+    
+    redirect_to admins_audience_members_import_new_path	
 
     # file = params[:file]
     # if file.nil? || File.extname(file) != '.csv'
