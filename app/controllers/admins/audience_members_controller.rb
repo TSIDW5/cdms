@@ -35,22 +35,27 @@ class Admins::AudienceMembersController < Admins::BaseController
   end
 
   def import
-    @audience_members = AudienceMember.all
-    file = params[:file]
-    if file.nil? || File.extname(file) != '.csv'
-      add_message(:error, I18n.t('views.audience_member.import.invalid_file'))
-    else
-      result = AudienceMember.my_import(file)
-      if result[0].num_inserts.positive?
-        flash[:success] = t('flash.actions.import.m', resource_name: t('activerecord.models.audience_member.other'))
-      end
-      unless result[1].empty?
-        result[1].each do |audience_member|
-          add_message(:error, "#{audience_member.name} = #{audience_member.errors.full_messages.join(' - ')}")
-        end
-      end      
-    end
-    render :index
+    puts "teeeeste"
+    puts params[:import_file]
+    @import_file = ImportFile.new(params[:import_file])
+
+    puts "teeeeste"
+    puts @import_file.file.to_json
+
+    # file = params[:file]
+    # if file.nil? || File.extname(file) != '.csv'
+    #   add_message(:error, I18n.t('views.audience_member.import.invalid_file'))
+    # else
+    #   result = AudienceMember.my_import(file)
+    #   if result[0].num_inserts.positive?
+    #     flash[:success] = t('flash.actions.import.m', resource_name: t('activerecord.models.audience_member.other'))
+    #   end
+    #   unless result[1].empty?
+    #     result[1].each do |audience_member|
+    #       add_message(:error, "#{audience_member.name} = #{audience_member.errors.full_messages.join(' - ')}")
+    #     end
+    #   end      
+    # end
   end
 
   private
