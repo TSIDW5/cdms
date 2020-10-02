@@ -22,8 +22,8 @@ class ImportTest < ApplicationSystemTestCase
 
       submit_form("button[type='submit']")
 
-      assert_selector('div.alert.alert-danger', text: I18n.t('views.audience_member.import.extension_invalid'))      
-      assert_selector('div.alert.alert-danger', text: I18n.t('errors.messages.blank'))      
+      assert_selector('div.alert.alert-danger', text: I18n.t('views.audience_member.import.extension_invalid'))
+      assert_selector('div.alert.alert-danger', text: I18n.t('errors.messages.blank'))
     end
 
     should 'invalid extension import file' do
@@ -32,10 +32,10 @@ class ImportTest < ApplicationSystemTestCase
       attach_file 'import_file_file', FileHelper.image.path, make_visible: true
       submit_form("button[type='submit']")
 
-      assert_selector('div.alert.alert-danger', text: I18n.t('views.audience_member.import.extension_invalid'))      
+      assert_selector('div.alert.alert-danger', text: I18n.t('views.audience_member.import.extension_invalid'))
     end
 
-    should 'teste' do
+    should 'invalid data' do
       visit admins_audience_members_import_new_path
 
       attach_file 'import_file_file', FileHelper.csv.path, make_visible: true
@@ -47,9 +47,8 @@ class ImportTest < ApplicationSystemTestCase
       attach_file 'import_file_file', FileHelper.csv.path, make_visible: true
       submit_form("button[type='submit']")
 
-      assert_selector('div.card-body', text: "Email já está em uso")
-      assert_selector('div.card-body', text: "CPF já está em uso")
-            
-    end    
+      assert_selector('div.card-body', text: 'Email já está em uso')
+      assert_selector('div.card-body', text: 'CPF já está em uso')
+    end
   end
 end
