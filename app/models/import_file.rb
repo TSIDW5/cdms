@@ -13,8 +13,6 @@ class ImportFile
       attributes.each do |name, value|
         send("#{name}=", value)
       end
-    else
-      return false
     end
   end
 
@@ -24,9 +22,7 @@ class ImportFile
         return true
       end 
     end
-
-    errors.add(:file, "erro na extenção") 
-    return false  
+    errors.add :file, "erro na extenção" 
   end
 
   def persisted?
