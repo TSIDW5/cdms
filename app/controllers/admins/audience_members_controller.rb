@@ -31,21 +31,17 @@ class Admins::AudienceMembersController < Admins::BaseController
   end
 
   def new_import
-    
+    @errors = []
   end
 
   def import
-    puts "teeeeste"
-    puts params[:import_file]
     @import_file = ImportFile.new(params[:import_file])
 
-    puts "teeeeste"
-
-    puts @import_file.valid?
-    flash[:success] = "tesssssssssssste"
     flash[:error] = @import_file.errors.full_messages.join(' - ')
-    
-    redirect_to admins_audience_members_import_new_path	
+
+    @errors = %w[erro1 erro2]
+
+    render :new_import
 
     # file = params[:file]
     # if file.nil? || File.extname(file) != '.csv'
