@@ -7,33 +7,49 @@ class ImportTest < ApplicationSystemTestCase
       login_as(admin, scope: :admin)
     end
 
-    should 'list all' do
-      audience_members = create_list(:audience_member, 3)
-      visit admins_audience_members_path
+    should 'valid import file' do
+      visit admins_audience_members_import_new_path
 
-      within('table.table tbody') do
-        audience_members.each_with_index do |audience_member, index|
-          child = index + 1
-          base_selector = "tr:nth-child(#{child})"
+      attach_file 'import_file_file', FileHelper.csv.path, make_visible: true
+      submit_form("button[type='submit']")
 
-          assert_selector "#{base_selector} a[href='#{admins_audience_member_path(audience_member)}']",
-                          text: audience_member.name
-          assert_selector base_selector, text: audience_member.email
-          assert_selector base_selector, text: audience_member.cpf
-
-          assert_selector "#{base_selector} a[href='#{edit_admins_audience_member_path(audience_member)}']"
-          href = admins_audience_member_path(audience_member)
-          assert_selector "#{base_selector} a[href='#{href}'][data-method='delete']"
-        end
-      end
+      flash_message = I18n.t('flash.actions.import.m', resource_name: I18n.t('activerecord.models.audience_member.other'))
+      assert_selector('div.alert.alert-success', text: flash_message)
     end
 
-    should 'display' do
-      visit admins_audience_members_path
+    should 'invalid import file' do
+      visit admins_audience_members_import_new_path
 
-      assert_selector '#main-content .card-header', text: I18n.t('activerecord.models.audience_member.other')
-      assert_selector "#main-content a[href='#{new_admins_audience_member_path}']",
-                      text: I18n.t('views.audience_member.links.new')
+      submit_form("button[type='submit']")
+
+      assert_selector('div.alert.alert-danger', text: I18n.t('views.audience_member.import.extension_invalid'))      
+      assert_selector('div.alert.alert-danger', text: I18n.t('errors.messages.blank'))      
     end
+
+    should 'invalid extension import file' do
+      visit admins_audience_members_import_new_path
+
+      attach_file 'import_file_file', FileHelper.image.path, make_visible: true
+      submit_form("button[type='submit']")
+
+      assert_selector('div.alert.alert-danger', text: I18n.t('views.audience_member.import.extension_invalid'))      
+    end
+
+    should 'teste' do
+      visit admins_audience_members_import_new_path
+
+      attach_file 'import_file_file', FileHelper.csv.path, make_visible: true
+      submit_form("button[type='submit']")
+
+      flash_message = I18n.t('flash.actions.import.m', resource_name: I18n.t('activerecord.models.audience_member.other'))
+      assert_selector('div.alert.alert-success', text: flash_message)
+
+      attach_file 'import_file_file', FileHelper.csv.path, make_visible: true
+      submit_form("button[type='submit']")
+
+      assert_selector('div.card-body', text: "Email já está em uso")
+      assert_selector('div.card-body', text: "CPF já está em uso")
+            
+    end    
   end
 end

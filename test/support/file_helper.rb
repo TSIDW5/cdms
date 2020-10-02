@@ -8,6 +8,10 @@ module FileHelper
       File.open(Dir[path_to('images')].sample)
     end
 
+    def csv
+      File.open(Dir[path_to('csv')].sample)
+    end
+
     private
 
     def path_to(folder)
