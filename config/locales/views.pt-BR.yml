@@ -107,7 +107,7 @@ pt-BR:
       import:
         btn_import: Importar membros
         btn_download_sample_file: Baixar arquivo de exemplo
-        invalid_file: 'Arquivo inválido'
+        extension_invalid: 'Extensão inválida'
       links:
         new: Novo membro de audiência
         sign_out: Sair

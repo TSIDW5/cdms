@@ -22,7 +22,7 @@ class ImportFile
         return true
       end 
     end
-    errors.add :file, "erro na extenção" 
+    errors.add :file, I18n.t('views.audience_member.import.extension_invalid')
   end
 
   def persisted?
