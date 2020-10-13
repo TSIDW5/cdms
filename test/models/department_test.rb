@@ -31,10 +31,10 @@ class DepartmentTest < ActiveSupport::TestCase
 
     context 'phone format' do
       should 'valid' do
-        valid_phones = %w[42999034056 42999034213]
+        valid_phones = ['(42) 99903-4056', '(42) 9903-4213']
         valid_phones.each do |valid_phone|
           subject.phone = valid_phone
-          assert subject.valid?
+          assert subject.valid?, "#{valid_phone} is invalid"
         end
       end
 

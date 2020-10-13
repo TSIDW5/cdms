@@ -22,7 +22,7 @@ class UserTest < ActiveSupport::TestCase
       end
 
       should 'invalid format' do
-        usernames = ['user name', 'user-123', 'user.name']
+        usernames = ['user name', 'useá123', 'user$name']
 
         usernames.each do |username|
           @user.username = username
