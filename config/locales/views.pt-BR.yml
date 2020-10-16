@@ -34,8 +34,6 @@ pt-BR:
           sign_in: Acessar a área do administrativa
         user:
           sign_in: Acessar a área do usuário
-        audience_member:
-          sign_in: Acessar a área do membro de audiência
     search:
       placeholder: Procurar...
     session:

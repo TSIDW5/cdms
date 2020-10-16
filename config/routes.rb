@@ -1,13 +1,6 @@
 Rails.application.routes.draw do
   root to: 'home#index'
 
-  devise_for :audience_members, controllers: { registrations: 'audience_members/registrations' }
-  authenticate :audience_member do
-    namespace :audience_members do
-      root to: 'dashboard#index'
-    end
-  end
-
   devise_for :admins
   authenticate :admin do
     namespace :admins do

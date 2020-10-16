@@ -3,9 +3,6 @@
   <%= f.input :email, required: true, type: 'email' %>
   <%= f.input :cpf, required: true, :input_html => {'data-mask': '000.000.000-00'} %>
 
-  <%= f.input :password, required: true %>
-  <%= f.input :password_confirmation, required: true %>
-
   <div class="form-footer">
     <div class="d-flex">
       <%= link_to t('views.links.back'), admins_audience_members_path, class: 'btn btn-secondary' %>

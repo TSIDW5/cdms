@@ -3,7 +3,6 @@ class AudienceMember < ApplicationRecord
   require 'activerecord-import/base'
   require 'activerecord-import/active_record/adapters/postgresql_adapter'
 
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
   include Searchable
   search_by :name
 
@@ -24,8 +23,6 @@ class AudienceMember < ApplicationRecord
 
   def self.format_audience_member(row)
     audience_member = AudienceMember.new(row)
-    audience_member.password = '123456'
-    audience_member.password_confirmation = '123456'
     audience_member
   end
 

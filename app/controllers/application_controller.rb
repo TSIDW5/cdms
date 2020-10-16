@@ -4,11 +4,11 @@ class ApplicationController < ActionController::Base
   protected
 
   def after_sign_in_path_for(*)
-    current_admin ? admins_root_path : audience_member_registration_path
+    admins_root_path
   end
 
   def after_sign_out_path_for(*)
-    current_admin ? new_admin_session_path : new_audience_member_session_path
+    new_admin_session_path
   end
 
   def layout_by_resource
