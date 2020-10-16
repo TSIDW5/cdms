@@ -7,3 +7,4 @@ require('config/jmask');
 require('config/selectize');
 require('lib/choose_file');
 require('config/key_press_input_search');
+require('lib/submit_search');

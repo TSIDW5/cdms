@@ -60,17 +60,17 @@ class DepartmentTest < ActiveSupport::TestCase
     end
   end
 
-  context 'queries' do
-    should 'search' do
+  context 'search' do
+    should 'by name' do
       first_name = 'TSI'
       second_name = 'TMI'
 
       FactoryBot.create(:department, name: first_name)
       FactoryBot.create(:department, name: second_name)
 
-      assert_equal(1, Department.search(['name'], first_name).count)
-      assert_equal(1, Department.search(['name'], second_name).count)
-      assert_equal(2, Department.search(['name'], '').count)
+      assert_equal(1, Department.search(first_name).count)
+      assert_equal(1, Department.search(second_name).count)
+      assert_equal(2, Department.search('').count)
     end
   end
 end

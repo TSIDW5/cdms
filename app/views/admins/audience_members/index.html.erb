@@ -1,7 +1,13 @@
 <% provide(:head_title, I18n.t('activerecord.models.audience_member.other')) %>
 <% provide(:page_title, I18n.t('activerecord.models.audience_member.other')) %>
 
-<%= render 'shared/search_and_new', new_path: new_admins_audience_member_path, new_link: 'views.audience_member.links.new' %>
+<%= render 'shared/search_and_new', new_path: new_admins_audience_member_path,
+                                    new_link: 'views.audience_member.links.new',
+                                    search_path: search_admins_audience_members_path %>
+
+<div class="text-right mb-4">
+  <%= page_entries_info @audience_members %>
+</div>
 
 <div class="table-responsive dataTables_wrapper">
   <table class="table card-table table-striped table-vcenter table-options">
@@ -19,8 +25,5 @@
     </tbody>
   </table>
 
-  <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">
-    <%= page_entries_info @audience_members, entry_name: t('views.search.registers').downcase %>
-  </div>
   <%= paginate @audience_members %>
 </div>

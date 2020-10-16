@@ -1,12 +1,9 @@
 class Admins::DepartmentsController < Admins::BaseController
   before_action :set_department, except: [:index, :new, :create]
   include Breadcrumbs
-  include Paginate
 
   def index
-    paginate(:department, method(:search_admins_departments_path)) do
-      @departments = Department.search(['name'], params[:keyword]).page(params[:page])
-    end
+    @departments = Department.search(params[:term]).page(params[:page])
   end
 
   def show

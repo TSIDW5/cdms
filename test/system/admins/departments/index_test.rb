@@ -39,7 +39,7 @@ class IndexTest < ApplicationSystemTestCase
       visit admins_departments_path
 
       fill_in 'search', with: second_name
-      find('#submit-search').click
+      submit_form('button.submit-search')
 
       assert_selector 'tr:nth-child(1) td:nth-child(2)', text: second_name
     end

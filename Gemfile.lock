@@ -282,7 +282,6 @@ GEM
       psych (~> 3.1.0)
       rainbow (>= 2.0, < 4.0)
     regexp_parser (1.7.1)
-    require_all (3.0.0)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -421,7 +420,6 @@ DEPENDENCIES
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.2)
   rails-i18n (~> 6.0.0)
-  require_all
   rubocop
   rubocop-minitest
   rubocop-rails

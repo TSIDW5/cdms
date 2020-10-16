@@ -1,5 +1,6 @@
 class AudienceMember < ApplicationRecord
-  include Search
+  include Searchable
+  search_by :name
 
   validates :name, presence: true, length: { minimum: 2 }
   validates :cpf, :email, uniqueness: true, case_sensitive: false

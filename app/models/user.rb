@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  include Search
+  include Searchable
+  search_by :name
 
   before_destroy :can_destroy?
 

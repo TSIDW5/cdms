@@ -1,19 +1,23 @@
-<%= simple_form_for(:search, url: request.url, html: { autocomplete: 'off', class: 'row' }, method: :get) do |f| %>
-  <div class="col-sm-12 col-lg-5 mb-2">
+<div class="row">
+  <div class="col-sm-12 col-lg-8 mb-2">
+
     <div class="input-group mb-3">
       <div class="input-group">
-        <%= f.input :keyword, label: false, wrapper: false, placeholder: t('views.search.placeholder'), input_html: { value: @keyword || '', id: 'search' }, wrapper_html: { name: 'keyword', class: 'form-control enter-to-submit-search' } %>
+        <%= text_field_tag :search, params[:term],
+                           data: { url: search_path },
+                           class: 'form-control enter-to-submit-search',
+                           placeholder: t('views.search.placeholder') %>
         <span class="input-group-append">
-          <%= button_tag type: 'submit', class: 'btn btn-outline-info submit-search', id: 'submit-search' do %>
-            <i class="fe fe-search"></i>
-          <% end %>
+          <button class="btn btn-outline-info submit-search" type="button"><i class="fe fe-search"></i></button>
         </span>
       </div>
     </div>
+
   </div>
+
   <div class="col-sm-12 col-lg-4">
     <%= link_to new_path, class: "btn btn-outline-primary btn-block" do %>
       <%= icon('fas', 'plus', class: 'mr-2') %><%= t("#{new_link}") %>
     <% end %>
   </div>
-<% end %>
+</div>

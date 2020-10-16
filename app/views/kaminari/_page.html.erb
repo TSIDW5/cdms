@@ -1,9 +1,5 @@
 <% if page.current? %>
-  <li class='paginate_button current'>
-    <%= content_tag :a, page, data: { remote: remote }, rel: page.rel %>
-  </li>
+  <%= content_tag :a, page, class: 'paginate_button current', data: { remote: remote }, rel: page.rel %>
 <% else %>
-  <li class='paginate_button'>
-    <%= link_to page, url, remote: remote, rel: page.rel %>
-  </li>
+  <%= link_to page, url, remote: remote, rel: page.rel, class: 'paginate_button' %>
 <% end %>
