@@ -3,7 +3,7 @@ class Admins::DepartmentsController < Admins::BaseController
   include Breadcrumbs
 
   def index
-    @departments = Department.all
+    @departments = Department.search(params[:term]).page(params[:page])
   end
 
   def show

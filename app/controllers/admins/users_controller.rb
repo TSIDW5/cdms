@@ -3,7 +3,7 @@ class Admins::UsersController < Admins::BaseController
   include Breadcrumbs
 
   def index
-    @users = User.all
+    @users = User.search(params[:term]).page(params[:page])
   end
 
   def show; end

@@ -3,7 +3,7 @@ class Admins::AudienceMembersController < Admins::BaseController
   include Breadcrumbs
 
   def index
-    @audience_members = AudienceMember.all
+    @audience_members = AudienceMember.search(params[:term]).page(params[:page])
   end
 
   def new

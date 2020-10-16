@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  include Searchable
+  search_by :name
+
   before_destroy :can_destroy?
 
   has_many :department_users, dependent: :destroy
@@ -8,7 +11,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :register_number, presence: true
-  validates :username, uniqueness: true, format: { with: /\A[a-z0-9]+\Z/ }
+  validates :username, uniqueness: true, format: { with: /\A[a-z0-9_.]+\Z/ }
   validates_cpf_format_of :cpf, message: I18n.t('errors.messages.invalid')
 
   mount_uploader :avatar, AvatarUploader

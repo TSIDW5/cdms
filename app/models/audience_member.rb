@@ -4,6 +4,9 @@ class AudienceMember < ApplicationRecord
   require 'activerecord-import/active_record/adapters/postgresql_adapter'
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
+  include Searchable
+  search_by :name
+
   validates :name, presence: true, length: { minimum: 2 }
   validates :cpf, :email, uniqueness: true, case_sensitive: false
   validates_email_format_of :email, message: I18n.t('errors.messages.invalid')

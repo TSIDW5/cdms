@@ -29,6 +29,21 @@ class IndexTest < ApplicationSystemTestCase
       end
     end
 
+    should 'search' do
+      first_name = 'Eduardo'
+      second_name = 'Pedro'
+
+      FactoryBot.create(:user, name: first_name)
+      FactoryBot.create(:user, name: second_name)
+
+      visit admins_users_path
+
+      fill_in 'search', with: second_name
+      submit_form('button.submit-search')
+
+      assert_selector 'tr:nth-child(1) a', text: second_name
+    end
+
     should 'display' do
       visit admins_users_path
 
