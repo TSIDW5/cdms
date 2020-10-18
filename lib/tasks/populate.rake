@@ -14,5 +14,6 @@ namespace :db do
     DepartmentPopulate.populate
     DepartmentModulePopulate.populate
     DepartmentUserPopulate.populate
+    DepartmentModuleUserPopulate.populate
   end
 end
