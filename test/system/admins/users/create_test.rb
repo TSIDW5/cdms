@@ -3,8 +3,8 @@ require 'application_system_test_case'
 class CreateTest < ApplicationSystemTestCase
   context 'create' do
     setup do
-      admin = create(:admin)
-      login_as(admin, as: :admin)
+      user = create(:user, :manager)
+      login_as(user, as: :user)
       visit new_admins_user_path
     end
 
@@ -17,6 +17,8 @@ class CreateTest < ApplicationSystemTestCase
         fill_in 'user_username', with: user.username
         fill_in 'user_register_number', with: user.register_number
         find('div.user_active label.custom-switch').click
+        fill_in 'user_password', with: user.password
+        fill_in 'user_password_confirmation', with: user.password
         submit_form
 
         flash_message = I18n.t('flash.actions.create.m', resource_name: User.model_name.human)
@@ -43,6 +45,8 @@ class CreateTest < ApplicationSystemTestCase
         fill_in 'user_cpf', with: user.cpf
         fill_in 'user_username', with: user.username
         fill_in 'user_register_number', with: user.register_number
+        fill_in 'user_password', with: user.password
+        fill_in 'user_password_confirmation', with: user.password
         attach_file 'user_avatar', FileHelper.image.path, make_visible: true
         submit_form
 
@@ -74,6 +78,10 @@ class CreateTest < ApplicationSystemTestCase
       end
 
       within('div.user_name') do
+        assert_text I18n.t('errors.messages.blank')
+      end
+
+      within('div.user_password') do
         assert_text I18n.t('errors.messages.blank')
       end
     end

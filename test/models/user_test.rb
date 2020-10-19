@@ -6,6 +6,8 @@ class UserTest < ActiveSupport::TestCase
     should validate_presence_of(:register_number)
 
     context '#username' do
+      subject { FactoryBot.build(:user) }
+
       setup do
         @user = build(:user)
       end

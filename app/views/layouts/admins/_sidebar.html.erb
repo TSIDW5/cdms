@@ -3,16 +3,12 @@
 
     <span class="sidebar-heading pl-0 pt-2 pb-2">
       <%= icon('fas', 'book-open', class: 'mr-1') %>
-      SGCD
+      Administrador
     </span>
 
     <%= active_link_to admins_root_path, class: 'list-group-item list-group-item-action', active: :exclusive do %>
       <span class="icon mr-3"><i class="fas fa-home"></i></span>Página inicial
     <% end %>
-
-    <%= link_to users_root_path, class: 'list-group-item list-group-item-action' do %>
-        <span class="icon mr-3"><i class="fas fa-street-view"></i></span>Área do Usuário
-      <% end %>
 
     <%= active_link_to admins_departments_path, class: 'list-group-item list-group-item-action' do %>
       <span class="icon mr-3"><i class="fas fa-building"></i></span>Departamentos

@@ -7,6 +7,13 @@ class Admins::DashboardControllerTest < ActionDispatch::IntegrationTest
       assert_response :redirect
       assert_redirected_to new_user_session_url
     end
+
+    should 'redirect to users_root_path' do
+      sign_in create(:user)
+      get admins_root_url
+      assert_response :redirect
+      assert_redirected_to users_root_path
+    end
   end
 
   context 'logged in' do

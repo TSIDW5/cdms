@@ -4,8 +4,8 @@ require 'csv'
 class CreateFromCsvTest < ApplicationSystemTestCase
   context 'audience_members' do
     setup do
-      admin = create(:admin)
-      login_as(admin, scope: :admin)
+      user = create(:user, :manager)
+      login_as(user, as: :user)
     end
 
     context 'invalid' do

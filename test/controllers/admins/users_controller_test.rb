@@ -81,21 +81,34 @@ class Admins::UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   context 'unauthenticated' do
-    should 'redirect to login' do
-      requests = {
-        get: [admins_users_path, admins_users_path,
-              edit_admins_user_path(1), admins_user_path(1)],
-        post: [admins_users_path],
-        patch: [admins_user_path(1)],
-        delete: [admins_user_path(1)]
-      }
+    should 'redirect to login when not authenticated' do
+      assert_redirect_to(new_user_session_path)
+    end
 
-      requests.each do |method, routes|
-        routes.each do |route|
-          send(method, route)
-          assert_redirected_to new_user_session_path
-        end
+    should 'redirect to login when logged as non administrator user' do
+      sign_in create(:user)
+      assert_redirect_to(users_root_path)
+    end
+  end
+
+  private
+
+  def assert_redirect_to(redirect_to)
+    requests.each do |method, routes|
+      routes.each do |route|
+        send(method, route)
+        assert_redirected_to redirect_to
       end
     end
+  end
+
+  def requests
+    {
+      get: [admins_users_path, admins_users_path,
+            edit_admins_user_path(1), admins_user_path(1)],
+      post: [admins_users_path],
+      patch: [admins_user_path(1)],
+      delete: [admins_user_path(1)]
+    }
   end
 end

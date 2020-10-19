@@ -22,6 +22,12 @@
     <%= f.input :active, as: :switch_single, wrapper_html: { class: 'col-sm-3' } %>
   </div>
 
+  <div class="row">
+    <%= f.input :password, wrapper_html:  { class: 'col-sm-6' },
+                           hint: (f.object.new_record? ? '' : t('devise.registrations.edit.leave_blank_if_you_don_t_want_to_change_it')) %>
+    <%= f.input :password_confirmation, wrapper_html:  { class: 'col-sm-6' } %>
+  </div>
+
   <div class="form-footer">
     <div class="d-flex">
       <%= link_to t('views.links.back'), admins_users_path, class: 'btn btn-secondary' %>

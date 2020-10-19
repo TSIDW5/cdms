@@ -22,6 +22,17 @@
           </a>
 
           <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+
+            <%= link_to edit_user_registration_path, class: 'dropdown-item' do %>
+              <i class="dropdown-icon far fa-user"></i> <%= t('devise.registrations.edit.title') %>
+            <% end %>
+
+            <%= link_to users_root_path, class: 'dropdown-item' do %>
+              <i class="dropdown-icon fas fa-street-view"></i> <%= t('views.user.links.access') %>
+            <% end %>
+
+            <div class="dropdown-divider"></div>
+
             <%= link_to destroy_user_session_path, method: :delete, class: 'dropdown-item' do %>
               <i class="dropdown-icon fas fa-sign-out-alt"></i> <%= t('views.user.links.sign_out') %>
             <% end %>

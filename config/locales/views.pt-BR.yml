@@ -15,8 +15,6 @@ pt-BR:
       choose: Procurar...
     tooltips:
       home:
-        audience_member:
-          sign_in: Clique aqui para acessar como membro de audiência
         user:
           sign_in: Clique aqui para acessar como usuário
     prompt:
@@ -65,6 +63,7 @@ pt-BR:
         plural:  Administradores
       links:
         sign_out: Sair
+        access: Área administrativa
     user:
       name:
         singular: Usuário
@@ -76,7 +75,9 @@ pt-BR:
       edit:
         title: Editar usuário
       links:
+        sign_out: Sair
         new: Novo usuário
+        access: Área do usuário
     department:
       name:
         singular: Departamento

@@ -3,8 +3,8 @@ require 'application_system_test_case'
 class Admins::AdministratorTest < ApplicationSystemTestCase
   context 'administrators' do
     setup do
-      admin = create(:admin)
-      login_as(admin, scope: :admin)
+      user = create(:user, :manager)
+      login_as(user, scope: :user)
     end
 
     context 'create' do
@@ -25,7 +25,7 @@ class Admins::AdministratorTest < ApplicationSystemTestCase
         submit_form("button[type='submit']")
 
         @user.reload
-        base_selector = 'table tbody tr:nth-child(1)'
+        base_selector = 'table tbody tr:nth-child(2)'
         assert_selector "#{base_selector} a[href='#{admins_user_path(@user)}']", text: @user.name
         assert_selector base_selector, text: @user.email
         assert_selector base_selector, text: @user.username

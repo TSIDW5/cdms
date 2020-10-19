@@ -1,14 +1,16 @@
 class AddDeviseFieldsToUser < ActiveRecord::Migration[6.0]
   def change
-    ## Database authenticatable
-    add_column :users, :encrypted_password, :string, null: false
+    change_table :users, bulk: true do |t|
+      ## Database authenticatable
+      t.column :encrypted_password, :string
 
-    ## Recoverable
-    add_column :users, :reset_password_token, :string
-    add_column :users, :reset_password_sent_at, :datetime
+      ## Recoverable
+      t.column :reset_password_token, :string
+      t.column :reset_password_sent_at, :datetime
 
-    ## Rememberable
-    add_column :users, :remember_created_at, :datetime
+      ## Rememberable
+      t.column :remember_created_at, :datetime
+    end
 
     add_index :users, :reset_password_token, unique: true
   end

@@ -3,12 +3,15 @@ require 'application_system_test_case'
 class IndexTest < ApplicationSystemTestCase
   context 'users' do
     setup do
-      admin = create(:admin)
-      login_as(admin, scope: :admin)
+      @user = create(:user, :manager)
+      login_as(@user, as: :user)
     end
 
     should 'list all' do
       users = create_list(:user, 3)
+      users << @user
+      users.sort_by!(&:name)
+
       visit admins_users_path
 
       within('table.table tbody') do

@@ -3,8 +3,8 @@ require 'application_system_test_case'
 class UpdateTest < ApplicationSystemTestCase
   context 'update' do
     setup do
-      admin = create(:admin)
-      login_as(admin, as: :admin)
+      user = create(:user, :manager)
+      login_as(user, as: :user)
 
       @module = create(:department_module)
       @department = @module.department

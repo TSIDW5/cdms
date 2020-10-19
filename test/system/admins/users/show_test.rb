@@ -3,8 +3,8 @@ require 'application_system_test_case'
 class ShowTest < ApplicationSystemTestCase
   context 'user' do
     setup do
-      admin = create(:admin)
-      login_as(admin, scope: :admin)
+      user = create(:user, :manager)
+      login_as(user, as: :user)
 
       @user = create(:user)
       visit admins_user_path(@user)

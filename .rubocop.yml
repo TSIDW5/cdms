@@ -13,8 +13,6 @@ AllCops:
     - 'vendor/**/*'
     - 'bin/*'
     - 'db/schema.rb'
-    - 'db/seeds.rb'
-    - 'db/migrate/20200930232953_add_devise_fields_to_user.rb'
     - 'config/puma.rb'
     - 'config/initializers/simple_form.rb'
     - 'config/initializers/simple_form_bootstrap.rb'
@@ -22,7 +20,6 @@ AllCops:
     - 'config/initializers/backtrace_silencers.rb'
     - 'config/initializers/content_security_policy.rb'
     - 'config/environments/production.rb'
-    - 'app/controllers/users/base_controller.rb'
 
 Style/Documentation:
   Enabled: false
@@ -48,7 +45,12 @@ Metrics/ClassLength:
 Rails/ApplicationController:
   Exclude:
     - 'app/controllers/admins/base_controller.rb'
+    - 'app/controllers/users/base_controller.rb'
     - 'test/controllers/concerns/breadcrumbs_test.rb'
+
+Rails/LexicallyScopedActionFilter:
+  Exclude:
+    - 'app/controllers/users/registrations_controller.rb'
 
 Minitest/MultipleAssertions:
   Max: 4

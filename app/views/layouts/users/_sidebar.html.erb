@@ -3,17 +3,11 @@
 
     <span class="sidebar-heading pl-0 pt-2 pb-2">
       <%= icon('fas', 'book-open', class: 'mr-1') %>
-      SGCD
+      Usuário
     </span>
 
     <%= active_link_to users_root_path, class: 'list-group-item list-group-item-action' do %>
       <span class="icon mr-3"><i class="fas fa-home"></i></span>Página inicial
-    <% end %>
-
-    <% unless current_user.role_id.nil? %>  
-      <%= link_to admins_root_path, class: 'list-group-item list-group-item-action' do %>
-        <span class="icon mr-3"><i class="fas fa-street-view"></i></span>Área do Admin
-      <% end %>
     <% end %>
 
   </div>

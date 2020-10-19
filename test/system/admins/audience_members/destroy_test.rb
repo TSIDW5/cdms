@@ -3,8 +3,8 @@ require 'application_system_test_case'
 class DestroyTest < ApplicationSystemTestCase
   context 'audience_member' do
     setup do
-      admin = create(:admin)
-      login_as(admin, scope: :admin)
+      user = create(:user, :manager)
+      login_as(user, as: :user)
     end
 
     should 'destroy a audience_member' do

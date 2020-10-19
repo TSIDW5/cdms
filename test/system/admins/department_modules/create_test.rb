@@ -3,8 +3,8 @@ require 'application_system_test_case'
 class CreateTest < ApplicationSystemTestCase
   context 'create' do
     setup do
-      admin = create(:admin)
-      login_as(admin, as: :admin)
+      user = create(:user, :manager)
+      login_as(user, as: :user)
 
       @department = create(:department)
       visit new_admins_department_module_path(@department)

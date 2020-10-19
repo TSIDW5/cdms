@@ -42,13 +42,6 @@ pt-BR:
         created_at: Criado em
         updated_at: Atualizado em
         role: Papel
-      admin:
-        password: Senha
-        current_password: Senha atual
-        password_confirmation: Confirmação de senha
-        remember_me: Lembre-me
-        reset_password_token: Token para recuperação de senha
-        <<: *commons
       department:
         name: Nome
         description: Descrição
@@ -66,6 +59,12 @@ pt-BR:
         register_number: Número do registro
         cpf: CPF
         active: Status
+        password: Senha
+        current_password: Senha atual
+        password_confirmation: Confirmação de senha
+        remember_me: Lembre-me
+        reset_password_token: Token para recuperação de senha
+        <<: *commons
         <<: *commons
       audience_member:
         cpf: CPF
