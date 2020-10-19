@@ -46,3 +46,7 @@ Rails/ApplicationController:
   Exclude:
     - 'app/controllers/admins/base_controller.rb'
     - 'test/controllers/concerns/breadcrumbs_test.rb'
+
+Minitest/MultipleAssertions:
+  Max: 4
+

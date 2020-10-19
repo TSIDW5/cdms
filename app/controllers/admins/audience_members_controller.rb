@@ -30,32 +30,31 @@ class Admins::AudienceMembersController < Admins::BaseController
     redirect_to admins_audience_members_path
   end
 
-  def new_import
-    @errors = []
+  def from_csv
+    add_breadcrumb t('views.audience_member.import.btn_csv'), admins_new_audience_members_from_csv_path
   end
 
-  def import
-    @errors = []
-    @import_file = ImportFile.new(params[:import_file])
-    if @import_file.valid?
-      result = AudienceMember.my_import(@import_file.file)
-      if result[0].num_inserts.positive?
-        flash.now[:success] = t('flash.actions.import.m', resource_name: t('activerecord.models.audience_member.other'))
-      end
-      add_errors_messages(result)
+  def create_from_csv
+    add_breadcrumb t('views.audience_member.import.btn_csv'), admins_create_audience_members_from_csv_path
+
+    if params[:csv]
+      process_csv
     else
-      flash.now[:error] = @import_file.errors.full_messages.join(' - ')
+      flash.now[:error] = t('flash.actions.import.errors.blank')
     end
-    render :new_import
+
+    render :from_csv
   end
 
   private
 
-  def add_errors_messages(result)
-    return if result[1].empty?
+  def process_csv
+    @result = AudienceMember.from_csv(params[:csv][:file].tempfile)
 
-    result[1].each do |audience_member|
-      @errors << "#{audience_member.name} = #{audience_member.errors.full_messages.join(' - ')}"
+    if @result.valid_file?
+      flash.now[:success] = t('flash.actions.import.m', resource_name: t('activerecord.models.audience_member.other'))
+    else
+      flash.now[:error] = t('flash.actions.import.errors.invalid')
     end
   end
 

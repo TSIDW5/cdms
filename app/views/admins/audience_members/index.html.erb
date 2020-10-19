@@ -1,14 +1,7 @@
 <% provide(:head_title, I18n.t('activerecord.models.audience_member.other')) %>
 <% provide(:page_title, I18n.t('activerecord.models.audience_member.other')) %>
-      
-<%= render 'shared/search_and_new', new_path: new_admins_audience_member_path,
-                                    new_link: 'views.audience_member.links.new',
-                                    search_path: search_admins_audience_members_path %>
-<div class="col-sm-12 col-lg-3">
-  <%= link_to admins_audience_members_import_new_path, class: "btn btn-outline-primary btn-block" do %>
-    <%= icon('fas', 'plus', class: 'mr-2') %><%= t('views.audience_member.import.btn_import') %>
-  <% end %>
-</div>
+
+<%= render 'index_header' %>
 
 <div class="text-right mb-4">
   <%= page_entries_info @audience_members %>
