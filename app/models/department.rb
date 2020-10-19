@@ -1,4 +1,7 @@
 class Department < ApplicationRecord
+  include Searchable
+  search_by :name, :initials
+
   has_many :department_modules, dependent: :destroy
   has_many :department_users, dependent: :destroy
   has_many :users, through: :department_users
@@ -8,7 +11,7 @@ class Department < ApplicationRecord
   validates :local, presence: true
   validates_email_format_of :email, message: I18n.t('errors.messages.invalid')
   validates :email, uniqueness: true
-  validates :phone, format: { with: /\A[1-9]{2}9[0-9]{8}\z|\A[1-9]{2}[0-9]{8}\z/ }
+  validates :phone, format: { with: /\A\(\d{2}\)\s\d{4,5}-\d{4}\z/ }
 
   def modules
     department_modules

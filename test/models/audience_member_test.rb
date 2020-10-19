@@ -6,7 +6,7 @@ class AudienceMemberTest < ActiveSupport::TestCase
   context 'validations' do
     should validate_presence_of(:name)
     should validate_uniqueness_of(:cpf).case_insensitive
-    should validate_uniqueness_of(:email)
+    should validate_uniqueness_of(:email).case_insensitive
 
     context 'email' do
       should 'be a valid email' do
@@ -42,6 +42,42 @@ class AudienceMemberTest < ActiveSupport::TestCase
           assert_not audience_member.valid?
         end
       end
+    end
+  end
+
+  context 'search' do
+    should 'search' do
+      first_name = 'Eduardo'
+      second_name = 'Pedro'
+
+      FactoryBot.create(:audience_member, name: first_name)
+      FactoryBot.create(:audience_member, name: second_name)
+
+      assert_equal(1, AudienceMember.search(first_name).count)
+      assert_equal(1, AudienceMember.search(second_name).count)
+      assert_equal(2, AudienceMember.search('').count)
+    end
+  end
+
+  context '.from_csv' do
+    should 'call new with args' do
+      mock = Minitest::Mock.new
+      mock.expect :call, OpenStruct.new(perform: true), [Hash]
+      CreateAudienceMembersFromCsv.stub :new, mock do
+        AudienceMember.from_csv(Tempfile.new)
+      end
+
+      assert_mock mock
+    end
+
+    should 'call perform from instance' do
+      mock = Minitest::Mock.new
+      mock.expect :perform, true
+      CreateAudienceMembersFromCsv.stub :new, mock do
+        AudienceMember.from_csv(Tempfile.new)
+      end
+
+      assert_mock mock
     end
   end
 end

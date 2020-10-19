@@ -3,7 +3,7 @@ class Admins::AudienceMembersController < Admins::BaseController
   include Breadcrumbs
 
   def index
-    @audience_members = AudienceMember.all
+    @audience_members = AudienceMember.search(params[:term]).page(params[:page])
   end
 
   def new
@@ -30,7 +30,33 @@ class Admins::AudienceMembersController < Admins::BaseController
     redirect_to admins_audience_members_path
   end
 
+  def from_csv
+    add_breadcrumb t('views.audience_member.import.btn_csv'), admins_new_audience_members_from_csv_path
+  end
+
+  def create_from_csv
+    add_breadcrumb t('views.audience_member.import.btn_csv'), admins_create_audience_members_from_csv_path
+
+    if params[:csv]
+      process_csv
+    else
+      flash.now[:error] = t('flash.actions.import.errors.blank')
+    end
+
+    render :from_csv
+  end
+
   private
+
+  def process_csv
+    @result = AudienceMember.from_csv(params[:csv][:file].tempfile)
+
+    if @result.valid_file?
+      flash.now[:success] = t('flash.actions.import.m', resource_name: t('activerecord.models.audience_member.other'))
+    else
+      flash.now[:error] = t('flash.actions.import.errors.invalid')
+    end
+  end
 
   def set_audience_member
     @audience_member = AudienceMember.find(params[:id])
@@ -40,7 +66,7 @@ class Admins::AudienceMembersController < Admins::BaseController
   end
 
   def audience_member_params
-    params.require(:audience_member).permit(:id, :name, :email, :cpf)
+    params.require(:audience_member).permit(:id, :name, :email, :cpf, :password, :password_confirmation)
   end
 
   def save_audience_member

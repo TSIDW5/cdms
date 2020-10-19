@@ -1,0 +1,5 @@
+<% if page.current? %>
+  <%= content_tag :a, page, class: 'paginate_button current', data: { remote: remote }, rel: page.rel %>
+<% else %>
+  <%= link_to page, url, remote: remote, rel: page.rel, class: 'paginate_button' %>
+<% end %>

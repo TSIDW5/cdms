@@ -22,7 +22,7 @@ class UserTest < ActiveSupport::TestCase
       end
 
       should 'invalid format' do
-        usernames = ['user name', 'user-123', 'user.name']
+        usernames = ['user name', 'useá123', 'user$name']
 
         usernames.each do |username|
           @user.username = username
@@ -127,6 +127,20 @@ class UserTest < ActiveSupport::TestCase
       create_list(:user, 2, :assistant)
 
       assert_equal User.search_non_admins('u'), users
+    end
+  end
+
+  context 'search' do
+    should 'by name' do
+      first_name = 'Eduardo'
+      second_name = 'Pedro'
+
+      FactoryBot.create(:user, name: first_name)
+      FactoryBot.create(:user, name: second_name)
+
+      assert_equal(1, User.search(first_name).count)
+      assert_equal(1, User.search(second_name).count)
+      assert_equal(2, User.search('').count)
     end
   end
 end

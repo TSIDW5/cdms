@@ -1,10 +1,13 @@
 <% provide(:head_title, I18n.t('activerecord.models.audience_member.other')) %>
 <% provide(:page_title, I18n.t('activerecord.models.audience_member.other')) %>
 
-<%= render 'shared/search_and_new', search_path: '#', new_path: new_admins_audience_member_path,
-                                    new_link: 'views.audience_member.links.new' %>
+<%= render 'index_header' %>
 
-<div class="table-responsive">
+<div class="text-right mb-4">
+  <%= page_entries_info @audience_members %>
+</div>
+
+<div class="table-responsive dataTables_wrapper">
   <table class="table card-table table-striped table-vcenter table-options">
     <thead>
       <tr>
@@ -19,4 +22,6 @@
       <%= render @audience_members %>
     </tbody>
   </table>
+
+  <%= paginate @audience_members %>
 </div>

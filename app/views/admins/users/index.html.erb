@@ -1,10 +1,15 @@
 <% provide(:head_title, t('views.user.name.plural')) %>
 <% provide(:page_title, t('views.user.name.plural')) %>
 
-<%= render 'shared/search_and_new', search_path: '#', new_path: new_admins_user_path, new_link: 'views.user.links.new' %>
+<%= render 'shared/search_and_new', new_path: new_admins_user_path,
+                                    new_link: 'views.user.links.new',
+                                    search_path: search_admins_users_path %>
 
-<div class="table-responsive">
+<div class="text-right mb-4">
+  <%= page_entries_info @users %>
+</div>
 
+<div class="table-responsive dataTables_wrapper">
   <table class="table card-table table-striped table-vcenter table-options">
     <thead>
       <tr>
@@ -22,4 +27,6 @@
       <%= render @users %>
     </tbody>
   </table>
+
+  <%= paginate @users %>
 </div>

@@ -8,11 +8,16 @@ pt-BR:
       administrator:
         one: Administrador
         other: Administradores
+      import_file:
+        one: Importar arquivo
+        other: Importar arquivos
     attributes:
       administrator:
         role: Papel
         role_id: Papel
         user: Usuário
+      import_file:
+        file: Arquivo
   activerecord:
     models:
       admin:

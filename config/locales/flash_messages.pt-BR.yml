@@ -18,8 +18,12 @@ pt-BR:
         m: '%{resource_name} removido com sucesso!'
         f: '%{resource_name} removida com sucesso!'
       least: 'Deve existir pelo menos um %{resource_name}'
-
       errors: Existem dados incorretos!
+      import:
+        m: '%{resource_name} importados com sucesso!'
+        errors:
+          blank: Nenhum arquivo enviado!
+          invalid: Arquivo inválido
     not_authorized: Acesso não autorizado!
     not_found: Registro não encontrado!
 
