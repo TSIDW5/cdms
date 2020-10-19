@@ -24,8 +24,6 @@ gem 'simple_form'
 gem 'sprockets-rails', git: 'git://github.com/rails/sprockets-rails.git'
 gem 'validators'
 
-gem 'activerecord-import'
-
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails'
