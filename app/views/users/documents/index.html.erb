@@ -1,0 +1,27 @@
+<% provide(:head_title, t('activerecord.models.document.other')) %>
+<% provide(:page_title, t('activerecord.models.document.other')) %>
+
+<%= render 'shared/search_and_new', new_path: new_users_document_path, new_link: 'views.document.links.new',
+                                    search_path: search_users_documents_path %>
+<div class="text-right mb-4">
+  <%= page_entries_info @documents %>
+</div>
+
+<div class="table-responsive dataTables_wrapper">
+  <table class="table card-table table-striped table-vcenter table-options">
+    <thead>
+      <tr>
+        <th><%= t('activerecord.attributes.document.title') %></th>
+        <th><%= t('activerecord.attributes.document.category') %></th>
+        <th><%= t('activerecord.attributes.document.department') %></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= render @documents %>
+    </tbody>
+  </table>
+
+  <%= paginate @documents %>
+</div>
