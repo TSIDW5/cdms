@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   authenticate :user do
     namespace :users do
       root to: 'dashboard#index'
+      #get 'team-departments-modules', controller: 'team_departments_modules', action: 'index', as: 'team_departments_modules'
+      get 'team-departments-modules', to: 'team_departments_modules#index', action: :index
     end
 
     namespace :admins do
