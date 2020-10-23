@@ -2,17 +2,20 @@
  <tr class="department">
     <td>  
         <%= link_to admins_department_path(department["department"]) do %>
-            <%=department["department"].name %>
+            <%="Departamento: #{department["department"].name}" %>
         <% end %>
     </td>
-    <td></td>
+    <td><%= t("enums.roles.#{department["role"]}") %></td>
     <td data-identifier="dep<%=department["department"].id %>" class="w-1 selected"><i class="fas fa-chevron-right"></i></td>
 </tr>
 
 <% department["modules"].each do |mod| %>
-    <tr data-identifier=<%= "child-dep#{mod.id}" %> class="hide">
-        <td><%= "#{mod.name}" %></td>
-        <td></td>
+    <tr data-identifier=<%= "child-dep#{mod["module"].department_id}" %> class="hide">
+        <td><%= "Módulo: #{mod["module"].name}" %></td>
+        <td><%= t("enums.roles.#{mod["role"]}") %></td>
         <td></td>
     </tr>
 <% end %> 
+
+
+

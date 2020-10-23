@@ -6,14 +6,18 @@ class Users::TeamDepartmentsModulesController < Users::BaseController
     @departments = []
     @departmentsUser.each do |dep_user|
       department = Hash.new
-      modules = []
-      department.store("department", dep_user.department)      
-
+      modules = Array.new 
+            
       @modulesUser.each do |mod_user|
         if dep_user.department.id == mod_user.department_module.department_id
-          modules.push(mod_user.department_module)  
+          mod = Hash.new
+          mod.store("role", mod_user.role)
+          mod.store('module', mod_user.department_module)
+          modules.push(mod)  
         end        
       end
+      department.store("department", dep_user.department) 
+      department.store("role", dep_user.role)
       department.store("modules", modules)
       @departments.push(department)
     end 
