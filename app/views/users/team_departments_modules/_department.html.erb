@@ -1,0 +1,18 @@
+
+ <tr class="department">
+    <td>  
+        <%= link_to admins_department_path(department["department"]) do %>
+            <%=department["department"].name %>
+        <% end %>
+    </td>
+    <td></td>
+    <td data-identifier="dep<%=department["department"].id %>" class="w-1 selected"><i class="fas fa-chevron-right"></i></td>
+</tr>
+
+<% department["modules"].each do |mod| %>
+    <tr data-identifier=<%= "child-dep#{mod.id}" %> class="hide">
+        <td><%= "#{mod.name}" %></td>
+        <td></td>
+        <td></td>
+    </tr>
+<% end %> 

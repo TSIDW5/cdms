@@ -1,49 +1,17 @@
 <% provide(:head_title, 'Departamentos e módulos') %>
 <% provide(:page_title, 'Departamentos e módulos') %>
 
-<%
-=begin%>
-  TO_DO: REFATORAR TELA
-<%
-=end%>
-
 <div class="table-responsive">
   <table class="table card-table table-striped table-vcenter table-options">
     <thead>
         <tr>
-            <th><%= t("views.department.name.plural") %></th>
+            <th><%= t("views.department.name.singular") %></th>
             <th>Cargo</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-      <%= render partial: "department_user", collection: @departmentsUser %> 
+      <%= render partial: "department", collection: @departments %> 
     </tbody>
   </table>
-</div> 
-
-<br/>
-<hr>
-<br/>
-
-
-<div class="table-responsive">
-  <table class="table card-table table-striped table-vcenter table-options">
-    <thead>
-        <tr>
-            <th><%= t("views.department_module.name.plural") %></th>
-            <th>Cargo</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-       <% @modulesUser.each do |element| %>
-          <tr>
-              <td><%= "modulo #{element.department_module.name}" %></td>
-              <td><%= t("enums.roles.#{element.role}") %></td>
-              <td></td>
-          </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div> 
+</div>
