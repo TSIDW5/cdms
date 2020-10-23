@@ -10,6 +10,9 @@ class User < ApplicationRecord
   has_many :department_users, dependent: :destroy
   has_many :departments, through: :department_users
 
+  has_many :department_module_users, dependent: :destroy
+  has_many :department_modules, through: :department_module_users
+
   belongs_to :role, optional: true
 
   validates :name, presence: true
