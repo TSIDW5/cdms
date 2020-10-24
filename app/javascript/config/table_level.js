@@ -2,7 +2,7 @@ $(document).on('turbolinks:load', () => {
     Array.from(document.getElementsByClassName('selected')).forEach(element => {
         element.addEventListener('click', function(e) {
             toggleHide(element.dataset.identifier);
-            element.firstChild.classList.toggle('rotated');
+            element.firstElementChild.classList.toggle('rotated');
         });
     });
 
