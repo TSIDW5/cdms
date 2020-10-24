@@ -115,6 +115,13 @@ pt-BR:
       links:
         new: Novo membro de audiência
         sign_out: Sair
+    team:
+      name:
+        singular: Equipe
+        plural:  Equipes
+      links:
+        sign_out: Sair
+        access: Área administrativa
     breadcrumbs:
       edit: Editar
       new:
