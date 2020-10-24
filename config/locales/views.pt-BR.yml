@@ -95,6 +95,7 @@ pt-BR:
         plural: Módulos departamento
       links:
         new: Novo módulo
+        show: Visualizar módulo
       new:
         title: 'Novo módulo para o departamento #%{dp}'
       edit:

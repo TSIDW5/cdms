@@ -11,7 +11,11 @@
 
 <% department["modules"].each do |mod| %>
     <tr data-identifier=<%= "child-dep#{mod["module"].department_id}" %> class="hide">
-        <td><%= "Módulo: #{mod["module"].name}" %></td>
+        <td>
+            <%= link_to users_show_module_path(mod["module"].id) do %>
+            <%= "Módulo: #{mod["module"].name}" %>
+            <% end %>
+        </td>
         <td><%= t("enums.roles.#{mod["role"]}") %></td>
         <td></td>
     </tr>
