@@ -22,4 +22,22 @@ class Users::TeamDepartmentsModulesController < Users::BaseController
       @departments.push(department)
     end 
   end
+
+  def show_department
+    id = params[:department_id] || params[:id]
+    @department = Department.find(id)
+    
+    validation_department_current_user
+
+    @department_users = @department.department_users.includes(:user)
+
+  end
+
+  private
+  def validation_department_current_user
+    if (@department.department_users.where(user_id: current_user.id.to_s).empty?)
+      redirect_to users_team_departments_modules_path
+    end
+  end
+  
 end
