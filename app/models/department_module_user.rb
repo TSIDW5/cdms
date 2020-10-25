@@ -1,4 +1,6 @@
 class DepartmentModuleUser < ApplicationRecord
+  before_save :link_user_in_department
+
   belongs_to :department_module
   belongs_to :user
 
@@ -15,6 +17,17 @@ class DepartmentModuleUser < ApplicationRecord
   end
 
   private
+
+  def link_user_in_department
+    if user_not_linked_department
+      departmentUser = DepartmentUser.new(department_id: self.department_module.department_id, user_id: self.user.id, role: :collaborator )
+      departmentUser.save
+    end 
+  end
+
+  def user_not_linked_department
+    return DepartmentUser.includes(:department, :user).where(users:{id: self.user.id}).where(departments: {id: self.department_module.department_id}).count.zero? 
+  end
 
   def only_one_responsible
     return if department_module.department_module_users.responsible_role.count.zero?
