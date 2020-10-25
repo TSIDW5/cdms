@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   layout :layout_by_resource
+  before_action :set_current_user
 
   protected
 
@@ -15,5 +16,9 @@ class ApplicationController < ActionController::Base
     return 'layouts/devise/session' if devise_controller?
 
     'layouts/application'
+  end
+
+  def set_current_user
+    User.current = current_user
   end
 end
