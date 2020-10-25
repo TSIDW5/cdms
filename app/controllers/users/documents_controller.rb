@@ -1,6 +1,6 @@
 class Users::DocumentsController < Users::BaseController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
-  before_action :set_departments, only: [:edit, :new]
+  before_action :set_departments, only: [:edit, :new, :update, :create]
   include Breadcrumbs
 
   def index
