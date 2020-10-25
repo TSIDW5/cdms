@@ -145,4 +145,24 @@ class UserTest < ActiveSupport::TestCase
       assert_equal(2, User.search('').count)
     end
   end
+
+
+  context 'departments and modules' do
+    should 'by user' do
+
+      user = create(:user)
+      create(:department_user, :responsible, user: user)
+
+      department = create(:department)
+      department_user = create(:department_user, :responsible, user: user, department: department)
+
+      dep_module = create(:department_module, department: department)
+      module_user = create(:department_module_user, :collaborator, user: user, department_module: dep_module)
+
+      assert_equal(2, user.departments_and_modules.count)
+      assert_equal(department, user.departments_and_modules[1]["department"])
+      assert_equal(dep_module, user.departments_and_modules[1]["modules"][0]["module"])
+      
+    end
+  end
 end
