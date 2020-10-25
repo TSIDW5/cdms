@@ -15,9 +15,9 @@
       prompt: t('views.prompt.select.m', name: t('activerecord.attributes.document.department').downcase) %>
   </div>
 
-  <%= f.input :front_text %>
+  <%= f.input :front_text, input_html: { data: { type: 'summernote' } } %>
 
-  <%= f.input :back_text %>
+  <%= f.input :back_text, input_html: { data: { type: 'summernote' } } %>
 
   <div class="form-footer">
     <div class="d-flex">

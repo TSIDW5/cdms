@@ -83,6 +83,9 @@ pt-BR:
       links:
         new: Novo certificado/declaração
         show: Visualizar certificado/declaração
+      name:
+        singular: Documento
+        plural:  Documentos
     department:
       name:
         singular: Departamento
