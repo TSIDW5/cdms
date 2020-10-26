@@ -57,55 +57,27 @@ class User < ApplicationRecord
   end
 
   def departments_and_modules
-    departmentsUser = DepartmentUser.includes(:department, :user).where(users: {id: self.id.to_s})
-    modulesUser = DepartmentModuleUser.includes(:department_module, :user).where(users: {id: self.id.to_s})
-
+    departments_user = DepartmentUser.includes(:department, :user).where(users: { id: id.to_s })
+    modules_user = DepartmentModuleUser.includes(:department_module, :user).where(users: { id: id.to_s })
     departments = []
-    departmentsUser.each do |dep_user|
-      department = Hash.new
-      modules = Array.new 
-            
-      modulesUser.each do |mod_user|
-        if dep_user.department.id == mod_user.department_module.department_id
-          mod = Hash.new
-          mod.store("role", mod_user.role)
-          mod.store('module', mod_user.department_module)
-          modules.push(mod)  
-        end        
-      end
-      department.store("department", dep_user.department) 
-      department.store("role", dep_user.role)
-      department.store("modules", modules)
+    departments_user.each do |dep_user|
+      department = { 'modules' => populate_modules(dep_user.department.id, modules_user),
+                     'department' => dep_user.department, 'role' => dep_user.role }
       departments.push(department)
     end
-    return departments 
+    departments
+  end
+
+  def populate_modules(department_id, modules_list)
+    modules = []
+    modules_list.each do |mod_user|
+      next unless department_id == mod_user.department_module.department_id
+
+      mod = {}
+      mod.store('role', mod_user.role)
+      mod.store('module', mod_user.department_module)
+      modules.push(mod)
+    end
+    modules
   end
 end
-
-
-
-
-
-# def index     
-#   @departmentsUser = DepartmentUser.includes(:department, :user).where(users: {id: current_user.id.to_s})
-#   @modulesUser =DepartmentModuleUser.includes(:department_module, :user).where(users: {id: current_user.id.to_s})
-
-#   @departments = []
-#   @departmentsUser.each do |dep_user|
-#     department = Hash.new
-#     modules = Array.new 
-          
-#     @modulesUser.each do |mod_user|
-#       if dep_user.department.id == mod_user.department_module.department_id
-#         mod = Hash.new
-#         mod.store("role", mod_user.role)
-#         mod.store('module', mod_user.department_module)
-#         modules.push(mod)  
-#       end        
-#     end
-#     department.store("department", dep_user.department) 
-#     department.store("role", dep_user.role)
-#     department.store("modules", modules)
-#     @departments.push(department)
-#   end 
-# end

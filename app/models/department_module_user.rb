@@ -8,7 +8,8 @@ class DepartmentModuleUser < ApplicationRecord
 
   validates :role, inclusion: { in: DepartmentModuleUser.roles.values }
   validates :user, uniqueness: { scope: :department_module_id }
-  #validate :only_one_responsible, if: :responsible_role?  TO_DO HABILITAR UNICO RESPONSAVEL PELO MODULO
+
+  # validate :only_one_responsible, if: :responsible_role? TO_DO HABILITAR UNICO RESPONSAVEL PELO MODULO
 
   def self.human_roles
     hash = {}
@@ -19,14 +20,16 @@ class DepartmentModuleUser < ApplicationRecord
   private
 
   def link_user_in_department
-    if user_not_linked_department
-      departmentUser = DepartmentUser.new(department_id: self.department_module.department_id, user_id: self.user.id, role: :collaborator )
-      departmentUser.save
-    end 
+    return unless user_not_linked_department
+
+    entity = DepartmentUser.new(department_id: department_module.department_id, user_id: user.id, role: :collaborator)
+    entity.save
   end
 
   def user_not_linked_department
-    return DepartmentUser.includes(:department, :user).where(users:{id: self.user.id}).where(departments: {id: self.department_module.department_id}).count.zero? 
+    DepartmentUser.includes(:department, :user)
+                  .where(users: { id: user.id })
+                  .where(departments: { id: department_module.department_id }).count.zero?
   end
 
   def only_one_responsible

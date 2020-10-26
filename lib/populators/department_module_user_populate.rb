@@ -16,7 +16,6 @@ class Populators::DepartmentModuleUserPopulate < Populators::BasePopulate
       user_ids.each do |user_id|
         add_department_module_member(DepartmentModuleUser.roles[:collaborator], user_id, department_module_id)
       end
-      
     end
   end
 

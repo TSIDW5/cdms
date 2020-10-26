@@ -11,7 +11,8 @@ Rails.application.routes.draw do
     namespace :users do
       root to: 'dashboard#index'
       get 'team-departments-modules', to: 'team_departments_modules#index', action: :index
-      get 'show-department/:id', to: 'team_departments_modules#show_department', action: :show_department, as: 'show_department'
+      get 'show-department/:id', to: 'team_departments_modules#show_department',
+                                 action: :show_department, as: 'show_department'
       get 'show-module/:id', to: 'team_departments_modules#show_module', action: :show_module, as: 'show_module'
     end
 

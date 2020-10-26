@@ -35,5 +35,4 @@ class DepartmentModuleUserTest < ActiveSupport::TestCase
       assert_equal hash, DepartmentModuleUser.human_roles
     end
   end
-
 end

@@ -20,5 +20,4 @@ class Users::DashboardControllerTest < ActionDispatch::IntegrationTest
       assert_active_link(href: users_root_path)
     end
   end
-
 end

@@ -6,11 +6,10 @@ class ShowDepartmentTest < ApplicationSystemTestCase
       @user = create(:user)
       login_as(@user, as: :user)
       @department = create(:department)
-      department_user = create(:department_user, :responsible, user: @user, department: @department)
+      create(:department_user, :responsible, user: @user, department: @department)
     end
 
     should 'display department data' do
-
       visit users_show_department_path(@department)
 
       within('#main-content .card.department-data .card-body') do
@@ -24,7 +23,6 @@ class ShowDepartmentTest < ApplicationSystemTestCase
     end
 
     should 'display text and options' do
-      
       visit users_show_department_path(@department)
 
       within('#main-content .card-body .footer') do
@@ -33,16 +31,15 @@ class ShowDepartmentTest < ApplicationSystemTestCase
     end
 
     should 'list members' do
-
       users = create_list(:user, 3)
       users.each do |user|
-        department_user = create(:department_user, :collaborator, user: user, department: @department)
+        create(:department_user, :collaborator, user: user, department: @department)
       end
 
       visit users_show_department_path(@department)
 
       within('.card.team table.table tbody') do
-        base_selector = "tr:nth-child(1)"
+        base_selector = 'tr:nth-child(1)'
         assert_selector base_selector, text: @user.name
         assert_selector base_selector, text: @user.email
         assert_selector base_selector, text: I18n.t('enums.roles.responsible')
@@ -57,6 +54,5 @@ class ShowDepartmentTest < ApplicationSystemTestCase
         end
       end
     end
-
   end
 end

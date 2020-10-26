@@ -10,7 +10,7 @@ class CreateDepartmentModuleUsers < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
-    add_index :department_module_users, [:department_module_id, :user_id], unique: true, :name => 'module_users'
+    add_index :department_module_users, [:department_module_id, :user_id], unique: true, name: 'module_users'
     add_index :department_module_users, :role
   end
 end

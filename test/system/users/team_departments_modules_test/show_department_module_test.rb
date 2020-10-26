@@ -7,11 +7,10 @@ class ShowDepartmentModuleTest < ApplicationSystemTestCase
       login_as(@user, as: :user)
 
       @dep_module = create(:department_module)
-      module_user = create(:department_module_user, :responsible, user: @user, department_module: @dep_module)
+      create(:department_module_user, :responsible, user: @user, department_module: @dep_module)
     end
 
     should 'display module data' do
-
       visit users_show_module_path(@dep_module)
 
       within('#main-content .card.department-module-data .card-body') do
@@ -21,7 +20,6 @@ class ShowDepartmentModuleTest < ApplicationSystemTestCase
     end
 
     should 'display text and options' do
-      
       visit users_show_module_path(@dep_module)
       within('#main-content .card-body .footer') do
         assert_link(I18n.t('views.links.back'), href: users_team_departments_modules_path)
@@ -29,16 +27,15 @@ class ShowDepartmentModuleTest < ApplicationSystemTestCase
     end
 
     should 'list members' do
-
       users = create_list(:user, 3)
       users.each do |user|
-        module_user = create(:department_module_user, :collaborator, user: user, department_module: @dep_module)
+        create(:department_module_user, :collaborator, user: user, department_module: @dep_module)
       end
 
       visit users_show_module_path(@dep_module)
 
       within('.card.team table.table tbody') do
-        base_selector = "tr:nth-child(1)"
+        base_selector = 'tr:nth-child(1)'
         assert_selector base_selector, text: @user.name
         assert_selector base_selector, text: @user.email
         assert_selector base_selector, text: I18n.t('enums.roles.responsible')
@@ -53,6 +50,5 @@ class ShowDepartmentModuleTest < ApplicationSystemTestCase
         end
       end
     end
-
   end
 end
