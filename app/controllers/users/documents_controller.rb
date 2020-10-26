@@ -1,5 +1,5 @@
 class Users::DocumentsController < Users::BaseController
-  before_action :set_document, only: [:show, :edit, :update, :destroy]
+  before_action :set_document, only: [:show, :edit, :update, :destroy, :preview]
   before_action :set_departments, only: [:edit, :new, :update, :create]
   include Breadcrumbs
 
@@ -8,6 +8,10 @@ class Users::DocumentsController < Users::BaseController
   end
 
   def show; end
+
+  def preview
+    render layout: 'users/application-blank'
+  end
 
   def new
     @document = Document.new

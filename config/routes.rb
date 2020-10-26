@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       end
 
       resources :documents, concerns: [:paginatable, :searchable_paginatable]
+      get 'documents/:id/preview', to: 'documents#preview', as: 'preview_document'
     end
 
     namespace :admins do

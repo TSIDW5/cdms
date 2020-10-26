@@ -4,7 +4,7 @@
     <td><%= document.department.name %></td>
 
     <td>
-      <%= link_to users_document_path(document) do %>
+      <%= link_to users_preview_document_path(document) do %>
           <%= icon('fas', 'print', class: 'icon', data: { toggle: 'tooltip' }, title: t('views.document.name.singular')) %>
       <% end %>
       <%= link_to edit_users_document_path(document) do %>
