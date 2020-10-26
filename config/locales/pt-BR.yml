@@ -62,6 +62,7 @@ pt-BR:
         back_text: Texto de trás
         category: Categoria
         department: Departamento
+        department_id: Departamento
       department_module:
         name: Nome
         description: Descrição

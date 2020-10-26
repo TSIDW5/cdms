@@ -16,11 +16,11 @@
     </p>
     <p>
       <strong><%= t('activerecord.attributes.document.front_text') %>:</strong>
-      <%= @document.front_text %>
+      <%= raw(@document.front_text) %>
     </p>
     <p>
       <strong><%= t('activerecord.attributes.document.back_text') %>:</strong>
-      <%= @document.back_text %>
+      <%= raw(@document.back_text) %>
     </p>
   </div>
 </div>

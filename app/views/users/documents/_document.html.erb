@@ -5,7 +5,7 @@
 
     <td>
       <%= link_to users_document_path(document) do %>
-          <%= icon('fas', 'print', class: 'icon', data: { toggle: 'tooltip' }, title: t('views.user.name.plural')) %>
+          <%= icon('fas', 'print', class: 'icon', data: { toggle: 'tooltip' }, title: t('views.document.name.singular')) %>
       <% end %>
       <%= link_to edit_users_document_path(document) do %>
         <%= icon('fas', 'edit', class: 'icon', data: { toggle: 'tooltip' }, title: t('views.links.edit')) %>
