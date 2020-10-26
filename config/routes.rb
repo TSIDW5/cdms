@@ -10,6 +10,25 @@ Rails.application.routes.draw do
   authenticate :user do
     namespace :users do
       root to: 'dashboard#index'
+      concern :paginatable do
+        get '(page/:page)', action: :index, on: :collection, as: ''
+      end
+      concern :searchable_paginatable do
+        get '/search/(:term)/(page/:page)', action: :index, on: :collection, as: :search
+      end
+      
+      resources :departments, constraints: { id: /[0-9]+/ }, concerns: [:paginatable, :searchable_paginatable] do
+        resources :department_modules, except: [:index, :show], as: :modules, path: 'modules'
+
+        get '/members', to: 'departments#members', as: :members
+        get '/non-members/search/(:term)', costraints: { term: %r{[^/]+} }, # allows anything except a slash.
+                                           to: 'departments#non_members',
+                                           as: 'search_non_members'
+
+        post '/members', to: 'departments#add_member', as: :add_member
+        delete '/members/:id', to: 'departments#remove_member', as: 'remove_member'
+      end
+
     end
 
     namespace :admins do

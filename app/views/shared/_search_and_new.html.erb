@@ -15,9 +15,12 @@
 
   </div>
 
-  <div class="col-sm-12 col-lg-4">
-    <%= link_to new_path, class: "btn btn-outline-primary btn-block" do %>
-      <%= icon('fas', 'plus', class: 'mr-2') %><%= t("#{new_link}") %>
-    <% end %>
-  </div>
+  <% unless controller_path.eql? "users/departments" %>  
+      <div class="col-sm-12 col-lg-4">
+        <%= link_to new_path, class: "btn btn-outline-primary btn-block" do %>
+          <%= icon('fas', 'plus', class: 'mr-2') %><%= t("#{new_link}") %>
+        <% end %>
+      </div>
+  <% end %>
+
 </div>
