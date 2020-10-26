@@ -73,9 +73,8 @@ class User < ApplicationRecord
     modules_list.each do |mod_user|
       next unless department_id == mod_user.department_module.department_id
 
-      mod = {}
-      mod.store('role', mod_user.role)
-      mod.store('module', mod_user.department_module)
+      mod = { 'role' => mod_user.role,
+              'module' => mod_user.department_module }
       modules.push(mod)
     end
     modules
