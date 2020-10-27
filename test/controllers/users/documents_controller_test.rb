@@ -25,6 +25,11 @@ class Users::DocumentsControllerTest < ActionDispatch::IntegrationTest
       assert_response :success
       assert_active_link(href: users_documents_path)
     end
+
+    should 'get preview' do
+      get users_preview_document_path(@document)
+      assert_response :success
+    end
   end
 
   context 'unauthenticated' do
