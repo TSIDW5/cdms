@@ -2,7 +2,6 @@ require 'test_helper'
 
 class Users::DocumentsControllerTest < ActionDispatch::IntegrationTest
   context 'authenticated' do
-
     setup do
       @document = create(:document, :certification)
       sign_in create(:user)
@@ -51,11 +50,11 @@ class Users::DocumentsControllerTest < ActionDispatch::IntegrationTest
 
   def requests
     {
-        get: [users_documents_path, users_documents_path,
-              edit_users_document_path(1), users_document_path(1)],
-        post: [users_documents_path],
-        patch: [users_document_path(1)],
-        delete: [users_document_path(1)]
+      get: [users_documents_path, users_documents_path,
+            edit_users_document_path(1), users_document_path(1)],
+      post: [users_documents_path],
+      patch: [users_document_path(1)],
+      delete: [users_document_path(1)]
     }
   end
 end

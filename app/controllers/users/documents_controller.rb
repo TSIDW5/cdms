@@ -10,7 +10,7 @@ class Users::DocumentsController < Users::BaseController
   def show; end
 
   def preview
-    render layout: 'users/application-blank'
+    render layout: 'users/preview_document'
   end
 
   def new
