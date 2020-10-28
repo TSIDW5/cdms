@@ -6,28 +6,34 @@ class CreateTest < ApplicationSystemTestCase
       user = create(:user, :manager)
       login_as(user, as: :user)
       @department = create(:department)
+      @department.department_users.create(user: user, role: :responsible)
 
       visit new_users_document_path
+
+      sign_in user
     end
 
     should 'successfully' do
       document = build(:document)
 
       fill_in 'document_title', with: document.title
-      # fill_in 'document_front_text', with: document.front_text
-      # fill_in 'document_back_text', with: document.back_text
 
-      find(".selectize-dropdown-content .option[data-value='declaration']").click
+      find('#document_category-selectized').click
+      find('.selectize-dropdown-content .option[data-value="declaration"]').click
+
       find('#document_department_id-selectized').click
+      find(".selectize-dropdown-content .option[data-value='#{@department.id}']").click
+
+      page.execute_script("document.getElementById('document_front_text').innerText = '#{document.front_text}'")
+      page.execute_script("document.getElementById('document_back_text').innerText = '#{document.back_text}'")
 
       submit_form
 
-      flash_message = I18n.t('flash.actions.create.m', resource_name: Department.model_name.human)
+      flash_message = I18n.t('flash.actions.create.m', resource_name: Document.model_name.human)
       assert_selector('div.alert.alert-success', text: flash_message)
 
       document = Document.last
       within('table.table tbody') do
-        assert_selector "a[href='#{users_document_path(document)}']", text: document.id
         assert_text document.title
 
         assert_selector "a[href='#{users_preview_document_path(document)}']"

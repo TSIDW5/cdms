@@ -3,8 +3,10 @@ require 'test_helper'
 class Users::DocumentsControllerTest < ActionDispatch::IntegrationTest
   context 'authenticated' do
     setup do
-      @document = create(:document, :certification)
-      sign_in create(:user)
+      user = create(:user)
+      @department = create(:department)
+      @department.department_users.create(user: user, role: :responsible)
+      sign_in user
     end
 
     should 'get index' do
@@ -20,13 +22,17 @@ class Users::DocumentsControllerTest < ActionDispatch::IntegrationTest
     end
 
     should 'get edit' do
-      get edit_users_document_path(@document)
+      document = create(:document, :certification, department: @department)
+
+      get edit_users_document_path(document)
       assert_response :success
       assert_active_link(href: users_documents_path)
     end
 
     should 'get preview' do
-      get users_preview_document_path(@document)
+      document = create(:document, :certification, department: @department)
+
+      get users_preview_document_path(document)
       assert_response :success
     end
   end
