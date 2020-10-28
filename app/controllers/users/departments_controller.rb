@@ -3,16 +3,17 @@ class Users::DepartmentsController < Users::BaseController
     include Breadcrumbs
   
     def index
-        @departments = current_user.departments.all.search(params[:term]).page(params[:page])
+        @departments = current_user.departments.search(params[:term]).page(params[:page])
     end
   
     def show; end
   
     def members
       breadcrumbs_members
-  
+
       @department_user = DepartmentUser.new
       @department_users = @department.department_users.includes(:user)
+      @current_department_user_role = @department.department_users.find_by(user_id: current_user.id).role
     end
   
     def non_members

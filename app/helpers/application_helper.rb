@@ -11,4 +11,10 @@ module ApplicationHelper
       "#{page_title} | #{base_title}"
     end
   end
+
+
+  def user_is_collaborator(role)
+    role == 'collaborator'
+  end
+
 end

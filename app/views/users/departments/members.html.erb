@@ -1,7 +1,7 @@
 <% provide(:head_title, t('views.department.members.nwdp', name: @department.name)) %>
 <% provide(:page_title, t('views.department.members.nwdp', name: @department.name)) %>
 
-<% unless @department.department_users.find_by(user_id: current_user.id).role == 'collaborator'%>
+<% unless user_is_collaborator(@current_department_user_role)%>
   <%= simple_form_for(@department_user, url: users_department_add_member_path, method: :post) do |f| %>
     <div class="row">
       <%= f.hidden_field :user_id %>
@@ -46,14 +46,12 @@
           <td><%= t("enums.roles.#{department_user.role}") %></td>
           
             <td>
-            <% unless @department.department_users.find_by(user_id: current_user.id).role == 'collaborator' || department_user.user.id == current_user.id%>
+            <% unless user_is_collaborator(@current_department_user_role) || department_user.user.id == current_user.id%>
                 <%= link_to users_department_remove_member_path(@department, department_user.user), method: :delete, data: { confirm: t('views.prompt.confirm') } do %>
                     <%= icon('fas', 'trash', class: 'icon', data: { toggle: 'tooltip' }, title: t('views.links.destroy')) %>
                 <% end %>
             <% end %>
             </td>
-       
-
         </tr>
       <% end %>
     </tbody>

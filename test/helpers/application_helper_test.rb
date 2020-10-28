@@ -36,4 +36,20 @@ class ApplicationHelperTest < ActionView::TestCase
       assert_equal 'alert-apocalypse', bootstrap_class_for('apocalypse')
     end
   end
+
+  context '#user_role' do
+    setup do
+      @department_user_responsible = create(:department_user, :responsible)
+      @department_user_collaborator = create(:department_user, :collaborator)
+    end
+
+    should 'return false' do
+      assert_equal false, user_is_collaborator(@department_user_responsible.role)
+    end
+    
+    should 'return true' do
+      assert_equal true, user_is_collaborator(@department_user_collaborator.role)
+    end
+  end
+
 end
