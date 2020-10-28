@@ -7,6 +7,10 @@
       <%= image_tag 'documents/left-document.png', class: 'w-100 h-100', alt: 'UTFPR' %>
     </div>
     <div class="col-10">
+      <% if show_title %>
+        <h4 class="text-center"> <%= I18n.t("enums.categories.#{ @document.category }") %>
+          <%= "#{@document.id}/#{@document.created_at.year} - #{@document.department.name}" %></h4>
+      <% end %>
       <%== text %>
     </div>
   </div>

@@ -2,5 +2,5 @@
 
 <%= render 'not_print' %>
 
-<%= render 'page', text: @document.front_text %>
-<%= render 'page', text: @document.back_text %>
+<%= render 'page', text: @document.front_text, show_title: true %>
+<%= render 'page', text: @document.back_text, show_title: false %>
