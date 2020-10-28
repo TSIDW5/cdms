@@ -60,7 +60,7 @@ pt-BR:
         title: Título
         front_text: Texto de frente
         back_text: Texto de trás
-        category: Categoria
+        category: Tipo
         department: Departamento
         department_id: Departamento
       department_module:
