@@ -8,7 +8,7 @@ $(document).on('turbolinks:load', () => {
 
     function toggleHide(identifier) {
         Array.from(document.querySelectorAll('[ data-identifier = "child-' + identifier + '"]')).forEach(element => {
-            element.classList.toggle('hide');
+            element.classList.toggle('d-none');
         });
     }
 });

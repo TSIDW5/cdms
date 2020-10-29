@@ -57,26 +57,19 @@ class User < ApplicationRecord
   end
 
   def departments_and_modules
-    departments_user = DepartmentUser.includes(:department, :user).where(users: { id: id.to_s })
-    modules_user = DepartmentModuleUser.includes(:department_module, :user).where(users: { id: id.to_s })
-    departments = []
-    departments_user.each do |dep_user|
-      department = { 'modules' => populate_modules(dep_user.department.id, modules_user),
-                     'department' => dep_user.department, 'role' => dep_user.role }
-      departments.push(department)
+    department_users.includes(:department).map do |dep_user|
+      { 'modules' => populate_modules(dep_user.department.id),
+        'department' => dep_user.department, 'role' => dep_user.role }
     end
-    departments
   end
 
-  def populate_modules(department_id, modules_list)
-    modules = []
-    modules_list.each do |mod_user|
+  private
+
+  def populate_modules(department_id)
+    department_module_users.includes(:department_module).map do |mod_user|
       next unless department_id == mod_user.department_module.department_id
 
-      mod = { 'role' => mod_user.role,
-              'module' => mod_user.department_module }
-      modules.push(mod)
-    end
-    modules
+      { 'role' => mod_user.role, 'module' => mod_user.department_module }
+    end.compact
   end
 end
