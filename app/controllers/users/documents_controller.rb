@@ -20,7 +20,9 @@ class Users::DocumentsController < Users::BaseController
   def edit; end
 
   def create
-    @document = Document.new(document_params)
+    department = current_user.departments.find(document_params['department_id'])
+
+    @document = department.documents.create(document_params)
     if @document.save
       flash[:success] = t('flash.actions.create.m', resource_name: Document.model_name.human)
       redirect_to users_documents_path

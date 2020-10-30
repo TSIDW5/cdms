@@ -52,12 +52,4 @@ class User < ApplicationRecord
   def self.search_non_admins(term)
     where(role_id: nil).where('unaccent(name) ILIKE unaccent(?)', "%#{term}%").order('name ASC')
   end
-
-  def self.current
-    Thread.current[:user]
-  end
-
-  def self.current=(user)
-    Thread.current[:user] = user
-  end
 end
