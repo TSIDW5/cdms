@@ -20,4 +20,8 @@ class Department < ApplicationRecord
   def search_non_members(term)
     User.where('unaccent(name) ILIKE unaccent(?)', "%#{term}%").order('name ASC').where.not(id: user_ids)
   end
+
+  def user_is_collaborator?(user)
+    department_users.find_by(user_id: user.id).role.eql?('collaborator')
+  end
 end

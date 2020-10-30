@@ -73,4 +73,16 @@ class DepartmentTest < ActiveSupport::TestCase
       assert_equal(2, Department.search('').count)
     end
   end
+
+  context 'verify user role' do
+    should 'return false' do
+      department_user = create(:department_user, :responsible)
+      assert_not department_user.department.user_is_collaborator?(department_user.user)
+    end
+
+    should 'return true' do
+      department_user = create(:department_user, :collaborator)
+      assert department_user.department.user_is_collaborator?(department_user.user)
+    end
+  end
 end

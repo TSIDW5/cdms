@@ -12,8 +12,3 @@ Role.create_with(name: 'Administrador assistente').find_or_create_by!(identifier
 User.create_with(name: 'Adminstrador', register_number: '000001', cpf: CPF.generate(true),
                  password: '123456', role_id: role.id)
     .find_or_create_by!(username: 'admin', email: 'admin@utfpr.edu.br')
-
-
-User.create_with(name: 'Usuário', register_number: '000002', cpf: CPF.generate(true),
-password: '123456')
-.find_or_create_by!(username: 'user', email: 'user@utfpr.edu.br')
