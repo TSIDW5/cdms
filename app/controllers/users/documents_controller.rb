@@ -20,9 +20,7 @@ class Users::DocumentsController < Users::BaseController
   def edit; end
 
   def create
-    department = current_user.departments.find(document_params['department_id'])
-
-    @document = department.documents.create(document_params)
+    @document = create_document
     if @document.save
       flash[:success] = t('flash.actions.create.m', resource_name: Document.model_name.human)
       redirect_to users_documents_path
@@ -59,6 +57,15 @@ class Users::DocumentsController < Users::BaseController
 
   def set_departments
     @departments = current_user.departments
+  end
+
+  def create_document
+    if document_params['department_id'] != ''
+      department = current_user.departments.find(document_params['department_id'])
+      department.documents.create(document_params)
+    else
+      Document.new(document_params)
+    end
   end
 
   def document_params

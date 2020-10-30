@@ -11,11 +11,11 @@ class IndexTest < ApplicationSystemTestCase
     end
 
     should 'list all' do
-      document = create_list(:document, 3, :certification, department: @department)
+      documents = create_list(:document, 3, :certification, department: @department)
       visit users_documents_path
 
       within('table.table tbody') do
-        document.each_with_index do |document, index|
+        documents.each_with_index do |document, index|
           child = index + 1
           base_selector = "tr:nth-child(#{child})"
 
