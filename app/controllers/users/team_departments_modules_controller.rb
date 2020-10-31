@@ -30,7 +30,7 @@ class Users::TeamDepartmentsModulesController < Users::BaseController
 
   def validation_module_current_user
     @id = params[:id]
-    
+
     return unless current_user.department_modules.where(id: @id).empty?
 
     redirect_to users_team_departments_modules_path

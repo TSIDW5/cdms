@@ -7,7 +7,7 @@
     </td>
     <td><%= t("enums.roles.#{department["role"]}") %></td>
     <td data-identifier="dep<%=department["department"].id %>" class="w-1 selected">
-        <i class="fas fa-chevron-right <%='d-none' if department["modules"].count == 0%>"></i>
+        <i class="fas fa-chevron-right<%='d-none' if department["modules"].count == 0%>"></i>
     </td>
 </tr>
 
