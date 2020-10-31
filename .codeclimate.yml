@@ -34,7 +34,7 @@ checks:
 
 exclude_patterns:
   - ".rubocop*.yml"
-  - "tests/system"
+  - "test/"
   - "node_modules/"
   - "config/"
   - "db/"

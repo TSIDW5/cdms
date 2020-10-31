@@ -102,10 +102,10 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Setup Ruby 2.7.1
+      - name: Setup Ruby 2.7
         uses: actions/setup-ruby@v1
         with:
-          ruby-version: '2.7.1'
+          ruby-version: '2.7'
 
       - name: Copy application env file
         run: cp config/application.ci.yml config/application.yml
