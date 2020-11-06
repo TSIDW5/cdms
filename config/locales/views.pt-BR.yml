@@ -5,6 +5,7 @@ pt-BR:
       name: Sistema Gerenciador de Certificados e Declarações da UTFPR-GP
       sidebar:
         audience_members: Membros de audiência
+        documents: Certificados e declarações
     boolean:
       'true': Sim
       'false': Não
@@ -78,6 +79,15 @@ pt-BR:
         sign_out: Sair
         new: Novo usuário
         access: Área do usuário
+    document:
+      links:
+        new: Novo certificado/declaração
+        show: Visualizar certificado/declaração
+        preview: '%{category}-%{name}'
+      name:
+        singular: Documento
+        plural:  Documentos
+      print_label: Para imprimir ou salvar como PDF aperte CTRL + P ou clique no botão ao lado.
     department:
       name:
         singular: Departamento

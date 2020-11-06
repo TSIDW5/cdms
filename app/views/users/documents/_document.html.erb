@@ -1,0 +1,17 @@
+<tr>
+    <td><%= document.title %></td>
+    <td><%= t("enums.categories.#{document.category}") %></td>
+    <td><%= document.department.name %></td>
+
+    <td>
+      <%= link_to users_preview_document_path(document) do %>
+          <%= icon('fas', 'print', class: 'icon', data: { toggle: 'tooltip' }, title: t('views.document.name.singular')) %>
+      <% end %>
+      <%= link_to edit_users_document_path(document) do %>
+        <%= icon('fas', 'edit', class: 'icon', data: { toggle: 'tooltip' }, title: t('views.links.edit')) %>
+      <% end %>
+      <%= link_to users_document_path(document), method: :delete, data: { confirm: t('views.prompt.confirm') } do %>
+        <%= icon('fas', 'trash', class: 'icon', data: { toggle: 'tooltip' }, title: t('views.links.destroy')) %>
+      <% end %>
+    </td>
+</tr>

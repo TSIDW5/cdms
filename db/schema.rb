@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_15_012118) do
+ActiveRecord::Schema.define(version: 2020_10_22_151225) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,24 @@ ActiveRecord::Schema.define(version: 2020_10_15_012118) do
     "responsible",
     "collaborator",
   ], force: :cascade
+
+  create_enum :document_categories, [
+    "declaration",
+    "certification",
+  ], force: :cascade
+
+  create_table "admins", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
 
   create_table "audience_members", force: :cascade do |t|
     t.string "name", null: false
@@ -83,6 +101,18 @@ ActiveRecord::Schema.define(version: 2020_10_15_012118) do
     t.index ["initials"], name: "index_departments_on_initials", unique: true
   end
 
+  create_table "documents", force: :cascade do |t|
+    t.bigint "department_id", null: false
+    t.enum "category", enum_name: "document_categories"
+    t.string "title", null: false
+    t.text "front_text"
+    t.text "back_text"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category"], name: "index_documents_on_category"
+    t.index ["department_id"], name: "index_documents_on_department_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "identifier"
@@ -117,5 +147,6 @@ ActiveRecord::Schema.define(version: 2020_10_15_012118) do
   add_foreign_key "department_modules", "departments"
   add_foreign_key "department_users", "departments"
   add_foreign_key "department_users", "users"
+  add_foreign_key "documents", "departments"
   add_foreign_key "users", "roles"
 end
