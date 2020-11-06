@@ -49,6 +49,22 @@ class CreateTest < ApplicationSystemTestCase
       within('div.document_title') do
         assert_text(I18n.t('errors.messages.blank'))
       end
+
+      within('div.document_category') do
+        assert_text(I18n.t('errors.messages.inclusion'))
+      end
+
+      within('div.document_department_id') do
+        assert_text(I18n.t('errors.messages.blank'))
+      end
+
+      within('div.document_front_text') do
+        assert_text(I18n.t('errors.messages.blank'))
+      end
+
+      within('div.document_back_text') do
+        assert_text(I18n.t('errors.messages.blank'))
+      end
     end
   end
 end

@@ -46,6 +46,14 @@ class UpdateTest < ApplicationSystemTestCase
       within('div.document_title') do
         assert_text(I18n.t('errors.messages.blank'))
       end
+
+      within('div.document_front_text') do
+        assert_text(I18n.t('errors.messages.blank'))
+      end
+
+      within('div.document_back_text') do
+        assert_text(I18n.t('errors.messages.blank'))
+      end
     end
   end
 end

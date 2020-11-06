@@ -1,16 +1,17 @@
 class Users::DocumentsController < Users::BaseController
+  before_action :can_manager?, only: [:edit, :new, :update, :create, :destroy]
   before_action :set_document, only: [:show, :edit, :update, :destroy, :preview]
   before_action :set_departments, only: [:edit, :new, :update, :create]
   include Breadcrumbs
 
   def index
-    @documents = Document.search(params[:term]).page(params[:page]).includes(:department)
+    @documents = current_user.documents.search(params[:term]).page(params[:page]).includes(:department)
   end
 
   def show; end
 
   def preview
-    render layout: 'users/preview_document'
+    render layout: 'users/document_preview'
   end
 
   def new
@@ -21,6 +22,7 @@ class Users::DocumentsController < Users::BaseController
 
   def create
     @document = create_document
+
     if @document.save
       flash[:success] = t('flash.actions.create.m', resource_name: Document.model_name.human)
       redirect_to users_documents_path
@@ -41,18 +43,21 @@ class Users::DocumentsController < Users::BaseController
   end
 
   def destroy
-    if @document.destroy
-      flash[:success] = t('flash.actions.destroy.m', resource_name: Document.model_name.human)
-    else
-      flash[:warning] = @document.errors.messages[:base].join
-    end
+    flash[:success] = t('flash.actions.destroy.m', resource_name: Document.model_name.human)
     redirect_to users_documents_path
   end
 
   private
 
+  def can_manager?
+    return true if current_user.member_of_any?
+
+    flash[:warning] = t('flash.actions.member.non')
+    redirect_to users_documents_path
+  end
+
   def set_document
-    @document = Document.find(params[:id])
+    @document = current_user.documents.find(params[:id])
   end
 
   def set_departments
@@ -60,8 +65,8 @@ class Users::DocumentsController < Users::BaseController
   end
 
   def create_document
-    if document_params['department_id'] != ''
-      department = current_user.departments.find(document_params['department_id'])
+    if document_params[:department_id].present?
+      department = current_user.departments.find(document_params[:department_id])
       department.documents.create(document_params)
     else
       Document.new(document_params)

@@ -45,6 +45,15 @@ class User < ApplicationRecord
     throw :abort
   end
 
+  def member_of_any?
+    departments.any?
+  end
+
+  def documents
+    department_ids = departments.pluck(:id)
+    Document.where(department_id: department_ids)
+  end
+
   def self.admins
     includes(:role).where.not(role_id: nil)
   end

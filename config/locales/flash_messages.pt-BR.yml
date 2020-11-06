@@ -24,6 +24,8 @@ pt-BR:
         errors:
           blank: Nenhum arquivo enviado!
           invalid: Arquivo inválido
+      member:
+        non: 'Certificados/Declarações podem ser gerenciados somente por usuários associados a um departmento!'
     not_authorized: Acesso não autorizado!
     not_found: Registro não encontrado!
 
