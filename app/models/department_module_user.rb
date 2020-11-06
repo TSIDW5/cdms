@@ -8,8 +8,7 @@ class DepartmentModuleUser < ApplicationRecord
 
   validates :role, inclusion: { in: DepartmentModuleUser.roles.values }
   validates :user, uniqueness: { scope: :department_module_id }
-
-  # validate :only_one_responsible, if: :responsible_role? TO_DO HABILITAR UNICO RESPONSAVEL PELO MODULO
+  validate :only_one_responsible, if: :responsible_role?
 
   def self.human_roles
     hash = {}

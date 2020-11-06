@@ -162,7 +162,7 @@ class UserTest < ActiveSupport::TestCase
       assert_equal(dep_module, user.departments_and_modules[1]['modules'][0]['module'])
     end
   end
-  
+
   context '.department' do
     should '.is_member_of_any?' do
       user = create(:user)

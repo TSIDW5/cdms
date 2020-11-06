@@ -12,6 +12,15 @@ class DepartmentModuleUserTest < ActiveSupport::TestCase
       assert_includes du.errors.messages[:role], I18n.t('errors.messages.inclusion')
     end
 
+    should 'have only one responsible' do
+      dmu = create(:department_module_user, :responsible)
+      department_module = dmu.department_module
+      dmudp = department_module.department_module_users.new(user: create(:user), role: dmu.role)
+
+      assert_not dmudp.valid?
+      assert_includes dmudp.errors.messages[:role], I18n.t('errors.messages.taken')
+    end
+
     should 'not accept duplicate user' do
       du = create(:department_module_user, :responsible)
       department_module = du.department_module

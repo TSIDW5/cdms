@@ -1,42 +1,37 @@
 class Users::TeamDepartmentsModulesController < Users::BaseController
-  before_action :breadcrumbs_team
+  before_action :set_department, only: :show_department
+  before_action :set_module, only: :show_module
+
+  add_breadcrumb I18n.t('views.team.name.plural'), :users_team_departments_modules_path
 
   def index
     @departments = current_user.departments_and_modules
   end
 
   def show_department
-    validation_department_current_user
-    @department = Department.find(@id)
+    set_department
     add_breadcrumb I18n.t('views.department.links.show'), users_show_department_path(@department)
     @department_users = @department.department_users.includes(:user)
   end
 
   def show_module
-    validation_module_current_user
-    @department_module = DepartmentModule.find(@id)
+    set_module
     add_breadcrumb I18n.t('views.department_module.links.show'), users_show_module_path(@department_module)
     @module_users = @department_module.department_module_users.includes(:user)
   end
 
   private
 
-  def validation_department_current_user
-    @id = params[:department_id] || params[:id]
-    return unless current_user.departments.where(id: @id).empty?
+  def set_department
+    id = params[:department_id] || params[:id]
+    @department = current_user.departments.find_by(id: id)
 
-    redirect_to users_team_departments_modules_path
+    redirect_to users_team_departments_modules_path if @department.nil?
   end
 
-  def validation_module_current_user
-    @id = params[:id]
+  def set_module
+    @department_module = current_user.department_modules.find_by(id: params[:id])
 
-    return unless current_user.department_modules.where(id: @id).empty?
-
-    redirect_to users_team_departments_modules_path
-  end
-
-  def breadcrumbs_team
-    add_breadcrumb I18n.t('views.team.name.plural'), :users_team_departments_modules_path
+    redirect_to users_team_departments_modules_path if @department_module.nil?
   end
 end

@@ -17,10 +17,10 @@ Rails.application.routes.draw do
       end
 
       root to: 'dashboard#index'
-      
+
       resources :documents, concerns: [:paginatable, :searchable_paginatable]
       get 'documents/:id/preview', to: 'documents#preview', as: 'preview_document'
-  
+
       get 'team-departments-modules', to: 'team_departments_modules#index', action: :index
       get 'show-department/:id', to: 'team_departments_modules#show_department',
                                  action: :show_department, as: 'show_department'
