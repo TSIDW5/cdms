@@ -43,6 +43,7 @@ class Users::DocumentsController < Users::BaseController
   end
 
   def destroy
+    @document.destroy
     flash[:success] = t('flash.actions.destroy.m', resource_name: Document.model_name.human)
     redirect_to users_documents_path
   end
