@@ -14,7 +14,7 @@ class EditProfileTest < ApplicationSystemTestCase
     fill_in 'user_email', with: new_email
     fill_in 'user_current_password', with: user.password
 
-    click_on I18n.t('devise.registrations.edit.update')
+    submit_form
 
     assert_current_path edit_user_registration_path
     assert_selector('div.alert.alert-info', text: I18n.t('devise.registrations.updated'))
@@ -38,7 +38,7 @@ class EditProfileTest < ApplicationSystemTestCase
     fill_in 'user_email', with: 'email'
     fill_in 'user_current_password', with: user.password
 
-    click_on I18n.t('devise.registrations.edit.update')
+    submit_form
 
     assert_selector('div.alert.alert-danger', text: I18n.t('simple_form.error_notification.default_message'))
 

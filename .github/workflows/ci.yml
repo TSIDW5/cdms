@@ -142,5 +142,5 @@ jobs:
         run: |
           yarn run lint
           bundle exec rubocop --parallel
-          bundle exec brakeman
+          bundle exec brakeman --ignore-config config/brakeman.ignore 
           bundle exec rubycritic --format console

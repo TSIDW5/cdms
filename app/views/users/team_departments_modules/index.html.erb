@@ -1,0 +1,19 @@
+<% provide(:head_title, 'Departamentos e módulos') %>
+<% provide(:page_title, 'Departamentos e módulos') %>
+
+<!-- < %= debug(@departments) %> -->
+
+<div class="table-responsive">
+  <table class="table card-table table-striped table-vcenter table-options">
+    <thead>
+        <tr>
+            <th><%= t("views.department.name.singular") %></th>
+            <th>Cargo</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+      <%= render partial: "department", collection: @departments %> 
+    </tbody>
+  </table>
+</div>

@@ -1,7 +1,8 @@
 require 'support/simplecov'
 require 'support/file_helper'
-require 'support/asserts/breadcrumbs'
 require 'support/asserts/active_link'
+require 'support/asserts/breadcrumbs'
+require 'support/asserts/redirect_to'
 
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
@@ -32,6 +33,7 @@ end
 class ActionDispatch::IntegrationTest
   include ::Asserts::Breadcrumbs
   include ::Asserts::ActiveLink
+  include ::Asserts::RedirectTo
 end
 
 Shoulda::Matchers.configure do |config|

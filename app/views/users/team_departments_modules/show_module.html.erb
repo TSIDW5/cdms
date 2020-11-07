@@ -1,0 +1,46 @@
+<% provide(:head_title, t('views.department_module.links.show')) %>
+<% provide(:page_title, t('views.department_module.links.show')) %>
+
+<div class="card department-module-data">
+  <div class="card-header">
+    <h3 class="card-title">Módulo #<%= @department_module.id %></h3>
+  </div>
+  <div class="card-body">
+    <p>
+      <strong><%= t('activerecord.attributes.department_module.name') %>: </strong>
+      <%= @department_module.name %>
+    </p>
+    <p>
+      <strong><%= t('activerecord.attributes.department_module.description') %>:</strong>
+      <%= @department_module.description %>
+    </p>
+  </div>
+</div>
+
+<div class="card team">
+  <div class="card-header">
+    <h3 class="card-title">Equipe</h3>
+  </div>
+  <div class="card-body">
+
+    <div class="table-responsive">
+      <table class="table card-table table-striped table-vcenter table-options">
+        <thead>
+          <tr>
+            <th><%= t('activerecord.attributes.department_module.name') %></th>
+            <th><%= t('activerecord.attributes.department_module.email') %></th>
+            <th><%= t('activerecord.attributes.department_module.role') %></th>
+            <th> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render partial: "module_users", collection: @module_users %> 
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex mt-3 footer">
+  <%= link_to t('views.links.back'), users_team_departments_modules_path, class: 'btn btn-secondary' %>
+</div>

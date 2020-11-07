@@ -13,6 +13,7 @@
 * Configurations
 **************************************************************/
 @import "config/tabler";
+@import "config/summernote";
 
 
 /*************************************************************
@@ -24,3 +25,4 @@
 * Apps stylesheets
 **************************************************************/
 @import "shared/sidebar";
+@import "shared/table_level";

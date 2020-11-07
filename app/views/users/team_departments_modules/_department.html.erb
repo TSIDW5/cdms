@@ -1,0 +1,24 @@
+
+ <tr class="department">
+    <td>  
+        <%= link_to users_show_department_path(department["department"]) do %>
+            <%="Departamento: #{department["department"].name}" %>
+        <% end %>
+    </td>
+    <td><%= t("enums.roles.#{department["role"]}") %></td>
+    <td data-identifier="dep<%=department["department"].id %>" class="w-1 selected">
+        <i class="fas fa-chevron-right<%='d-none' if department["modules"].count == 0%>"></i>
+    </td>
+</tr>
+
+<% department["modules"].each do |mod| %>
+    <tr data-identifier=<%= "child-dep#{mod["module"].department_id}" %> class="d-none">
+        <td class="module">
+            <%= link_to users_show_module_path(mod["module"].id) do %>
+                <%= "Módulo: #{mod["module"].name}" %>
+            <% end %>
+        </td>
+        <td><%= t("enums.roles.#{mod["role"]}") %></td>
+        <td></td>
+    </tr>
+<% end %>

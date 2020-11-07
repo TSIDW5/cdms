@@ -3,6 +3,9 @@ pt-BR:
     roles:
       responsible: Responsável
       collaborator: Colaborador
+    categories:
+      declaration: Declaração
+      certification: Certificado
   activemodel:
     models:
       administrator:
@@ -23,6 +26,9 @@ pt-BR:
       admin:
         one: Administrador
         other: Administradores
+      document:
+        one: Certificado/Declaração
+        other: Certificados/Declarações
       department:
         one: Departamento
         other: Departamentos
@@ -50,6 +56,13 @@ pt-BR:
         phone: Telefone
         email: Email
         <<: *commons
+      document:
+        title: Título
+        front_text: Texto de frente
+        back_text: Texto de trás
+        category: Tipo
+        department: Departamento
+        department_id: Departamento
       department_module:
         name: Nome
         description: Descrição

@@ -145,4 +145,50 @@ class UserTest < ActiveSupport::TestCase
       assert_equal(2, User.search('').count)
     end
   end
+
+  context 'departments and modules' do
+    should 'by user' do
+      user = create(:user)
+      create(:department_user, :responsible, user: user)
+
+      department = create(:department)
+      create(:department_user, :responsible, user: user, department: department)
+
+      dep_module = create(:department_module, department: department)
+      create(:department_module_user, :collaborator, user: user, department_module: dep_module)
+
+      assert_equal(2, user.departments_and_modules.count)
+      assert_equal(department, user.departments_and_modules[1]['department'])
+      assert_equal(dep_module, user.departments_and_modules[1]['modules'][0]['module'])
+    end
+  end
+
+  context '.department' do
+    should '.is_member_of_any?' do
+      user = create(:user)
+      assert_not user.member_of_any?
+
+      department = create(:department)
+      department.department_users.create(user: user, role: :responsible)
+      assert user.member_of_any?
+    end
+
+    should 'list all documentos of member department' do
+      user = create(:user)
+      department = create(:department)
+      department.department_users.create(user: user, role: :collaborator)
+      documents = create_list(:document, 3, :certification, department: department)
+
+      # same department user
+      department.department_users.create(user: create(:user), role: :collaborator)
+      documents << create(:document, :declaration, department: department)
+
+      # other department user
+      department = create(:department)
+      department.department_users.create(user: create(:user), role: :responsible)
+      create_list(:document, 3, :declaration, department: department)
+
+      assert_same_elements documents, user.documents
+    end
+  end
 end

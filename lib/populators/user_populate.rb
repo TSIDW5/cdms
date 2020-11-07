@@ -7,6 +7,7 @@ class Populators::UserPopulate < Populators::BasePopulate
       username: Faker::Internet.unique.username,
       register_number: Faker::Number.number(digits: 7),
       cpf: CPF.generate,
+      password: '123456',
       active: active_sample
     )
   end
