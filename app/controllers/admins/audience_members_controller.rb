@@ -26,7 +26,7 @@ class Admins::AudienceMembersController < Admins::BaseController
 
   def destroy
     @audience_member.destroy
-    flash[:success] = t('flash.actions.destroy.m', resource_name: t('activerecord.models.audience_member.one'))
+    success_destroy_message
     redirect_to admins_audience_members_path
   end
 
@@ -71,10 +71,10 @@ class Admins::AudienceMembersController < Admins::BaseController
 
   def save_audience_member
     if @audience_member.save
-      flash[:success] = t("flash.actions.#{action_name}.m", resource_name: t('activerecord.models.audience_member.one'))
+      send("success_#{action_name}_message")
       redirect_to admins_audience_members_path
     else
-      flash.now[:error] = I18n.t('flash.actions.errors')
+      error_message
       render @audience_member.new_record? ? :new : :edit
     end
   end

@@ -67,18 +67,19 @@ class User < ApplicationRecord
 
   def departments_and_modules
     department_users.includes(:department).map do |dep_user|
-      { 'modules' => populate_modules(dep_user.department.id),
-        'department' => dep_user.department, 'role' => dep_user.role }
+      department = dep_user.department
+      { modules: populate_modules(department.id),
+        department: department, role: dep_user.role }
     end
   end
 
   private
 
   def populate_modules(department_id)
-    department_module_users.includes(:department_module).map do |mod_user|
-      next unless department_id == mod_user.department_module.department_id
-
-      { 'role' => mod_user.role, 'module' => mod_user.department_module }
-    end.compact
+    dmus = department_module_users.includes(:department_module)
+                                  .where(department_modules: { department_id: department_id })
+    dmus.map do |mod_user|
+      { role: mod_user.role, module: mod_user.department_module }
+    end
   end
 end

@@ -57,8 +57,9 @@ class CreateAudienceMembersFromCsv
   end
 
   def registered?(member)
-    cpf_taken = member.errors.details[:cpf].pluck(:error).include?(:taken)
-    email_taken = member.errors.details[:email].pluck(:error).include?(:taken)
+    details = member.errors.details
+    cpf_taken = details[:cpf].pluck(:error).include?(:taken)
+    email_taken = details[:email].pluck(:error).include?(:taken)
 
     cpf_taken or email_taken
   end

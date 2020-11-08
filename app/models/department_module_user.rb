@@ -1,20 +1,14 @@
 class DepartmentModuleUser < ApplicationRecord
+  include Roleable
+
   before_save :link_user_in_department
 
   belongs_to :department_module
   belongs_to :user
 
-  enum role: { responsible: 'responsible', collaborator: 'collaborator' }, _suffix: :role
-
   validates :role, inclusion: { in: DepartmentModuleUser.roles.values }
   validates :user, uniqueness: { scope: :department_module_id }
   validate :only_one_responsible, if: :responsible_role?
-
-  def self.human_roles
-    hash = {}
-    roles.each_key { |key| hash[I18n.t("enums.roles.#{key}")] = key }
-    hash
-  end
 
   private
 

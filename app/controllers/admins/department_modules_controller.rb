@@ -15,27 +15,27 @@ class Admins::DepartmentModulesController < Admins::BaseController
     @module = @department.modules.new(module_params)
 
     if @module.save
-      flash[:success] = t('flash.actions.create.m', resource_name: t('activerecord.models.department_module.one'))
+      success_create_message
       redirect_to [:admins, @department]
     else
-      flash[:error] = I18n.t('flash.actions.errors')
+      error_message
       render :new
     end
   end
 
   def update
     if @module.update(module_params)
-      flash[:success] = t('flash.actions.update.m', resource_name: t('activerecord.models.department_module.one'))
+      success_update_message
       redirect_to [:admins, @department]
     else
-      flash[:error] = I18n.t('flash.actions.errors')
+      error_message
       render :edit
     end
   end
 
   def destroy
     @module.destroy
-    flash[:success] = t('flash.actions.destroy.m', resource_name: t('activerecord.models.department_module.one'))
+    success_destroy_message
     redirect_to [:admins, @department]
   end
 

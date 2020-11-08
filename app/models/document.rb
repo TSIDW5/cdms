@@ -10,8 +10,8 @@ class Document < ApplicationRecord
   validates :title, :front_text, :back_text, :department_id, presence: true
 
   def self.human_categories
-    hash = {}
-    categories.each_key { |key| hash[I18n.t("enums.categories.#{key}")] = key }
-    hash
+    categories.each_with_object({}) do |(key, _value), obj|
+      obj[I18n.t("enums.categories.#{key}")] = key
+    end
   end
 end

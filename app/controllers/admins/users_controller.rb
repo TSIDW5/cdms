@@ -17,10 +17,10 @@ class Admins::UsersController < Admins::BaseController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:success] = t('flash.actions.create.m', resource_name: User.model_name.human)
+      success_create_message
       redirect_to admins_users_path
     else
-      flash.now[:error] = I18n.t('flash.actions.errors')
+      error_message
       render :new
     end
   end
@@ -29,17 +29,17 @@ class Admins::UsersController < Admins::BaseController
     remove_empty_password
 
     if @user.update(user_params)
-      flash[:success] = t('flash.actions.update.m', resource_name: User.model_name.human)
+      success_update_message
       redirect_to admins_users_path
     else
-      flash.now[:error] = I18n.t('flash.actions.errors')
+      error_message
       render :edit
     end
   end
 
   def destroy
     if @user.destroy
-      flash[:success] = t('flash.actions.destroy.m', resource_name: User.model_name.human)
+      success_destroy_message
     else
       flash[:warning] = @user.errors.messages[:base].join
     end
@@ -49,10 +49,11 @@ class Admins::UsersController < Admins::BaseController
   private
 
   def remove_empty_password
-    return if params[:user][:password].present?
+    user_param = params[:user]
+    return if user_param[:password].present?
 
-    params[:user].delete(:password)
-    params[:user].delete(:password_confirmation)
+    user_param.delete(:password)
+    user_param.delete(:password_confirmation)
   end
 
   def set_user
