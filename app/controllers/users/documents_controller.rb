@@ -24,27 +24,27 @@ class Users::DocumentsController < Users::BaseController
     @document = create_document
 
     if @document.save
-      flash[:success] = t('flash.actions.create.m', resource_name: Document.model_name.human)
+      success_create_message
       redirect_to users_documents_path
     else
-      flash.now[:error] = I18n.t('flash.actions.errors')
+      error_message
       render :new
     end
   end
 
   def update
     if @document.update(document_params)
-      flash[:success] = t('flash.actions.update.m', resource_name: Document.model_name.human)
+      success_update_message
       redirect_to users_documents_path
     else
-      flash.now[:error] = I18n.t('flash.actions.errors')
+      error_message
       render :edit
     end
   end
 
   def destroy
     @document.destroy
-    flash[:success] = t('flash.actions.destroy.m', resource_name: Document.model_name.human)
+    success_destroy_message
     redirect_to users_documents_path
   end
 

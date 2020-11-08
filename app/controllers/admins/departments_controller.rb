@@ -20,27 +20,27 @@ class Admins::DepartmentsController < Admins::BaseController
     @department = Department.new(department_params)
 
     if @department.save
-      flash[:success] = I18n.t('flash.actions.create.m', resource_name: I18n.t('activerecord.models.department.one'))
+      success_create_message
       redirect_to admins_departments_path
     else
-      flash.now[:error] = I18n.t('flash.actions.errors')
+      error_message
       render :new
     end
   end
 
   def update
     if @department.update(department_params)
-      flash[:success] = I18n.t('flash.actions.update.m', resource_name: I18n.t('activerecord.models.department.one'))
+      success_update_message
       redirect_to admins_departments_path
     else
-      flash.now[:error] = I18n.t('flash.actions.errors')
+      error_message
       render :edit
     end
   end
 
   def destroy
     @department.destroy
-    flash[:success] = I18n.t('flash.actions.destroy.m', resource_name: I18n.t('activerecord.models.department.one'))
+    success_destroy_message
     redirect_to admins_departments_path
   end
 
@@ -48,7 +48,7 @@ class Admins::DepartmentsController < Admins::BaseController
     breadcrumbs_members
 
     @department_user = DepartmentUser.new
-    @department_users = @department.department_users.includes(:user)
+    set_departments
   end
 
   def non_members
@@ -57,15 +57,14 @@ class Admins::DepartmentsController < Admins::BaseController
   end
 
   def add_member
-    department_users = @department.department_users
-    @department_user = department_users.new(department_users_params)
+    @department_user = @department.department_users.new(department_users_params)
 
     if @department_user.save
       flash[:success] = I18n.t('flash.actions.add.m', resource_name: User.model_name.human)
       redirect_to admins_department_members_path(@department)
     else
       breadcrumbs_members
-      @department_users = department_users.includes(:user)
+      set_departments
       render :members
     end
   end
@@ -82,6 +81,10 @@ class Admins::DepartmentsController < Admins::BaseController
   def set_department
     id = params[:department_id] || params[:id]
     @department = Department.find(id)
+  end
+
+  def set_departments
+    @department_users = @department.department_users.includes(:user)
   end
 
   def department_params

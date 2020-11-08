@@ -13,7 +13,7 @@ class Admins::AdministratorsController < Admins::BaseController
       flash[:success] = I18n.t('flash.actions.add.m', resource_name: resource_name)
       redirect_to admins_administrators_path
     else
-      flash.now[:error] = I18n.t('flash.actions.errors')
+      error_message
       @administrators = User.admins
       render :index
     end

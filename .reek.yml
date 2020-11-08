@@ -7,6 +7,24 @@ detectors:
   DuplicateMethodCall:
     exclude:
       - 'Admins::DepartmentsController#department_users_params'
+      - 'User#is?'
+      - 'Populators::DepartmentUserPopulate'
+  Attribute:
+    exclude:
+      - 'Administrator'
+  FeatureEnvy:
+    exclude:
+      - 'Admins::UsersController#remove_empty_password'
+      - 'User#populate_modules'
+      - 'CreateAudienceMembersFromCsv#included?'
+  UtilityFunction:
+    exclude:
+      - 'Admins::AdministratorsController#resource_name'
+      - 'CreateAudienceMembersFromCsv#registered?'
+  TooManyInstanceVariables:
+    exclude:
+      - 'CreateAudienceMembersFromCsv'
+
 directories:
   "app/controllers":
     NestedIterators:
@@ -19,6 +37,8 @@ directories:
       max_instance_variables: 6
     TooManyStatements:
       max_statements: 10
+    TooManyMethods:
+      max_methods: 20
   "app/helpers":
     UtilityFunction:
       enabled: false
@@ -32,5 +52,8 @@ directories:
     InstanceVariableAssumption:
       enabled: false
   "app/uploaders":
+    UtilityFunction:
+      enabled: false
+  "lib/populators":
     UtilityFunction:
       enabled: false
