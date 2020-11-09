@@ -18,32 +18,22 @@ Rails.application.routes.draw do
 
       root to: 'dashboard#index'
 
-      concern :paginatable do
-        get '(page/:page)', action: :index, on: :collection, as: ''
-      end
-      concern :searchable_paginatable do
-        get '/search/(:term)/(page/:page)', action: :index, on: :collection, as: :search
-      end
-      
-      resources :departments, constraints: { id: /[0-9]+/ }, concerns: [:paginatable, :searchable_paginatable] do
-        resources :department_modules, except: [:index, :show], as: :modules, path: 'modules'
+      get 'departments/:id/members', to: 'departments#members', as: :department_members
+      get 'departments/:id/non-members/search/(:term)', costraints: { term: %r{[^/]+} },
+                                                        to: 'departments#non_members',
+                                                        as: :department_search_non_members
 
-        get '/members', to: 'departments#members', as: :members
-        get '/non-members/search/(:term)', costraints: { term: %r{[^/]+} }, # allows anything except a slash.
-                                           to: 'departments#non_members',
-                                           as: 'search_non_members'
-
-        post '/members', to: 'departments#add_member', as: :add_member
-        delete '/members/:id', to: 'departments#remove_member', as: 'remove_member'
-      end
+      post 'departments/:id/members', to: 'departments#add_member', as: :department_add_member
+      delete 'departments/:department_id/members/:id', to: 'departments#remove_member',
+                                                       as: :department_remove_member
 
       resources :documents, concerns: [:paginatable, :searchable_paginatable]
-      get 'documents/:id/preview', to: 'documents#preview', as: 'preview_document'
+      get 'documents/:id/preview', to: 'documents#preview', as: :preview_document
 
       get 'team-departments-modules', to: 'team_departments_modules#index', action: :index
       get 'show-department/:id', to: 'team_departments_modules#show_department',
-                                 action: :show_department, as: 'show_department'
-      get 'show-module/:id', to: 'team_departments_modules#show_module', action: :show_module, as: 'show_module'
+                                 action: :show_department, as: :show_department
+      get 'show-module/:id', to: 'team_departments_modules#show_module', action: :show_module, as: :show_module
     end
 
     namespace :admins do

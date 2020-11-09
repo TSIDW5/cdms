@@ -34,8 +34,12 @@
 </div>
 
 <div class="card team">
-  <div class="card-header">
+  <div class="card-header d-flex">
     <h3 class="card-title">Equipe</h3>
+
+    <%= link_to users_department_members_path(@department), class: "btn btn-outline-primary ml-auto" do %>
+      <%= icon('fas', 'plus', class: 'mr-2') %> Gerenciar membros
+    <% end %>
   </div>
   <div class="card-body">
 

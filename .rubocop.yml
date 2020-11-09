@@ -40,7 +40,7 @@ Metrics/BlockLength:
     - 'config/routes.rb'
 
 Metrics/ClassLength:
-  Max: 150
+  Max: 200
 
 Rails/ApplicationController:
   Exclude:

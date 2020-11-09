@@ -28,6 +28,8 @@ class User < ApplicationRecord
     self.email = "#{username}@utfpr.edu.br"
   end
 
+  # Admin roles
+  # --------------------------
   def is?(role)
     return true if role.eql?(:admin) && self.role
 
@@ -40,29 +42,16 @@ class User < ApplicationRecord
     is?(:manager) && role.users.count == 1
   end
 
-  def can_destroy?
-    return unless last_manager?
+  # Departments
+  # --------------------------
+  def responsible_of?(department)
+    return false unless department
 
-    errors.add :base, I18n.t('flash.actions.least', resource_name: Administrator.model_name.human)
-
-    throw :abort
+    department_users.responsible_role.find_by(department_id: department.id)
   end
 
   def member_of_any?
     departments.any?
-  end
-
-  def documents
-    department_ids = departments.pluck(:id)
-    Document.where(department_id: department_ids)
-  end
-
-  def self.admins
-    includes(:role).where.not(role_id: nil)
-  end
-
-  def self.search_non_admins(term)
-    where(role_id: nil).where('unaccent(name) ILIKE unaccent(?)', "%#{term}%").order('name ASC')
   end
 
   def departments_and_modules
@@ -73,7 +62,32 @@ class User < ApplicationRecord
     end
   end
 
+  # Documents
+  # --------------------------
+  def documents
+    department_ids = departments.pluck(:id)
+    Document.where(department_id: department_ids)
+  end
+
+  # Class methods
+  # --------------------------
+  def self.admins
+    includes(:role).where.not(role_id: nil)
+  end
+
+  def self.search_non_admins(term)
+    where(role_id: nil).where('unaccent(name) ILIKE unaccent(?)', "%#{term}%").order('name ASC')
+  end
+
   private
+
+  def can_destroy?
+    return unless last_manager?
+
+    errors.add :base, I18n.t('flash.actions.least', resource_name: Administrator.model_name.human)
+
+    throw :abort
+  end
 
   def populate_modules(department_id)
     dmus = department_module_users.includes(:department_module)

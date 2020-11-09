@@ -26,6 +26,9 @@ pt-BR:
           invalid: Arquivo inválido
       member:
         non: 'Certificados/Declarações podem ser gerenciados somente por usuários associados a um departmento!'
+      responsible:
+        non: 'A funcionalidade requisitada somente pode ser gerendicada por um responsável!'
+        removeitself: 'Não é permitido auto remover-se!'
     not_authorized: Acesso não autorizado!
     not_found: Registro não encontrado!
 

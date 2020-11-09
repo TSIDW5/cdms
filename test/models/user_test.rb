@@ -164,6 +164,18 @@ class UserTest < ActiveSupport::TestCase
   end
 
   context '.department' do
+    should '.responsible_of?' do
+      user = create(:user)
+      assert_not user.responsible_of?(nil)
+
+      department = create(:department)
+
+      assert_not user.responsible_of?(department)
+
+      department.department_users.create(user: user, role: :responsible)
+      assert user.responsible_of?(department)
+    end
+
     should '.is_member_of_any?' do
       user = create(:user)
       assert_not user.member_of_any?

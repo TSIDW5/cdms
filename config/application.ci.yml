@@ -1,4 +1,3 @@
- 
 database: &database
   db.username: postgres
   db.password: postgres
