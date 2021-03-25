@@ -3,7 +3,9 @@
   <div class="row">
     <%= f.input :name, wrapper_html: { class: 'col-sm-6' } %>
     <%= f.input :initials, wrapper_html: { class: 'col-sm-2' } %>
-    <%= f.input :phone, wrapper_html: { class: 'col-sm-4' } %>
+    <%= f.input :phone,
+                wrapper_html: {class: 'col-sm-4'},
+                input_html: {class: 'phone_mask'}%>
   </div>
 
   <div class="row">
