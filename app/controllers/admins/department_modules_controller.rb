@@ -39,6 +39,14 @@ class Admins::DepartmentModulesController < Admins::BaseController
     redirect_to [:admins, @department]
   end
 
+  def members
+
+
+    @department_module_user = DepartmentModule.new
+
+  end
+
+
   private
 
   def set_department
@@ -68,4 +76,6 @@ class Admins::DepartmentModulesController < Admins::BaseController
   def set_create_breadcrumbs
     add_breadcrumb I18n.t('views.breadcrumbs.new.m'), new_admins_department_module_path
   end
+
+  
 end
