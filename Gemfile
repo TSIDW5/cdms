@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '~> 2.7'
 
+gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
@@ -21,7 +22,7 @@ gem 'font-awesome-sass', '~> 5.13.0'
 gem 'kaminari'
 gem 'rails-i18n', '~> 6.0.0'
 gem 'simple_form'
-gem 'sprockets-rails', git: 'git://github.com/rails/sprockets-rails.git'
+gem 'sprockets-rails', git: 'https://github.com/rails/sprockets-rails.git'
 gem 'validators'
 
 group :development, :test do
