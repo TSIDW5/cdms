@@ -40,12 +40,10 @@ class Admins::DepartmentModulesController < Admins::BaseController
   end
 
   def members
-
-
+    
     @department_module_user = DepartmentModule.new
-
+    
   end
-
 
   private
 
@@ -77,5 +75,4 @@ class Admins::DepartmentModulesController < Admins::BaseController
     add_breadcrumb I18n.t('views.breadcrumbs.new.m'), new_admins_department_module_path
   end
 
-  
 end

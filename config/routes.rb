@@ -66,7 +66,8 @@ Rails.application.routes.draw do
         post '/members', to: 'departments#add_member', as: :add_member
         delete '/members/:id', to: 'departments#remove_member', as: 'remove_member'
 
-        get '/modules/members', to: 'department_modules#members', as: :module_members
+        get '/modules/:id/members', to: 'department_modules#members', as: :module_members
+        
       end
     end
   end
