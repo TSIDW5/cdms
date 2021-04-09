@@ -10,3 +10,4 @@ require('config/key_press_input_search');
 require('config/summernote');
 require('lib/submit_search');
 require('config/table_level');
+require('config/mask_phone');
