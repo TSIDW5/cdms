@@ -35,6 +35,11 @@ class CreateTest < ApplicationSystemTestCase
       end
     end
 
+    should 'mask phone' do
+      fill_in 'department_phone', with: '42998300990'.split('').join(' ')
+      assert_field 'department_phone', with: '(42) 99830-0990'
+    end
+
     should 'unsuccessfully' do
       submit_form
 
