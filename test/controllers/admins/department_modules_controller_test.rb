@@ -106,6 +106,14 @@ class Admins::DepartmentModulesControllerTest < ActionDispatch::IntegrationTest
       assert_redirected_to admins_department_path(@department)
       follow_redirect!
     end
+
+    context 'members' do
+      should 'get members' do
+        get admins_department_module_members_path(@department, @module)
+        assert_response :success
+        assert_active_link(href: admins_departments_path)
+      end
+    end
   end
 
   context 'unauthenticated' do
