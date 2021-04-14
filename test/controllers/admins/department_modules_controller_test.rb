@@ -113,6 +113,12 @@ class Admins::DepartmentModulesControllerTest < ActionDispatch::IntegrationTest
         assert_response :success
         assert_active_link(href: admins_departments_path)
       end
+
+      should 'add member' do
+        department_module_user
+
+      end
+
     end
   end
 
