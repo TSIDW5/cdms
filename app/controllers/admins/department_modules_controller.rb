@@ -1,6 +1,6 @@
 class Admins::DepartmentModulesController < Admins::BaseController
   before_action :set_department
-  before_action :set_module, only: [:edit, :update, :destroy]
+  before_action :set_module, except: [:new, :create, :remove_module_member]
   before_action :set_breadcrumbs
   before_action :set_update_breadcrumbs, only: [:edit, :update]
   before_action :set_create_breadcrumbs, only: [:new, :create]
@@ -42,12 +42,10 @@ class Admins::DepartmentModulesController < Admins::BaseController
   def members
     breadcrumbs_members
     @department_module_user = DepartmentModuleUser.new
-    set_module
-    set_modules
+    set_module_members
   end
 
   def module_non_members
-    set_module
     non_members = @module.search_non_members(params[:term])
     render json: non_members.as_json(only: [:id, :name])
   end
@@ -59,18 +57,18 @@ class Admins::DepartmentModulesController < Admins::BaseController
       flash[:success] = I18n.t('flash.actions.add.m', resource_name: User.model_name.human)
       redirect_to admins_department_module_members_path(@department, @module)
     else
-      set_modules
+      set_module_members
       @department_module_user = DepartmentModuleUser.new
       render :members
     end
   end
 
   def remove_module_member
-    breadcrumbs_members
-    set_module
-    module_user = @module.department_module_users.find_by(user_id: params[:user_id])
+    @module = @department.modules.find(params[:module_id])
+    module_user = @module.department_module_users.find_by(user_id: params[:id])
     module_user.destroy
     flash[:success] = I18n.t('flash.actions.remove.m', resource_name: User.model_name.human)
+    breadcrumbs_members
     redirect_to admins_department_module_members_path(@department, @module)
   end
 
@@ -80,8 +78,7 @@ class Admins::DepartmentModulesController < Admins::BaseController
     @department = Department.find(params[:department_id])
   end
 
-  def set_modules
-    set_module
+  def set_module_members
     @department_module_users = @module.department_module_users.includes(:user)
   end
 
@@ -115,7 +112,6 @@ class Admins::DepartmentModulesController < Admins::BaseController
   end
 
   def breadcrumbs_members
-    set_module
     add_breadcrumb I18n.t('views.breadcrumbs.show', model: DepartmentModule.model_name.human, id: @module.id),
                    admins_department_path(@department)
     add_breadcrumb I18n.t('views.department_module.members.name'), admins_department_module_members_path(@department)

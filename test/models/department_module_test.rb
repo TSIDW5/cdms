@@ -25,10 +25,9 @@ class DepartmentModuleTest < ActiveSupport::TestCase
       response = @dmodule.search_non_members('u')
 
       assert_equal([user2], response)
-      assert_not_equal([user1], response)
     end
 
-    should '#search_members_with_accent' do
+    should '#search_non_members_with_accent' do
       user_joao = create(:user, name: 'João')
       user_joao_with_accent = create(:user, name: 'Joao')
 
@@ -38,7 +37,7 @@ class DepartmentModuleTest < ActiveSupport::TestCase
       assert_contains(response, user_joao_with_accent)
     end
 
-    should '#search_order_ascii' do
+    should '#search_non_members_order_ascii' do
       user_1 = create(:user, name: 'Aab')
       user_2 = create(:user, name: 'Abc')
       user_3 = create(:user, name: 'Baa')
