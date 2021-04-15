@@ -3,22 +3,22 @@
 
 <%= simple_form_for(@department_module_user, url: admins_department_module_add_member_path, method: :post) do |f| %>
   <div class="row">
-  <%= f.hidden_field :user_id%>
-  <%= f.input :user, label: false,
+    <%= f.hidden_field :user_id %>
+    <%= f.input :user, label: false,
                 wrapper_html: { class: 'col-sm-6' },
                 placeholder: 'Pesquise por um usuário',
                 input_html: { data: { search: 'keypress', search_url: admins_department_module_search_non_members_path },
                               value: f.object.user&.name  } %>
 
-  <%= f.input :role, label: false, wrapper_html: { class: 'col-sm-5' },
+    <%= f.input :role, label: false, wrapper_html: { class: 'col-sm-5' },
                 input_html: {class: 'apply-selectize'},
                 collection: DepartmentModuleUser.human_roles,
-                prompt: t('views.prompt.select.m', name: User.human_attribute_name(:role))%>
-                
-  <div class="col-sm-1">
-    <%= button_tag type: 'submit', class: 'btn btn-primary' do %>
-      <i class="fe fe-user-plus"></i>
-    <% end %>
+                prompt: t('views.prompt.select.m', name: User.human_attribute_name(:role)) %>
+                  
+    <div class="col-sm-1">
+      <%= button_tag type: 'submit', class: 'btn btn-primary' do %>
+        <i class="fe fe-user-plus"></i>
+      <% end %>
   </div>
   
 <%end%>
