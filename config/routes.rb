@@ -67,7 +67,8 @@ Rails.application.routes.draw do
         delete '/members/:id', to: 'departments#remove_member', as: 'remove_member'
 
         get '/modules/:id/members', to: 'department_modules#members', as: :module_members
-        get '/modules/:id/non-members/search/(:term)', costraints: { term: %r{[^/]+} }, # allows anything except a slash.
+        get '/modules/:id/non-members/search/(:term)', costraints:
+                                                       { term: %r{[^/]+} }, # allows anything except a slash.
                                                        to: 'department_modules#module_non_members',
                                                        as: 'module_search_non_members'
 

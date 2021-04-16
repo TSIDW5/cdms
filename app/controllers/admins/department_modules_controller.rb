@@ -52,13 +52,12 @@ class Admins::DepartmentModulesController < Admins::BaseController
 
   def add_module_member
     breadcrumbs_members
-    @module_user = @module.department_module_users.new(department_module_users_params)
-    if @module_user.save
+    @department_module_user = @module.department_module_users.new(department_module_users_params)
+    if @department_module_user.save
       flash[:success] = I18n.t('flash.actions.add.m', resource_name: User.model_name.human)
       redirect_to admins_department_module_members_path(@department, @module)
     else
       set_module_members
-      @department_module_user = DepartmentModuleUser.new
       render :members
     end
   end
