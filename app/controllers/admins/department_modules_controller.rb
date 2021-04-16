@@ -63,15 +63,19 @@ class Admins::DepartmentModulesController < Admins::BaseController
   end
 
   def remove_module_member
-    @module = @department.modules.find(params[:module_id])
-    module_user = @module.department_module_users.find_by(user_id: params[:id])
-    module_user.destroy
+    set_user_to_remove
+    @module_user.destroy
     flash[:success] = I18n.t('flash.actions.remove.m', resource_name: User.model_name.human)
     breadcrumbs_members
     redirect_to admins_department_module_members_path(@department, @module)
   end
 
   private
+
+  def set_user_to_remove
+    @module = @department.modules.find(params[:module_id])
+    @module_user = @module.department_module_users.find_by(user_id: params[:id])
+  end
 
   def set_department
     @department = Department.find(params[:department_id])
