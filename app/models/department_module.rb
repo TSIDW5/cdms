@@ -1,4 +1,6 @@
 class DepartmentModule < ApplicationRecord
+  include Members
+
   belongs_to :department
 
   has_many :department_module_users, dependent: :destroy
@@ -6,8 +8,4 @@ class DepartmentModule < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
   validates :description, presence: true
-
-  def search_non_members(term)
-    User.where('unaccent(name) ILIKE unaccent(?)', "%#{term}%").order('name ASC').where.not(id: user_ids)
-  end
 end
