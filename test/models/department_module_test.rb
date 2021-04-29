@@ -9,4 +9,44 @@ class DepartmentModuleTest < ActiveSupport::TestCase
 
     should validate_uniqueness_of(:name)
   end
+
+  context 'members' do
+    setup do
+      @dmodule = create(:department_module)
+    end
+
+    should '#search_non_members' do
+      user1 = create(:user, name: 'usuario 1')
+      user2 = create(:user, name: 'usuario 2')
+
+      create(:department_module_user, :collaborator,
+             department_module: @dmodule, user: user1)
+
+      response = @dmodule.search_non_members('u')
+
+      assert_equal([user2], response)
+    end
+
+    should '#search_non_members_with_accent' do
+      user_joao = create(:user, name: 'João')
+      user_joao_with_accent = create(:user, name: 'Joao')
+
+      response = @dmodule.search_non_members('joao')
+
+      assert_contains(response, user_joao)
+      assert_contains(response, user_joao_with_accent)
+    end
+
+    should '#search_non_members_order_ascii' do
+      user1 = create(:user, name: 'Aab')
+      user2 = create(:user, name: 'Abc')
+      user3 = create(:user, name: 'Baa')
+
+      response = @dmodule.search_non_members('a')
+
+      assert_equal(user1, response[0])
+      assert_equal(user2, response[1])
+      assert_equal(user3, response[2])
+    end
+  end
 end
