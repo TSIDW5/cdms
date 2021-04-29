@@ -45,11 +45,6 @@ class Admins::DepartmentModulesController < Admins::BaseController
     set_module_members
   end
 
-  def module_non_members
-    non_members = @module.search_non_members(params[:term])
-    render json: non_members.as_json(only: [:id, :name])
-  end
-
   def add_module_member
     breadcrumbs_members
     @department_module_user = @module.department_module_users.new(department_module_users_params)

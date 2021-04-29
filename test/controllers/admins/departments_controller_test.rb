@@ -94,16 +94,6 @@ class Admins::DepartmentsControllerTest < ActionDispatch::IntegrationTest
         assert_active_link(href: admins_departments_path)
       end
 
-      should 'search non members' do
-        @check_active_link = false
-
-        user = create(:user)
-        get admins_department_search_non_members_path(@department, user.name)
-
-        json_response = JSON.parse(response.body)
-        assert_equal [user.as_json(only: [:id, :name])], json_response
-      end
-
       context 'add' do
         should 'successfully' do
           user = create(:user)

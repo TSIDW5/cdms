@@ -42,8 +42,9 @@ window.CDMS.classes.KeyPressInputSearch = class {
       dataType: 'JSON',
       url: `${this.searchUrl}/${term}`,
       success: (response) => {
+      
         this.loadDropdownItens(response);
-      },
+      }, 
     });
   }
 
