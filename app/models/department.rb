@@ -1,5 +1,7 @@
 class Department < ApplicationRecord
   include Searchable
+  include Members
+
   search_by :name, :initials
 
   has_many :department_modules, dependent: :destroy
@@ -16,10 +18,6 @@ class Department < ApplicationRecord
 
   def modules
     department_modules
-  end
-
-  def search_non_members(term)
-    User.where('unaccent(name) ILIKE unaccent(?)', "%#{term}%").order('name ASC').where.not(id: user_ids)
   end
 
   def user_is_collaborator?(user)

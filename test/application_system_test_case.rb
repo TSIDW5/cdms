@@ -6,6 +6,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
   def self.args
     args = ['--no-default-browser-check', '--start-maximized']
+    args << '--disable-dev-shm-usage'
     args << 'headless' unless ENV['LAUNCH_BROWSER']
     args
   end

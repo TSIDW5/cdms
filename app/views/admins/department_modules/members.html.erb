@@ -1,0 +1,53 @@
+<% provide(:head_title, t('views.department_module.members.nwdp', name: @module.name)) %>
+<% provide(:page_title, t('views.department_module.members.nwdp', name: @module.name)) %>
+
+<%= simple_form_for(@department_module_user, url: admins_department_module_add_member_path, method: :post) do |f| %>
+  <div class="row">
+    <%= f.hidden_field :user_id %>
+    <%= f.input :user, label: false,
+                wrapper_html: { class: 'col-sm-6' },
+                placeholder: 'Pesquise por um usuário',
+                input_html: { data: { search: 'keypress', search_url: admins_department_module_search_non_members_path },
+                              value: f.object.user&.name  } %>
+
+    <%= f.input :role, label: false, wrapper_html: { class: 'col-sm-5' },
+                input_html: {class: 'apply-selectize'},
+                collection: DepartmentModuleUser.human_roles,
+                prompt: t('views.prompt.select.m', name: User.human_attribute_name(:role)) %>
+                  
+    <div class="col-sm-1">
+      <%= button_tag type: 'submit', class: 'btn btn-primary' do %>
+        <i class="fe fe-user-plus"></i>
+      <% end %>
+  </div>
+  
+<%end%>
+<div class="table-responsive">
+  <table class="table card-table table-striped table-vcenter table-options">
+    <thead>
+      <tr>
+        <th><%= User.human_attribute_name(:name) %></th>
+        <th><%= User.human_attribute_name(:email) %></th>
+        <th><%= User.human_attribute_name(:active) %></th>
+        <th><%= User.human_attribute_name(:role) %></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @department_module_users.each do |module_user| %>
+        <tr>
+          <td><%= module_user.user.name %></td>
+          <td><%= module_user.user.email %></td>
+          <td><%= t("views.status.#{module_user.user.active?}") %></td>
+          <td><%= t("enums.roles.#{module_user.role}") %></td>
+          <td>
+            <%= link_to admins_department_module_remove_member_path(@department, module_user.department_module ,module_user.user), method: :delete, data: { confirm: t('views.prompt.confirm') } do %>
+              <%= icon('fas', 'trash', class: 'icon', data: { toggle: 'tooltip' }, title: t('views.links.destroy')) %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

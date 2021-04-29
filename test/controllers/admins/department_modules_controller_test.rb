@@ -106,6 +106,94 @@ class Admins::DepartmentModulesControllerTest < ActionDispatch::IntegrationTest
       assert_redirected_to admins_department_path(@department)
       follow_redirect!
     end
+
+    context 'members' do
+      should 'get members' do
+        get admins_department_module_members_path(@department, @module)
+        assert_response :success
+        assert_active_link(href: admins_departments_path)
+      end
+
+      should 'add member' do
+        user = create(:user)
+        params = { user_id: user.id, department_module: @module.id, role: :collaborator }
+
+        assert_difference('DepartmentModuleUser.count', 1) do
+          post admins_department_module_add_member_path(@department, @module), params:
+           { department_module_user: params }
+        end
+
+        assert_redirected_to admins_department_module_members_path(@department, @module)
+        follow_redirect!
+        @module.reload
+        assert_equal 1, @module.users.count
+      end
+
+      should 'not add member without role' do
+        user = create(:user)
+        params = { user_id: user.id, department_module: @module.id }
+
+        assert_difference('DepartmentModuleUser.count', 0) do
+          post admins_department_module_add_member_path(@department, @module), params:
+           { department_module_user: params }
+        end
+
+        assert_response :success
+        @module.reload
+        assert_equal 0, @module.users.count
+      end
+
+      should 'dont add twice with diffent roles' do
+        responsible = create(:department_module_user, department_module: @module, role: :collaborator)
+        params = { user_id: responsible.id, department_module: @module, role: :responsible }
+
+        assert_no_difference('DepartmentModuleUser.count') do
+          post admins_department_module_add_member_path(@department, @module), params:
+          { department_module_user: params }
+        end
+
+        @module.reload
+        assert_equal 1, @module.users.count
+      end
+
+      should 'not add twice with same role' do
+        responsible = create(:department_module_user, department_module: @module, role: :collaborator)
+        params = { user_id: responsible.id, department_module: @module, role: :collaborator }
+
+        assert_no_difference('DepartmentModuleUser.count') do
+          post admins_department_module_add_member_path(@department, @module), params:
+           { department_module_user: params }
+        end
+
+        @module.reload
+        assert_equal 1, @module.users.count
+      end
+
+      should 'not add two responsibles' do
+        create(:department_module_user, department_module: @module, role: :responsible)
+        user = create(:user)
+        params = { user_id: user.id, department_module: @module, role: :responsible }
+
+        assert_no_difference('DepartmentModuleUser.count') do
+          post admins_department_module_add_member_path(@department, @module), params:
+           { department_module_user: params }
+        end
+
+        @module.reload
+        assert_equal 1, @module.users.count
+      end
+
+      should 'remove member' do
+        module_user = create(:department_module_user, department_module: @module, role: :collaborator)
+
+        assert_difference('DepartmentModuleUser.count', -1) do
+          delete admins_department_module_remove_member_path(@department, @module, module_user.user)
+        end
+
+        assert_redirected_to admins_department_module_members_path(@department, @module)
+        follow_redirect!
+      end
+    end
   end
 
   context 'unauthenticated' do
@@ -133,10 +221,10 @@ class Admins::DepartmentModulesControllerTest < ActionDispatch::IntegrationTest
   def requests
     {
       get: [new_admins_department_module_path(1),
-            edit_admins_department_module_path(1, 1)],
-      post: [admins_department_modules_path(1)],
+            edit_admins_department_module_path(1, 1), admins_department_module_members_path(1, 1)],
+      post: [admins_department_modules_path(1), admins_department_module_add_member_path(1, 1)],
       patch: [admins_department_module_path(1, 1)],
-      delete: [admins_department_module_path(1, 1)]
+      delete: [admins_department_module_path(1, 1), admins_department_module_remove_member_path(1, 1, 1)]
     }
   end
 end

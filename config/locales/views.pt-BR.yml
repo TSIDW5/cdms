@@ -115,6 +115,9 @@ pt-BR:
         title: 'Novo módulo para o departamento #%{dp}'
       edit:
         title: 'Editar módulo do departamento #%{dp}'
+      members:
+        name: Membros
+        nwdp: 'Membros do módulo %{name}'
     audience_member:
       name:
         singular: Membro de audiência

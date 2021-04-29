@@ -1,6 +1,6 @@
 class Admins::DepartmentModulesController < Admins::BaseController
   before_action :set_department
-  before_action :set_module, only: [:edit, :update, :destroy]
+  before_action :set_module, except: [:new, :create, :remove_module_member]
   before_action :set_breadcrumbs
   before_action :set_update_breadcrumbs, only: [:edit, :update]
   before_action :set_create_breadcrumbs, only: [:new, :create]
@@ -39,10 +39,50 @@ class Admins::DepartmentModulesController < Admins::BaseController
     redirect_to [:admins, @department]
   end
 
+  def members
+    breadcrumbs_members
+    @department_module_user = DepartmentModuleUser.new
+    set_module_members
+  end
+
+  def module_non_members
+    non_members = @module.search_non_members(params[:term])
+    render json: non_members.as_json(only: [:id, :name])
+  end
+
+  def add_module_member
+    breadcrumbs_members
+    @department_module_user = @module.department_module_users.new(department_module_users_params)
+    if @department_module_user.save
+      flash[:success] = I18n.t('flash.actions.add.m', resource_name: User.model_name.human)
+      redirect_to admins_department_module_members_path(@department, @module)
+    else
+      set_module_members
+      render :members
+    end
+  end
+
+  def remove_module_member
+    set_user_to_remove
+    @module_user.destroy
+    flash[:success] = I18n.t('flash.actions.remove.m', resource_name: User.model_name.human)
+    breadcrumbs_members
+    redirect_to admins_department_module_members_path(@department, @module)
+  end
+
   private
+
+  def set_user_to_remove
+    @module = @department.modules.find(params[:module_id])
+    @module_user = @module.department_module_users.find_by(user_id: params[:id])
+  end
 
   def set_department
     @department = Department.find(params[:department_id])
+  end
+
+  def set_module_members
+    @department_module_users = @module.department_module_users.includes(:user)
   end
 
   def set_module
@@ -51,6 +91,11 @@ class Admins::DepartmentModulesController < Admins::BaseController
 
   def module_params
     params.require(:department_module).permit(:name, :description)
+  end
+
+  def department_module_users_params
+    { user_id: params[:department_module_user][:user_id],
+      role: params[:department_module_user][:role] }
   end
 
   def set_breadcrumbs
@@ -67,5 +112,11 @@ class Admins::DepartmentModulesController < Admins::BaseController
 
   def set_create_breadcrumbs
     add_breadcrumb I18n.t('views.breadcrumbs.new.m'), new_admins_department_module_path
+  end
+
+  def breadcrumbs_members
+    add_breadcrumb I18n.t('views.breadcrumbs.show', model: DepartmentModule.model_name.human, id: @module.id),
+                   admins_department_path(@department)
+    add_breadcrumb I18n.t('views.department_module.members.name'), admins_department_module_members_path(@department)
   end
 end
