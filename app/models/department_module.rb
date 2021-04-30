@@ -1,4 +1,6 @@
 class DepartmentModule < ApplicationRecord
+  include Members
+
   belongs_to :department
 
   has_many :department_module_users, dependent: :destroy
