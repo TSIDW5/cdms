@@ -8,11 +8,6 @@ class Users::DepartmentsController < Users::BaseController
     @department_users = @department.department_users.includes(:user)
   end
 
-  def non_members
-    non_members = @department.search_non_members(params[:term])
-    render json: non_members.as_json(only: [:id, :name])
-  end
-
   def add_member
     department_users = @department.department_users
     @department_user = department_users.new(department_users_params)
