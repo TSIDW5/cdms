@@ -51,11 +51,6 @@ class Admins::DepartmentsController < Admins::BaseController
     set_departments
   end
 
-  def non_members
-    non_members = @department.search_non_members(params[:term])
-    render json: non_members.as_json(only: [:id, :name])
-  end
-
   def add_member
     @department_user = @department.department_users.new(department_users_params)
 

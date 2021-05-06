@@ -81,7 +81,7 @@ class Users::DepartmentsControllerTest < ActionDispatch::IntegrationTest
 
   def unauthenticated_requests
     {
-      get: [users_department_members_path(1), users_department_search_non_members_path(1)],
+      get: [users_department_members_path(1)],
       post: [users_department_add_member_path(1)],
       delete: [users_department_remove_member_path(1, 1)]
     }
@@ -90,8 +90,7 @@ class Users::DepartmentsControllerTest < ActionDispatch::IntegrationTest
   def non_responsible_requests(department)
     flash = { type: :warning, message: I18n.t('flash.actions.responsible.non') }
     {
-      get: [{ route: users_department_members_path(department), flash: flash },
-            { route: users_department_search_non_members_path(department), flash: flash }],
+      get: [{ route: users_department_members_path(department), flash: flash }],
       post: [{ route: users_department_add_member_path(department), flash: flash }],
       delete: [{ route: users_department_remove_member_path(department, 1), flash: flash }]
     }
