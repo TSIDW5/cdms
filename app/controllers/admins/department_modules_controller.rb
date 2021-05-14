@@ -53,6 +53,7 @@ class Admins::DepartmentModulesController < Admins::BaseController
       redirect_to admins_department_module_members_path(@department, @module)
     else
       set_module_members
+      @department_module_user = @module.get_member(users_params)
       render :members
     end
   end

@@ -11,7 +11,7 @@ module Members
     end
 
     def add_member(user)
-      relationship.create(user)
+      relationship.create(user).valid?
     end
   
     def remove_member(user_id)
@@ -19,7 +19,7 @@ module Members
     end
 
     def get_member(user)
-      relationship.new(user)
+      relationship.create(user)
     end
 
     private

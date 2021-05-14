@@ -14,6 +14,7 @@ class Users::DepartmentsController < Users::BaseController
       redirect_to users_department_members_path(@department)
     else
       breadcrumbs_members
+      @department_user = @department.get_member(users_params)
       @department_users = @department.modules
       render :members
     end
