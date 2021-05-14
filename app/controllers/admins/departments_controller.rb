@@ -1,7 +1,7 @@
 class Admins::DepartmentsController < Admins::BaseController
   before_action :set_department, except: [:index, :new, :create]
   include Breadcrumbs
-
+ 
   def index
     @departments = Department.search(params[:term]).page(params[:page])
   end
@@ -46,27 +46,23 @@ class Admins::DepartmentsController < Admins::BaseController
 
   def members
     breadcrumbs_members
-
     @department_user = DepartmentUser.new
-    set_departments
+    set_department_members
   end
 
   def add_member
-    @department_user = @department.department_users.new(department_users_params)
-
-    if @department_user.save
+    if @department.add_member(users_params)
       flash[:success] = I18n.t('flash.actions.add.m', resource_name: User.model_name.human)
       redirect_to admins_department_members_path(@department)
     else
       breadcrumbs_members
-      set_departments
+      set_department_members
       render :members
     end
   end
 
   def remove_member
-    department_user = @department.department_users.find_by(user_id: params[:id])
-    department_user.destroy
+    @department.remove_member(params[:id])
     flash[:success] = I18n.t('flash.actions.remove.m', resource_name: User.model_name.human)
     redirect_to admins_department_members_path(@department)
   end
@@ -78,15 +74,15 @@ class Admins::DepartmentsController < Admins::BaseController
     @department = Department.find(id)
   end
 
-  def set_departments
-    @department_users = @department.department_users.includes(:user)
+  def set_department_members
+    @department_users = @department.members
   end
 
   def department_params
     params.require(:department).permit(:name, :description, :initials, :local, :phone, :email)
   end
 
-  def department_users_params
+  def users_params
     { user_id: params[:department_user][:user_id],
       role: params[:department_user][:role] }
   end
