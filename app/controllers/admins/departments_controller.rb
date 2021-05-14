@@ -56,6 +56,7 @@ class Admins::DepartmentsController < Admins::BaseController
       redirect_to admins_department_members_path(@department)
     else
       breadcrumbs_members
+      @department_user = @department.get_member(users_params)
       set_department_members
       render :members
     end

@@ -58,6 +58,44 @@ class DepartmentTest < ActiveSupport::TestCase
       assert_not_equal [user_a], department.search_non_members('a')
       assert_equal [user_b], department.search_non_members('b')
     end
+
+    should 'add member' do
+      department = create(:department)
+      user_a = create(:user, name: 'user_a')
+
+      department.add_member([role: :collaborator, user: user_a] )
+
+      assert_equal 1, department.members.count
+    end
+
+    should 'not add member' do
+      department = create(:department)
+      user_a = create(:user, name: 'user_a')
+
+      department.add_member([ user: user_a] )
+
+      assert_equal 0, department.members.count
+    end
+
+    should 'not add two responsibles' do
+      department = create(:department)
+      user_a = create(:user, name: 'user_a')
+      user_b = create(:user, name: 'user_b')
+
+      department.get_member([role: :responsible, user: user_a] )
+      department.get_member([role: :responsible, user: user_b] )
+      
+      assert_equal 1, department.members.count
+    end
+
+    should 'remove member' do
+      department = create(:department)
+      user_a = create(:user, name: 'user_a')
+      create(:department_user, :collaborator, user: user_a, department: department)
+      department.remove_member(user_a.id)
+
+      assert_equal 0, department.members.count
+    end
   end
 
   context 'search' do

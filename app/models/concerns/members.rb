@@ -18,6 +18,10 @@ module Members
       relationship.find_by(user_id: user_id).destroy
     end
 
+    def get_member(user)
+      relationship.new(user)
+    end
+
     private
     def relationship
       send("#{self.class.name.underscore}_users".to_sym)
