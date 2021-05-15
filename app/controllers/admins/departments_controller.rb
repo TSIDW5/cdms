@@ -1,7 +1,7 @@
 class Admins::DepartmentsController < Admins::BaseController
   before_action :set_department, except: [:index, :new, :create]
   include Breadcrumbs
- 
+
   def index
     @departments = Department.search(params[:term]).page(params[:page])
   end
@@ -56,7 +56,7 @@ class Admins::DepartmentsController < Admins::BaseController
       redirect_to admins_department_members_path(@department)
     else
       breadcrumbs_members
-      @department_user = @department.get_member(users_params)
+      @department_user = @department.department_users.last
       set_department_members
       render :members
     end

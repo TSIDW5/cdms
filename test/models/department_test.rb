@@ -63,7 +63,7 @@ class DepartmentTest < ActiveSupport::TestCase
       department = create(:department)
       user_a = create(:user, name: 'user_a')
 
-      department.add_member({role: :collaborator, user: user_a})
+      department.add_member({ role: :collaborator, user: user_a })
 
       assert_equal 1, department.members.count
     end
@@ -72,7 +72,7 @@ class DepartmentTest < ActiveSupport::TestCase
       department = create(:department)
       user_a = create(:user, name: 'user_a')
 
-      department.add_member({user: user_a})
+      department.add_member({ user: user_a })
 
       assert_equal 0, department.members.count
     end
@@ -82,9 +82,9 @@ class DepartmentTest < ActiveSupport::TestCase
       user_a = create(:user, name: 'user_a')
       user_b = create(:user, name: 'user_b')
 
-      department.add_member({role: :responsible, user: user_a})
-      department.add_member({role: :responsible, user: user_b})
-      
+      department.add_member({ role: :responsible, user: user_a })
+      department.add_member({ role: :responsible, user: user_b })
+
       assert_equal 1, department.members.count
     end
 

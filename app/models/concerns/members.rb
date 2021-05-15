@@ -13,16 +13,13 @@ module Members
     def add_member(user)
       relationship.create(user).valid?
     end
-  
+
     def remove_member(user_id)
       relationship.find_by(user_id: user_id).destroy
     end
 
-    def get_member(user)
-      relationship.create(user)
-    end
-
     private
+
     def relationship
       send("#{self.class.name.underscore}_users".to_sym)
     end
