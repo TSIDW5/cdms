@@ -14,14 +14,15 @@
                 input_html: {class: 'apply-selectize'},
                 collection: DepartmentModuleUser.human_roles,
                 prompt: t('views.prompt.select.m', name: User.human_attribute_name(:role)) %>
-                  
+
     <div class="col-sm-1">
       <%= button_tag type: 'submit', class: 'btn btn-primary' do %>
         <i class="fe fe-user-plus"></i>
       <% end %>
+    </div>
   </div>
-  
 <%end%>
+
 <div class="table-responsive">
   <table class="table card-table table-striped table-vcenter table-options">
     <thead>

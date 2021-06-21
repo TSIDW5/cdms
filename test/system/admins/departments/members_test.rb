@@ -1,6 +1,6 @@
 require 'application_system_test_case'
 
-class MemberTest < ApplicationSystemTestCase
+class MembersTest < ApplicationSystemTestCase
   context 'department' do
     setup do
       user = create(:user, :manager)

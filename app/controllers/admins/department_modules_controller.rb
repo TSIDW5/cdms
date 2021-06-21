@@ -59,12 +59,12 @@ class Admins::DepartmentModulesController < Admins::BaseController
   end
 
   def remove_module_member
-    breadcrumbs_members
-
     @module = @department.modules.find(params[:module_id])
     @module_user = @module.remove_member(params[:id])
 
+    breadcrumbs_members
     flash[:success] = I18n.t('flash.actions.remove.m', resource_name: User.model_name.human)
+
     redirect_to admins_department_module_members_path(@department, @module)
   end
 
