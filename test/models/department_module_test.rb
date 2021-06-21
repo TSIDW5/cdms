@@ -48,5 +48,39 @@ class DepartmentModuleTest < ActiveSupport::TestCase
       assert_equal(user2, response[1])
       assert_equal(user3, response[2])
     end
+
+    should 'add member' do
+      user_a = create(:user, name: 'user_a')
+
+      @dmodule.add_member({ role: :collaborator, user: user_a })
+
+      assert_equal 1, @dmodule.members.count
+    end
+
+    should 'not add member' do
+      user_a = create(:user, name: 'user_a')
+
+      @dmodule.add_member({ user: user_a })
+
+      assert_equal 0, @dmodule.members.count
+    end
+
+    should 'not add two responsibles' do
+      user_a = create(:user, name: 'user_a')
+      user_b = create(:user, name: 'user_b')
+
+      @dmodule.add_member({ role: :responsible, user: user_a })
+      @dmodule.add_member({ role: :responsible, user: user_b })
+
+      assert_equal 1, @dmodule.members.count
+    end
+
+    should 'remove member' do
+      user_a = create(:user, name: 'user_a')
+      create(:department_module_user, :collaborator, user: user_a, department_module: @dmodule)
+      @dmodule.remove_member(user_a.id)
+
+      assert_equal 0, @dmodule.members.count
+    end
   end
 end

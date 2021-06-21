@@ -47,37 +47,35 @@ class Admins::DepartmentModulesController < Admins::BaseController
 
   def add_module_member
     breadcrumbs_members
-    @department_module_user = @module.department_module_users.new(department_module_users_params)
-    if @department_module_user.save
+
+    if @module.add_member(users_params)
       flash[:success] = I18n.t('flash.actions.add.m', resource_name: User.model_name.human)
       redirect_to admins_department_module_members_path(@department, @module)
     else
       set_module_members
+      @department_module_user = @module.department_module_users.last
       render :members
     end
   end
 
   def remove_module_member
-    set_user_to_remove
-    @module_user.destroy
-    flash[:success] = I18n.t('flash.actions.remove.m', resource_name: User.model_name.human)
+    @module = @department.modules.find(params[:module_id])
+    @module_user = @module.remove_member(params[:id])
+
     breadcrumbs_members
+    flash[:success] = I18n.t('flash.actions.remove.m', resource_name: User.model_name.human)
+
     redirect_to admins_department_module_members_path(@department, @module)
   end
 
   private
-
-  def set_user_to_remove
-    @module = @department.modules.find(params[:module_id])
-    @module_user = @module.department_module_users.find_by(user_id: params[:id])
-  end
 
   def set_department
     @department = Department.find(params[:department_id])
   end
 
   def set_module_members
-    @department_module_users = @module.department_module_users.includes(:user)
+    @department_module_users = @module.members
   end
 
   def set_module
@@ -88,7 +86,7 @@ class Admins::DepartmentModulesController < Admins::BaseController
     params.require(:department_module).permit(:name, :description)
   end
 
-  def department_module_users_params
+  def users_params
     { user_id: params[:department_module_user][:user_id],
       role: params[:department_module_user][:role] }
   end

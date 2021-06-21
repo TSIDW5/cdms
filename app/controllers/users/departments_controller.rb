@@ -5,19 +5,17 @@ class Users::DepartmentsController < Users::BaseController
   def members
     breadcrumbs_members
     @department_user = DepartmentUser.new
-    @department_users = @department.department_users.includes(:user)
+    @department_users = @department.members
   end
 
   def add_member
-    department_users = @department.department_users
-    @department_user = department_users.new(department_users_params)
-
-    if @department_user.save
+    if @department.add_member(users_params)
       flash[:success] = I18n.t('flash.actions.add.m', resource_name: User.model_name.human)
       redirect_to users_department_members_path(@department)
     else
       breadcrumbs_members
-      @department_users = department_users.includes(:user)
+      @department_user = @department.department_users.last
+      @department_users = @department.modules
       render :members
     end
   end
@@ -26,8 +24,7 @@ class Users::DepartmentsController < Users::BaseController
     if try_to_remove_current_user?
       flash[:warning] = I18n.t('flash.actions.reponsible.removeitself')
     else
-      department_user = @department.department_users.find_by(user_id: params[:id])
-      department_user.destroy
+      @department.remove_member(params[:id])
       flash[:success] = I18n.t('flash.actions.remove.m', resource_name: User.model_name.human)
     end
 
@@ -56,7 +53,7 @@ class Users::DepartmentsController < Users::BaseController
     params.require(:department).permit(:name, :description, :initials, :local, :phone, :email)
   end
 
-  def department_users_params
+  def users_params
     { user_id: params[:department_user][:user_id],
       role: :collaborator }
   end
